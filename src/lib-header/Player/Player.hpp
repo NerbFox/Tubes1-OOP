@@ -12,7 +12,7 @@
 using namespace std;
 
 class Player {
-private:
+protected:
     string name;                  // player's name
     long long point;              // player's current points
     const int CARD_LEN = 2;       // the number of card in the player's hand
