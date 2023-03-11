@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Player::Player() : name {"noName"}, point{0}, abilityCard{}, allCombo{}, power{0} { }
+Player::Player() : name {NULL}, point{0}, abilityCard{}, allCombo{}, power{0} { }
 
 string Player::getName() const {
     return name;
@@ -31,7 +31,7 @@ bool Player::operator<(const Player& otherPlayer) const {
 
 void Player::getCommand() {
     string command;
-    cout << "Please input command\n>>";
+    cout << "Please input command\n>> ";
     cin >> command;
     
     // Masih nunggu command class untuk diimplementasi
