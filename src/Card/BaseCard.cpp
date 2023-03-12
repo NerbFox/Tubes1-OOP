@@ -1,7 +1,9 @@
 #include "../lib-header/Card/BaseCard.hpp"
+#include <iostream>
+using namespace std;
 
 // Constructor
-BaseCard::BaseCard(float _value = 0.0f) : value{_value} { }
+BaseCard::BaseCard(float _value) : value{_value} { }
 
 // Copy constructor
 BaseCard::BaseCard(const BaseCard& other) : value{other.value} { }
@@ -31,3 +33,8 @@ bool BaseCard::operator>(const BaseCard& other) {
 bool BaseCard::operator==(const BaseCard& other) {
   return value == other.value;
 } 
+
+// int main() {
+//   cout << "test";
+//   return 0;
+// }

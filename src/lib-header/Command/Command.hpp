@@ -1,8 +1,12 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
-class Command {
+#include "../Game/Game.hpp"
 
+class Command {
+    private : 
+    public : 
+        virtual void action(Game game) = 0;
 };  
 
 

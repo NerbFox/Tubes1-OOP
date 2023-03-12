@@ -1,12 +1,14 @@
-#include "../lib-header/Inventory/InventoryHolder.hpp"
+#include "InventoryHolder.hpp"
+#include "../Card/Card.hpp"
 #include <iostream>
+#include <queue>
 
 using namespace std;
 
 #ifndef DECK_CARD_HPP
 #define DECK_CARD_HPP
 
-class DeckCard : InventoryHolder<52>{
+class DeckCard : InventoryHolder<queue<Card>>{
   public:
     // ctor, isi dengan 52 kartu yang ada di poker
     DeckCard();
@@ -14,13 +16,13 @@ class DeckCard : InventoryHolder<52>{
     // Shuffle card in deck.
     void shuffleCard();
 
-    // Method to get the top index in card (index 0).
+    // Method to get the first index in card (index 0).
     Card getTopCard();
 
-    // method for adding a card to the array of card at the end of the deck.
+    // Method for adding a card to the container of card.
     void operator+(const Card& newCard);
 
-    // method for removing a card from the array of card. 
+    // Method to remove card at the first index. 
     void operator-(const Card& removedCard);
 };  
 

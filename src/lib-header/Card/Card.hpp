@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-class Card : BaseCard {
+class Card : public BaseCard {
 protected:
     int number;         // The number of the card.
     string color;  // The color of the card.
@@ -32,6 +32,9 @@ public:
 
     // Returns true if the card has no number or color assigned. 
     bool isEmpty() const; 
+
+    // Compute the value of the card;
+    void computeValue();
 };
 
 

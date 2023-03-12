@@ -1,10 +1,12 @@
 #include "../lib-header/Inventory/DeckCard.hpp"
 #include <iostream>
+#include <random>
+#include <algorithm>
 
 using namespace std;
 
 // ctor, isi dengan 52 kartu yang ada di poker
-DeckCard::DeckCard() : InventoryHolder() {
+DeckCard::DeckCard() : InventoryHolder{} {
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 13; i++) {
       string color;
@@ -22,52 +24,57 @@ DeckCard::DeckCard() : InventoryHolder() {
           color = "biru";
           break;                
         default:
+          color = "none";
           // throw exception("warna tidak ditemukan");              
           // untuk sementara gini dulu karena belum ada implementasi exception
       }
-      // arrayCard[(i+1)*(j+1)] = Card(((i+1)*(j+1)) % 13 + 1, color);
-      // untuk sementara gini dulu karena belum ada implementasi card
+      cardContainer.push(Card(((i+1)*(j+1)) % 13 + 1, color));
     }
   }
 }
 
 // Method to shuffle card in deck.
 void DeckCard::shuffleCard() {
-  
+  // Create a vector of cards from the queue
+  std::vector<Card> cards;
+  while (!cardContainer.empty()) {
+    cards.push_back(cardContainer.front());
+    cardContainer.pop();
+  }
+
+  // Shuffle the vector using the Fisher-Yates algorithm
+  random_device rd;
+  mt19937 gen(rd());
+  for (int i = cards.size() - 1; i > 0; --i) {
+      uniform_int_distribution<> dis(0, i);
+      int j = dis(gen);
+      swap(cards[i], cards[j]);
+  }
+
+  // Add the shuffled cards back to the queue
+  for (const auto& card : cards) {
+    cardContainer.push(card);
+  }
 }
 
-// Method to get the most top index in card (index 0).
+// Method to get the first index in card (index 0).
 Card DeckCard::getTopCard() {
-  return arrayCard.getCard(0);
+  Card res = cardContainer.front();
+  cardContainer.pop();
+  return res;
 }
 
-// method for adding a card to the array of card at the end of the deck.
+    // Method for adding a card to the container of card.
 void DeckCard::operator+(const Card& newCard){
-  for (int i = 0; i < arrayCard.size(); i++) {
-    if (i == arrayCard.size() - 1) {} 
-    // throw exception("Card is full");
-    // Buat sekarang baru throw kyk gini, nunggu kelas exception    
-    
-    if (arrayCard[i].isEmpty()) {
-      arrayCard[i] = newCard;
-      break;
-    }
-  }  
+  cardContainer.push(newCard);
 }
 
-// method for removing a card from the array of card. 
+    // Method to remove card at the first index. 
 void DeckCard::operator-(const Card& removedCard){
-  for (int i = 0; i < arrayCard.size(); i++) {
-    if (i == arrayCard.size() - 1) {} 
-    // throw exception("Card is not found");
-    // Buat sekarang baru throw kyk gini, nunggu kelas exception    
-    
-    if (arrayCard[i] == removedCard) {
-      for (int j = i; j < arrayCard.size() - 1; j++) {
-        arrayCard[j] = arrayCard[j+1];  
-      }
-      arrayCard[arrayCard.size() - 1] = Card();
-      break;
-    }
-  }  
+  cardContainer.pop();
 }
+
+// int main () {
+//   cout << "test";
+//   return 0;
+// }
