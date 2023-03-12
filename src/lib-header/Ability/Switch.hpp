@@ -1,7 +1,8 @@
 #ifndef SWITCH_HPP
 #define SWITCH_HPP
+#include "../lib-header/Command/Ability.hpp"
 
-class Switch {
+class Switch : public Ability {
     public:
         Switch();
         ~Switch();

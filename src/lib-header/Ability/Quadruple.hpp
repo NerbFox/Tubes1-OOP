@@ -1,7 +1,8 @@
 #ifndef QUADRUPLE_HPP
 #define QUADRUPLE_HPP
+#include "../lib-header/Command/Ability.hpp"
 
-class Quadruple {
+class Quadruple : public Ability {
 
 };  
 
