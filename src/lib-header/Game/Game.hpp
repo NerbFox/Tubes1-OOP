@@ -1,7 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <queue>
+#include <vector>
 #include "../Player/Player.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/DeckCard.hpp"
@@ -10,7 +10,7 @@ using namespace std;
 
 class Game {
     private :
-        queue<Player> playerState;
+        vector<pair<Player,bool>> playerQueue;
         TableCard tableCard;
         DeckCard deckCard;
         int reward;
@@ -22,7 +22,7 @@ class Game {
         const int MAX_PLAYER = 7;
         const int MAX_ROUND = 6;
         const long long MAX_POINT = 4294967296; //2 ^ 32
-
+        const int multiplier = 2;
 
     public : 
         // Ctor
@@ -36,6 +36,9 @@ class Game {
         // Geser pointer player ke player lain sesuai RR 
         void nextPlayer();
 
+        // Ganti round, round count bertambah 1
+        void nextRound();
+
         // Menambahkan reward menjadi 2 kali sebelumnya
         void doubleReward();
 
@@ -47,6 +50,15 @@ class Game {
 
         // Melakukan pengecekan untuk menentukan pemenang
         void resolveWinner();
+
+        // Mengambil Table Card yang ada
+        TableCard getTableCard();
+
+        // Mengambil Deck Card 
+        DeckCard getDeckCard(); 
+
+
+
         
 };  
 

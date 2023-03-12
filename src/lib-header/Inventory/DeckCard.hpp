@@ -13,6 +13,13 @@ class DeckCard : InventoryHolder<52>{
 
     // Pure virtual method for adding a card to the array of card.
     Card getTopCard();
+
+    
+    // Pure virtual method for adding a card to the array of card.
+    void operator+(const Card& newCard);
+
+    // Pure virtual method for removing a card from the array of card. 
+    void operator-(const Card& removedCard);
 };  
 
 
