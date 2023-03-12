@@ -6,6 +6,15 @@ private:
     float value; // The value of the card.
 
 public:
+    // Constructor
+    BaseCard(float _value = 0.0f);
+
+    // Copy constructor
+    BaseCard(const BaseCard& other);
+
+    // Assignment operator
+    BaseCard& operator=(const BaseCard& other);
+
     // Returns the value of the card.
     float getValue(); 
 
