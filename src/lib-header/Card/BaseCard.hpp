@@ -2,7 +2,7 @@
 #define BASE_CARD_HPP
 
 class BaseCard {
-private:
+protected:
     float value; // The value of the card.
 
 public:
