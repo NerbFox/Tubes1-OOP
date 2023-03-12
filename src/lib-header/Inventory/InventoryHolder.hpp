@@ -13,6 +13,9 @@ class InventoryHolder {
     array<Card, N> arrayCard;
 
   public:
+    // ctor
+    InventoryHolder();
+
     // Method to print the contents of the array of card.
     void printArrayCard();
 

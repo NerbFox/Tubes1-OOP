@@ -8,11 +8,20 @@ using namespace std;
 
 class DeckCard : InventoryHolder<52>{
   public:
-    // Method to shuffle card in deck.
+    // ctor, isi dengan 52 kartu yang ada di poker
+    DeckCard();
+
+    // Shuffle card in deck.
     void shuffleCard();
 
-    // Pure virtual method for adding a card to the array of card.
+    // Method to get the top index in card (index 0).
     Card getTopCard();
+
+    // method for adding a card to the array of card at the end of the deck.
+    void operator+(const Card& newCard);
+
+    // method for removing a card from the array of card. 
+    void operator-(const Card& removedCard);
 };  
 
 
