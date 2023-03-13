@@ -5,6 +5,8 @@
 #include "../Player/Player.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/DeckCard.hpp"
+#include "../Command/Ability.hpp"
+#include "../Ability/ReRoll.hpp"
 
 using namespace std;
 
@@ -25,6 +27,7 @@ class Game {
         long long reward;
         int countPermainan;
         int countRonde;
+        deque<Ability> abilityCardQueue;
 
         pair<Player*,int> playerPointer; 
 
@@ -78,8 +81,14 @@ class Game {
         // Mengambil Deck Card 
         DeckCard getDeckCard(); 
 
+        // get max player
+        int getMaxPlayer();
 
+        // set ability card kepada player
+        void setAbilityCard();
 
+        // set all ability card players 
+        void setConditionAbilityCardPlayer(bool);
         
 };  
 
