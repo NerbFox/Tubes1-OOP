@@ -1,7 +1,7 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include <vector>
+#include <deque>
 #include "../Player/Player.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/DeckCard.hpp"
@@ -10,7 +10,7 @@ using namespace std;
 
 class Game {
     private :
-        vector<pair<Player,bool>> playerQueue;
+        deque<pair<Player,bool>> playerQueue;
         TableCard tableCard;
         DeckCard deckCard;
         int reward;
@@ -50,6 +50,8 @@ class Game {
 
         // Melakukan pengecekan untuk menentukan pemenang
         void resolveWinner();
+
+        bool isEveryoneHaveTurn();
 
         // Mengambil Table Card yang ada
         TableCard getTableCard();
