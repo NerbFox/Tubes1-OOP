@@ -8,9 +8,9 @@ Switch::Switch()
 // action
 void Switch::action(Game game)
 {
-        /* menukar 2 kartu main deck milik diri sendiri dengan 2 kartu main deck milik pemain lain.
-        Harus bertukar milik sendiri dengan pemain lain. Tidak boleh ke 2 pemain lain.
-        */
+    /* menukar 2 kartu main deck milik diri sendiri dengan 2 kartu main deck milik pemain lain.
+    Harus bertukar milik sendiri dengan pemain lain. Tidak boleh ke 2 pemain lain.
+    */
     cout << "Switch diaktifkan" << endl;
     cout << "Pilih pemain yang ingin ditukar kartunya: " << endl;
 
@@ -28,7 +28,7 @@ void Switch::action(Game game)
     cout << "Pilih pemain: ";
     cin >> pilihan;
     cout << endl;
-    while (pilihan>7 and pilihan<1 and pilihan == indeksPemain) {
+    while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
         cout << "Pilihan tidak valid. Pilih pemain: "; // throw exception
         cin >> pilihan;
         cout << endl;
