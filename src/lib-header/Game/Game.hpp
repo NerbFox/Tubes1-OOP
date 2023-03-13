@@ -31,6 +31,8 @@ class Game {
 
 
         friend class Command;
+        friend class Quadruple;
+        friend class Quarter;
 
     public : 
         // Ctor

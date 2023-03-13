@@ -5,9 +5,11 @@
 class Quadruple : public Ability {
     private:
         const int FACTORQ = 4;
+        friend class Game;
     public:
         Quadruple();
         ~Quadruple();
+        void action(Game game);
 };  
 
 
