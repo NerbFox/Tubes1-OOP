@@ -17,19 +17,21 @@ class Game {
         int countPermainan;
         int countRonde;
 
-        Player* playerPointer; 
+        pair<Player*,int> playerPointer; 
 
         const int MAX_PLAYER = 7;
         const int MAX_ROUND = 6;
         const long long MAX_POINT = 4294967296; //2 ^ 32
         const int multiplier = 2;
+        bool reverse; 
+
 
         friend class Command;
-        friend class Ability;
 
     public : 
         // Ctor
-
+        Game();
+        ~Game();
         // start game
         void startGame();
 
@@ -68,10 +70,13 @@ class Game {
 };  
 
 // P2 P3 P4 P5 P6 P7 P1
-// P3 P4 P5 P6 P7 P1 P2
-// P4 P5 P6 P7 P1 P2 P3
 
 // P4 P5 P6 P7 P1 P2 P3
+
+// P4 P3 P2 P1 P7 P6 P5
+
 // P3 P2 P1 P7 P6 P5 P4
+
+// P3 P4 P5 P6 P7 P1 P2
 
 #endif

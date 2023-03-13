@@ -6,7 +6,8 @@
 class Command {
     private : 
     public : 
-        virtual void action(Game game) = 0;
+        virtual void action(Game) = 0;
+        virtual void action(Player) = 0;
 };  
 
 
