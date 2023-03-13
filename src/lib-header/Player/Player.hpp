@@ -55,7 +55,7 @@ public:
     void setNormalCard(const Card& card, int index);
 
     // pop player's normal card at certain index
-    Card Player::getNormalCard(int index);
+    Card getNormalCard(int index);
 
     // set all of the combo that the player have
     void setAllCombo(const vector<Combo>& _allCombo); 

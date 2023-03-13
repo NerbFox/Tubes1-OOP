@@ -1,6 +1,7 @@
 #include "../lib-header/Game/Game.hpp"
 #include <iostream> 
 
+
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
     for (int i = 0; i < MAX_PLAYER; i++){
         playerQueue.push_back(make_pair(Player(), false));
@@ -45,9 +46,6 @@ void Game::nextRound(){
         playerPointer.second = 0;
 
         countRonde++;
-    }
-    else {
-        if ()
     }
 }
 
