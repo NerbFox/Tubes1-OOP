@@ -14,14 +14,14 @@ class Game {
     friend class ReRoll;
     
     private :
-        deque<pair<Player,bool>> playerQueue;
+        deque<Player> playerQueue;
         TableCard tableCard;
         DeckCard deckCard;
         long long reward;
         int countPermainan;
         int countRonde;
 
-        pair<Player*,int> playerPointer; 
+        Player* playerPointer; 
 
         const int MAX_PLAYER = 7;
         const int MAX_ROUND = 6;
@@ -61,7 +61,10 @@ class Game {
         void reverseOrder();
 
         // Melakukan pengecekan untuk menentukan pemenang
-        Player resolveWinner();
+        int isHaveWinner();
+
+        // Mencetak hasil kelasemen akhir permainan
+        void printStandings(); 
 
         bool isEveryoneHaveTurn();
 
