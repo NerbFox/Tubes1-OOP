@@ -51,6 +51,13 @@ void Player::setNormalCard(const Card& card, int index) {
     normalCard.updateAt(card, index);
 }
 
+// get player's normal card at certain index
+Card Player::getNormalCard(int index) {
+    return normalCard.getCards()[index];
+}
+
+// push card to player's normal card
+
 // set all of the combo that the player have
 void Player::setAllCombo(const vector<Combo>& _allCombo) {
     for (int i = 0; i < _allCombo.size(); i++) {

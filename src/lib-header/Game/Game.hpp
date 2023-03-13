@@ -10,6 +10,10 @@
 using namespace std;
 
 class Game {
+    friend class Command;
+    friend class Ability;
+    friend class ReRoll;
+    
     private :
         vector<pair<Player,bool>> playerQueue;
         TableCard tableCard;
@@ -25,8 +29,6 @@ class Game {
         const long long MAX_POINT = 4294967296; //2 ^ 32
         const int multiplier = 2;
 
-        friend class Command;
-        friend class Ability;
 
     public : 
         // Ctor
