@@ -29,7 +29,13 @@ void Abilityless::action(Game game) {
         }
         cout << i << ". " <<  currentPair.first.getName() << endl;
     }
-
-
-
+    cout << "Pilih pemain: ";
+    cin >> pilihan;
+    cout << endl;
+    while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
+        cout << "Pilihan tidak valid. Pilih pemain: "; // throw exception
+        cin >> pilihan;
+        cout << endl;
+    }
+    game.playerQueue[pilihan-1].first.setAbilityUsed(true);
 }
