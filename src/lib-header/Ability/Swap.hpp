@@ -6,6 +6,7 @@ class Swap : public Ability {
     public:
         Swap();
         ~Swap();
+        void RunSwapCard();
 };
 
 #endif

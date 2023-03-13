@@ -1,11 +1,19 @@
 #ifndef REVERSE_DIRECTION_HPP
 #define REVERSE_DIRECTION_HPP
-#include "../lib-header/Command/Ability.hpp"
 
-class ReverseDirection : public Ability{
+#include "../Command/Ability.hpp"
+#include "../Game/Game.hpp"
+
+class ReversDirection : public Ability {
+    private:
+        bool reverseOn;
+        int pivot;
     public:
-        ReverseDirection();
-        ~ReverseDirection();
+        ReversDirection();
+        ~ReversDirection();
+
+        void FirstReverseStage();
+        void SecondReverseStage();
 };
 
 #endif

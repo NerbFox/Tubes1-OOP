@@ -24,6 +24,8 @@ class Game {
         const long long MAX_POINT = 4294967296; //2 ^ 32
         const int multiplier = 2;
 
+        friend class Command;
+
     public : 
         // Ctor
 

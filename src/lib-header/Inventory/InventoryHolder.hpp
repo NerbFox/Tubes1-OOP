@@ -1,28 +1,25 @@
 #include <iostream>
-#include "../lib-header/Card/Card.hpp"
+#include "../Card/Card.hpp"
 
 #ifndef INVENTORY_HOLDER_HPP
 #define INVENTORY_HOLDER_HPP
 
 using namespace std;
 
-template <size_t N>
+template <typename T>
 class InventoryHolder {
   protected:
-    // An array of card lists of size N.
-    array<Card, N> arrayCard;
+    // A generic container for cards.
+    T cardContainer;
 
   public:
-    // Method to print the contents of the array of card.
-    void printArrayCard();
+    // ctor
+    InventoryHolder();
 
-    // Method to return a card at certain index.
-    Card getCard(int index);
-
-    // Pure virtual method for adding a card to the array of card.
+    // Pure virtual method for adding a card to the container of card.
     virtual void operator+(const Card& newCard) = 0;
 
-    // Pure virtual method for removing a card from the array of card. 
+    // Pure virtual method for removing a card from the container of card. 
     virtual void operator-(const Card& removedCard) = 0;
 };
 

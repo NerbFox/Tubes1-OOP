@@ -6,7 +6,7 @@
 class Command {
     private : 
     public : 
-        friend virtual void action(Game game) = 0;
+        virtual void action(Game game) = 0;
 };  
 
 
