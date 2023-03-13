@@ -59,22 +59,20 @@ void DeckCard::shuffleCard() {
 
 // Method to get the first index in card (index 0).
 Card DeckCard::getTopCard() {
-  Card res = cardContainer.front();
-  cardContainer.pop();
-  return res;
+  return cardContainer.front();
 }
 
-    // Method for adding a card to the container of card.
+// Method for adding a card to the container of card.
 void DeckCard::operator+(const Card& newCard){
   cardContainer.push(newCard);
 }
 
-    // Method to remove card at the first index. 
+// Method to remove card at the first index. 
 void DeckCard::operator-(const Card& removedCard){
   cardContainer.pop();
 }
 
-// int main () {
-//   cout << "test";
-//   return 0;
-// }
+int main () {
+  cout << "test";
+  return 0;
+}

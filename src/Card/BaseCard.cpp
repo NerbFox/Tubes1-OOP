@@ -8,12 +8,6 @@ BaseCard::BaseCard(float _value) : value{_value} { }
 // Copy constructor
 BaseCard::BaseCard(const BaseCard& other) : value{other.value} { }
 
-// Assignment operator
-BaseCard& BaseCard::operator=(const BaseCard& other) {
-  value = other.value;
-  return *this;
-}
-
 // Returns the value of the card.
 float BaseCard::getValue() {
   return value;

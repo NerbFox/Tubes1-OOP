@@ -12,9 +12,6 @@ public:
     // Copy constructor
     BaseCard(const BaseCard& other);
 
-    // Assignment operator
-    BaseCard& operator=(const BaseCard& other);
-
     // Returns the value of the card.
     float getValue(); 
 
