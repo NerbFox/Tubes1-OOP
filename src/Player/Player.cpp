@@ -1,4 +1,5 @@
 #include "../lib-header/Player/Player.hpp"
+#include "../lib-header/Command/Ability.hpp"
 #include <iostream>
 
 using namespace std;
@@ -20,6 +21,9 @@ Player& Player::operator=(const Player& other) {
     setAllCombo(other.allCombo);
     return *this;
 }
+
+// dtor
+Player::~Player() {delete abilityCard;}
 
 void Player::setName(const string& newName) {
     name = newName;

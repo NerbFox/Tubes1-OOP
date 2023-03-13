@@ -30,6 +30,10 @@ class Game {
 
     public : 
         // Ctor
+        Game();
+
+        // dtor
+        ~Game();
 
         // start game
         void startGame();

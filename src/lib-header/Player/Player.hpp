@@ -4,13 +4,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../Command/Command.hpp"
-#include "../Command/Ability.hpp"
+// #include "../Command/Command.hpp"
+// #include "../Command/Ability.hpp"
 #include "../Card/Combo.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/PlayerCard.hpp"
 
 using namespace std;
+
+class Ability;
 
 class Player {
 protected:
@@ -30,6 +32,9 @@ public:
 
     // cctor
     Player& operator=(const Player& other);
+
+    // dtor
+    ~Player();
 
     // sets the player's name to the given string
     void setName(const string& newName);         
