@@ -5,9 +5,9 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRond
     for (int i = 0; i < MAX_PLAYER; i++){
         playerQueue.push_back(make_pair(Player(), false));
     }
-    playerPointer.first = &playerQueue.at(0).first;
+    playerPointer.first = &playerQueue[0].first;
     playerPointer.second = 0;
-    playerQueue.at(0).second = true;
+    playerQueue[0].second = true;
 }
 
 Game::~Game(){}
@@ -18,11 +18,36 @@ void Game::turn(){
 
 void Game::nextPlayer() {
     if (!isEveryoneHaveTurn()){
-        deque<pair<Player,bool>>::iterator it;
-        while (it->second){
-            ++it;
+        int i = 0;
+        while (playerQueue[i].second){
+            i++;
         }
-        
+        playerPointer.first = &playerQueue[i].first;
+        playerPointer.second = i;
+    }
+    else {
+        Game::nextRound();
+    }
+}
+
+void Game::nextRound(){
+    if (countRonde < MAX_ROUND){
+        pair<Player,bool> temp;
+        temp = playerQueue.front();
+        playerQueue.pop_front();
+        playerQueue.push_back(temp);
+
+        for (int i = 1; i < MAX_PLAYER; i++){
+            playerQueue[i].second = false;
+        }
+
+        playerPointer.first = &playerQueue[0].first;
+        playerPointer.second = 0;
+
+        countRonde++;
+    }
+    else {
+        if ()
     }
 }
 

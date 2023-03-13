@@ -23,7 +23,7 @@ class Game {
         const int MAX_ROUND = 6;
         const long long MAX_POINT = 4294967296; //2 ^ 32
         const int multiplier = 2;
-        bool reverse; 
+         
 
 
         friend class Command;
@@ -54,7 +54,7 @@ class Game {
         void reverseOrder();
 
         // Melakukan pengecekan untuk menentukan pemenang
-        void resolveWinner();
+        Player resolveWinner();
 
         bool isEveryoneHaveTurn();
 
@@ -69,13 +69,11 @@ class Game {
         
 };  
 
-// P2 P3 P4 P5 P6 P7 P1
-
-// P4 P5 P6 P7 P1 P2 P3
+// P2 P3 P4 P5 P6 P7 P1 <-
 
 // P4 P3 P2 P1 P7 P6 P5
 
-// P3 P2 P1 P7 P6 P5 P4
+// P3 P2 P1 P7 P6 P5 P4 <-
 
 // P3 P4 P5 P6 P7 P1 P2
 
