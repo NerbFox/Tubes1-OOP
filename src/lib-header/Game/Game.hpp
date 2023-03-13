@@ -25,6 +25,7 @@ class Game {
         const int multiplier = 2;
 
         friend class Command;
+        friend class Ability;
 
     public : 
         // Ctor
