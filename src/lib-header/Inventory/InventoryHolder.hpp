@@ -16,6 +16,9 @@ class InventoryHolder {
     // ctor
     InventoryHolder();
 
+    // Method to get the number of element in the container.
+    int getLength();
+
     // Pure virtual method for adding a card to the container of card.
     virtual void operator+(const Card& newCard) = 0;
 
