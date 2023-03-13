@@ -12,6 +12,7 @@ class Game {
     friend class Command;
     friend class Ability;
     friend class ReRoll;
+    friend class Switch;
     
     private :
         deque<pair<Player,bool>> playerQueue;
