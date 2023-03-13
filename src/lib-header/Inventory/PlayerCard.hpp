@@ -20,6 +20,9 @@ class PlayerCard : public InventoryHolder<array<Card, 2>> {
     // method for update the container at certain index. 
     void updateAt(Card updateCard, int index);
 
+    // get the cards in the container.
+    array<Card, 2> getCards() const;
+
     // assignment operator. 
     // PlayerCard& operator=(const Card& PlayerCard);    
 };  

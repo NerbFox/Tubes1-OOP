@@ -30,6 +30,11 @@ void PlayerCard::updateAt(Card updateCard, int index) {
   cardContainer[index] = updateCard;
 }
 
+array<Card, 2> PlayerCard::getCards() const {
+  return cardContainer;
+}
+
+
 // // assignment operator. 
 // PlayerCard& PlayerCard::operator=(const PlayerCard& other) {
 //   cardContainer[0] = other.cardContainer[0];

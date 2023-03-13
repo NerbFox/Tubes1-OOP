@@ -4,13 +4,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../Command/Command.hpp"
-#include "../Command/Ability.hpp"
+// #include "../Command/Command.hpp"
+// #include "../Command/Ability.hpp"
 #include "../Card/Combo.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/PlayerCard.hpp"
 
 using namespace std;
+
+class Ability;
 
 class Player {
 protected:
@@ -31,6 +33,9 @@ public:
     // cctor
     Player& operator=(const Player& other);
 
+    // dtor
+    ~Player();
+
     // sets the player's name to the given string
     void setName(const string& newName);         
 
@@ -48,6 +53,9 @@ public:
 
     // update player's normal card at certain index
     void setNormalCard(const Card& card, int index);
+
+    // pop player's normal card at certain index
+    Card Player::getNormalCard(int index);
 
     // set all of the combo that the player have
     void setAllCombo(const vector<Combo>& _allCombo); 

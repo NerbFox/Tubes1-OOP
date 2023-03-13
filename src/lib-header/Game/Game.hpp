@@ -9,6 +9,10 @@
 using namespace std;
 
 class Game {
+    friend class Command;
+    friend class Ability;
+    friend class ReRoll;
+    
     private :
         deque<pair<Player,bool>> playerQueue;
         TableCard tableCard;
@@ -31,7 +35,10 @@ class Game {
     public : 
         // Ctor
         Game();
+
+        // dtor
         ~Game();
+
         // start game
         void startGame();
 

@@ -2,6 +2,7 @@
 #define ABILITY_HPP
 #include <string>
 #include "../Command/Command.hpp"
+#include "../Game/Game.hpp"
 using namespace std;
 
 class Ability : public Command {

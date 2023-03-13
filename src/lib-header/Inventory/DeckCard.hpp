@@ -24,6 +24,7 @@ class DeckCard : public InventoryHolder<queue<Card>>{
 
     // Method to remove card at the first index. 
     void operator-(const Card& removedCard);
+
 };  
 
 
