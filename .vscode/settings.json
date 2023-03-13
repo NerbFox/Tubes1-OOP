@@ -5,6 +5,7 @@
         "utility": "cpp",
         "iostream": "cpp",
         "algorithm": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "deque": "cpp"
     }
 }

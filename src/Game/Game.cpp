@@ -16,12 +16,9 @@ void Game::turn(){
 }
 
 void Game::nextPlayer() {
-    pair <Player, bool> temp = playerQueue.front();
-    playerQueue.pop();
-    playerQueue.push(temp);
+    if (!isEveryoneHaveTurn()){
 
-    queue<pair<Player,bool>>::iterator it;
-
+    }
 }
 
 void Game::doubleReward(){
@@ -30,4 +27,23 @@ void Game::doubleReward(){
 
 void Game::halfReward(){
     this->reward /= multiplier;
+}
+
+void Game::reverseOrder() {
+}
+
+bool Game::isEveryoneHaveTurn(){
+    deque<pair<Player,bool>>::iterator it;
+    for (it = playerQueue.begin(); it != playerQueue.end(); ++it){
+        if (!it->second) return false
+    }
+    return true;
+}
+
+TableCard Game::getTableCard(){
+    return tableCard;
+}
+
+DeckCard Game::getTableCard(){
+    return deckCard;
 }
