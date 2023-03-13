@@ -67,9 +67,15 @@ void DeckCard::operator+(const Card& newCard){
   cardContainer.push(newCard);
 }
 
-// Method to remove card at the first index. 
-void DeckCard::operator-(const Card& removedCard){
-  cardContainer.pop();
+// Method to remove the first card from container n times.
+void DeckCard::operator-(int n){
+  if (n > cardContainer.size()) {
+    // throw exception "number of cards will be removed is bigger than the number of cards in the container"
+  }
+
+  for (int i = 0; i < n; i++) {
+    cardContainer.pop();
+  }
 }
 
 // int main () {

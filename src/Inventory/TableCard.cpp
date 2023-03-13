@@ -9,15 +9,13 @@ void TableCard::operator+(const Card& newCard) {
   cardContainer.push_back(newCard);
 }
 
-// method for removing a specific card the container. 
-void TableCard::operator-(const Card& removedCard) {
-  for (int i = 0; i < cardContainer.size(); i++) {
-    if ( i == cardContainer.size() - 1 ) {
-      // throw exception("Card not in container")
-    }
-    if (cardContainer[i] == removedCard) {
-      cardContainer.erase(cardContainer.begin() + i);
-      break;
-    }
+// Method to remove the first card from container n times.
+void TableCard::operator-(int n) {
+  if (n > cardContainer.size()) {
+    // throw exception "number of cards will be removed is bigger than the number of cards in the container"
+  }
+
+  for (int i = 0; i < n; i++) {
+    cardContainer.erase(cardContainer.begin());
   }
 }

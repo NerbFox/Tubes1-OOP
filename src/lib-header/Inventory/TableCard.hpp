@@ -14,8 +14,8 @@ class TableCard : public InventoryHolder<vector<Card>> {
     // method for adding a card to an empty slot.
     void operator+(const Card& newCard);
 
-    // method for removing a specific card the container. 
-    void operator-(const Card& removedCard);
+    // Method to remove the first card from container n times.
+    void operator-(int n);
 };  
 
 

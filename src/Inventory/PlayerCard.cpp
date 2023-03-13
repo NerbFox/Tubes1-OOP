@@ -15,15 +15,13 @@ void PlayerCard::operator+(const Card& newCard) {
   }
 }
 
-// method for removing a specific card the container. 
-void PlayerCard::operator-(const Card& removedCard) {
-  if (cardContainer[0] == removedCard) {
-    cardContainer[0] = Card();
-  } else if (cardContainer[1] == removedCard) {
-    cardContainer[1] = Card();
+// method for removing a card for a specific index. 
+void PlayerCard::operator-(int n) {
+  if (cardContainer[n].isEmpty()) { 
+    cardContainer[n] = Card();
   } else {
-    // throw exception("Player card is not found")
-  }  
+    // throw exception "card is empty on the specific index"
+  }
 }
 
 void PlayerCard::updateAt(Card updateCard, int index) {
