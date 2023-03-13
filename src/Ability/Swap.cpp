@@ -52,9 +52,10 @@ void Swap::action(Game game){
         cout << "Pemain kedua: " << endl;
         cin >> pilihanKartuP2; cout << endl;
     }
-    Card card1 = game.playerQueue[pilihanP1-1].first.getNormalCard(pilihanKartuP1-1);
-    Card card2 = game.playerQueue[pilihanP2-1].first.getNormalCard(pilihanKartuP2-1);
+    pilihanKartuP1--; pilihanKartuP2--; pilihanP1--; pilihanP2--;
+    Card card1 = game.playerQueue[pilihanP1].first.getNormalCard(pilihanKartuP1);
+    Card card2 = game.playerQueue[pilihanP2].first.getNormalCard(pilihanKartuP2);
     // cek apakah kartu yang di ubah adalah kartu yang dipilih
-    game.playerQueue[pilihanP1-1].first.setNormalCard(card2, pilihanKartuP1-1);
-    game.playerQueue[pilihanP2-1].first.setNormalCard(card1, pilihanKartuP2-1);
+    game.playerQueue[pilihanP1].first.setNormalCard(card2, pilihanKartuP1);
+    game.playerQueue[pilihanP2].first.setNormalCard(card1, pilihanKartuP2);
 }

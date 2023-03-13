@@ -35,13 +35,14 @@ void Switch::action(Game game)
         cout << endl;
     }
     // take 2 cards from the player's card deck and put it to the other player's card deck 
+    pilihan--;
     Card card1 = game.playerPointer.first->getNormalCard(0);
     Card card2 = game.playerPointer.first->getNormalCard(1);
-    Card card3 = game.playerQueue[pilihan-1].first.getNormalCard(0);
-    Card card4 = game.playerQueue[pilihan-1].first.getNormalCard(1);
+    Card card3 = game.playerQueue[pilihan].first.getNormalCard(0);
+    Card card4 = game.playerQueue[pilihan].first.getNormalCard(1);
     game.playerPointer.first->setNormalCard(card3, 0);
     game.playerPointer.first->setNormalCard(card4, 1);
-    game.playerQueue[pilihan-1].first.setNormalCard(card1, 0);
-    game.playerQueue[pilihan-1].first.setNormalCard(card2, 1);
+    game.playerQueue[pilihan].first.setNormalCard(card1, 0);
+    game.playerQueue[pilihan].first.setNormalCard(card2, 1);
 
 }
