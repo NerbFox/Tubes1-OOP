@@ -22,6 +22,6 @@ void PlayerCard::operator-(const Card& removedCard) {
   } else if (cardContainer[1] == removedCard) {
     cardContainer[1] = Card();
   } else {
-    // throw exception("Player card is not found or empty")
+    // throw exception("Player card is not found")
   }  
 }

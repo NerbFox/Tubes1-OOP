@@ -3,14 +3,30 @@
 
 using namespace std;
 
-Player::Player() : name {NULL}, point{0}, abilityCard{}, allCombo{}, power{0} { }
+// ctor
+Player::Player(string _name, long long _point, int _power) : name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{} { }
 
-string Player::getName() const {
-    return name;
+// cctor
+Player::Player(const Player& other) : name{other.name}, point{other.point}, power{other.power}, abilityCard{other.abilityCard} {
+    setAllCombo(other.allCombo);
+}
+
+// cctor
+Player& Player::operator=(const Player& other) {
+    name = other.name;
+    point = other.point;
+    power = other.power;
+    abilityCard = other.abilityCard;
+    setAllCombo(other.allCombo);
+    return *this;
 }
 
 void Player::setName(const string& newName) {
     name = newName;
+}
+
+string Player::getName() const {
+    return name;
 }
 
 long long Player::getPoint() const {
@@ -19,6 +35,24 @@ long long Player::getPoint() const {
 
 void Player::addPoint(long long pointsToAdd) {
     point += pointsToAdd;
+}
+
+// set the ability card of the player
+void Player::setAbilityCard(const Ability& card) {
+    abilityCard = card;
+}    
+
+// set all of the combo that the player have
+void Player::setAllCombo(const vector<Combo>& _allCombo) {
+    for (int i = 0; i < _allCombo.size(); i++) {
+        allCombo.push_back(_allCombo[i]);
+    }
+    
+} 
+
+// clear the combo that the player has
+void Player::clearCombo() {
+    allCombo.clear();
 }
 
 bool Player::operator>(const Player& otherPlayer) const {
@@ -45,3 +79,8 @@ void Player::computePower(const TableCard& tableCard) {
 int Player::getPower() const {
     return power;
 }
+
+// int main() {
+//     cout << "test";
+//     return 0;
+// }

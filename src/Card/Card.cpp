@@ -3,7 +3,7 @@
 using namespace std;
 
 // Constructor
-Card::Card(int number, string color) : BaseCard{0}, number(number), color(color) { computeValue();}
+Card::Card(int number, string color) : BaseCard{}, number(number), color(color) { computeValue();}
 
 // Copy constructor
 Card::Card(const Card& other) : BaseCard{other} ,number(other.number), color(other.color) {}

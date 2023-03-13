@@ -8,7 +8,7 @@ using namespace std;
 #ifndef DECK_CARD_HPP
 #define DECK_CARD_HPP
 
-class DeckCard : InventoryHolder<queue<Card>>{
+class DeckCard : public InventoryHolder<queue<Card>>{
   public:
     // ctor, isi dengan 52 kartu yang ada di poker
     DeckCard();
