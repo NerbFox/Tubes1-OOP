@@ -11,7 +11,7 @@ void PlayerCard::operator+(const Card& newCard) {
   } else if (cardContainer[1].isEmpty()) {
     cardContainer[1] = newCard;
   } else {
-    // throw exception("Player card is full")
+    throw "player card is full";
   }
 }
 
@@ -20,7 +20,7 @@ void PlayerCard::operator-(int n) {
   if (cardContainer[n].isEmpty()) { 
     cardContainer[n] = Card();
   } else {
-    // throw exception "card is empty on the specific index"
+    throw "card is empty on the specific index";
   }
 }
 
