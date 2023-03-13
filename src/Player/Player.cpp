@@ -72,11 +72,39 @@ void Player::clearCombo() {
 }
 
 bool Player::operator>(const Player& otherPlayer) const {
-    return power > otherPlayer.getPower();
+    int temp1 = 0;
+    for (int i = 0; i < allCombo.size(); i++) {
+        if (allCombo[i].getValue() > temp1) {
+            temp1 = allCombo[i].getValue();
+        }
+    }
+
+    int temp2 = 0;
+    for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
+        if (otherPlayer.allCombo[i].getValue() > temp1) {
+            temp2 = otherPlayer.allCombo[i].getValue();
+        }
+    }
+
+    return temp1 > temp2;
 }
 
 bool Player::operator<(const Player& otherPlayer) const {
-    return power < otherPlayer.getPower();
+    int temp1 = 0;
+    for (int i = 0; i < allCombo.size(); i++) {
+        if (allCombo[i].getValue() > temp1) {
+            temp1 = allCombo[i].getValue();
+        }
+    }
+
+    int temp2 = 0;
+    for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
+        if (otherPlayer.allCombo[i].getValue() > temp1) {
+            temp2 = otherPlayer.allCombo[i].getValue();
+        }
+    }
+
+    return temp1 < temp2;
 }
 
 void Player::getCommand() {
@@ -87,7 +115,7 @@ void Player::getCommand() {
     // Masih nunggu command class untuk diimplementasi
 }
 
-void Player::computePower(const TableCard& tableCard) {
+void Player::computePower(const TableCard& tableCard) const {
     // Masih nunggu combo class untuk diimplementasi
     // Masih nunggu generic function buat dapetin value tertinggi
 }

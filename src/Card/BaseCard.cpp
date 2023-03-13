@@ -9,22 +9,22 @@ BaseCard::BaseCard(float _value) : value{_value} { }
 BaseCard::BaseCard(const BaseCard& other) : value{other.value} { }
 
 // Returns the value of the card.
-float BaseCard::getValue() {
+float BaseCard::getValue() const {
   return value;
 } 
 
 // Compares the value of two cards and returns true if the value of this card is less than the other card.
-bool BaseCard::operator<(const BaseCard& other) {
+bool BaseCard::operator<(const BaseCard& other) const {
   return value < other.value;
 } 
 
 // Compares the value of two cards and returns true if the value of this card is greater than the other card.
-bool BaseCard::operator>(const BaseCard& other) {
+bool BaseCard::operator>(const BaseCard& other) const {
   return value > other.value;
 } 
 
 // Compares the value of two cards and returns true if the value of this card is equal to the other card.
-bool BaseCard::operator==(const BaseCard& other) {
+bool BaseCard::operator==(const BaseCard& other) const {
   return value == other.value;
 } 
 

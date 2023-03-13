@@ -73,7 +73,7 @@ public:
     void getCommand();      
     
     // computes the player's current power based on the cards at hand and on the table
-    void computePower(const TableCard& tableCard);    
+    void computePower(const TableCard& tableCard) const;    
     
     // returns the player's current power
     int getPower() const;                
