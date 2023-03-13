@@ -1,7 +1,6 @@
 #include "../lib-header/Game/Game.hpp"
 #include <iostream> 
 
-
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
     for (int i = 0; i < MAX_PLAYER; i++){
         playerQueue.push_back(make_pair(Player(), false));
@@ -98,8 +97,41 @@ void Game::printStandings(int pivot){
     }
 }
 
-int main() {
-    cout << "test";
 
-    return 0;
+// get max player
+int Game::getMaxPlayer(){
+    return MAX_PLAYER;
 }
+
+// set ability card kepada player
+void Game::setAbilityCard(){
+    // Ability abilityCard1;
+    // Ability abilityCard2;
+    // Ability abilityCard3;
+    // Ability abilityCard4;
+
+    // abilityCard1 = ReRoll();
+    // abilityCard2 = DoubleReward();
+    // ...
+
+    // abilityCardQueue.push_back(abilityCard1);
+    // abilityCardQueue.push_back(abilityCard2);
+    // ...
+
+    // Distribute ability card to player
+    // .. 
+
+}
+
+// set all ability card player
+void Game::setConditionAbilityCardPlayer(bool condition){
+    for (int i = 0; i < MAX_PLAYER; i++){
+        playerQueue[i].first.setAbilityUsed(condition);
+    }
+}
+
+// int main() {
+//     cout << "test";
+
+//     return 0;
+// }

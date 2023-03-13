@@ -23,7 +23,7 @@ class InventoryHolder {
     virtual void operator+(const Card& newCard) = 0;
 
     // Pure virtual method for removing a card from the container of card. 
-    virtual void operator-(const Card& removedCard) = 0;
+    virtual void operator-(int n) = 0;
 };
 
 #endif

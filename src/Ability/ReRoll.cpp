@@ -12,23 +12,19 @@ void ReRoll::action(Game game) {
     //     return;
     // }
     // else {
+    game.playerPointer.first->setAbilityUsed(true);
     int index = 0;
     
     // take 2 cards from the player's main deck
-    Card card1 = game.playerPointer->getNormalCard(0);
-    Card card2 = game.playerPointer->getNormalCard(1);
-    
+    Card card1 = game.playerPointer.first->getNormalCard(0);
+    Card card2 = game.playerPointer.first->getNormalCard(1);
     // take 2 cards from the deck and put it to the player's main deck
-    game.deckCard-(card1);
-    game.playerPointer->setNormalCard(game.deckCard.getTopCard(), 0);
-    game.deckCard-(card2);
-    game.playerPointer->setNormalCard(game.deckCard.getTopCard(), 1);
+    game.playerPointer.first->setNormalCard(game.deckCard.getTopCard(), 0);
+    game.deckCard-1;
+    game.playerPointer.first->setNormalCard(game.deckCard.getTopCard(), 1);
+    game.deckCard-1;
 
     // put the card back to the deck
     game.deckCard+(card1);
     game.deckCard+(card2);
-
-    // game.deckCard+(game.deckCard.getTopCard());
-    // }
-    // game.playerPointer->takeCard(2);
 }

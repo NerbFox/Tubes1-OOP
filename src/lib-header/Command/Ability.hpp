@@ -3,6 +3,7 @@
 #include <string>
 #include "../Command/Command.hpp"
 #include "../Game/Game.hpp"
+#include <iostream>
 using namespace std;
 
 class Ability : public Command {

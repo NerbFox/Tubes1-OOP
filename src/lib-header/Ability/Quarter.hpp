@@ -5,9 +5,11 @@
 class Quarter : public Ability {
     private:
         const int DEVISORQ = 4;
+        friend class Game;
     public:
         Quarter();
         ~Quarter();
+        void action(Game game);
 };
 
 #endif;

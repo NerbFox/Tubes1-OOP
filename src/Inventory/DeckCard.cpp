@@ -24,9 +24,7 @@ DeckCard::DeckCard() : InventoryHolder{} {
           color = "biru";
           break;                
         default:
-          color = "none";
-          // throw exception("warna tidak ditemukan");              
-          // untuk sementara gini dulu karena belum ada implementasi exception
+          throw "color is not found";              
       }
       cardContainer.push(Card(((i+1)*(j+1)) % 13 + 1, color));
     }
@@ -67,9 +65,15 @@ void DeckCard::operator+(const Card& newCard){
   cardContainer.push(newCard);
 }
 
-// Method to remove card at the first index. 
-void DeckCard::operator-(const Card& removedCard){
-  cardContainer.pop();
+// Method to remove the first card from container n times.
+void DeckCard::operator-(int n){
+  if (n > cardContainer.size()) {
+    throw "the number of cards that wanted to be removed is bigger than the number of cards in the container";
+  }
+
+  for (int i = 0; i < n; i++) {
+    cardContainer.pop();
+  }
 }
 
 // int main () {

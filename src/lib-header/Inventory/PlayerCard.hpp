@@ -14,8 +14,8 @@ class PlayerCard : public InventoryHolder<array<Card, 2>> {
     // method for adding a card to an empty slot.
     void operator+(const Card& newCard);
 
-    // method for removing a specific card the container. 
-    void operator-(const Card& removedCard);
+    // method for removing a card for a specific index. 
+    void operator-(int n);
 
     // method for update the container at certain index. 
     void updateAt(Card updateCard, int index);

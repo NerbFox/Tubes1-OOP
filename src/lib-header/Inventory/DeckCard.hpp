@@ -22,8 +22,8 @@ class DeckCard : public InventoryHolder<queue<Card>>{
     // Method for adding a card to the container of card.
     void operator+(const Card& newCard);
 
-    // Method to remove card at the first index. 
-    void operator-(const Card& removedCard);
+    // Method to remove the first card from container n times.
+    void operator-(int n);
 
 };  
 

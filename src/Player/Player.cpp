@@ -5,10 +5,10 @@
 using namespace std;
 
 // ctor
-Player::Player(string _name, long long _point, int _power) : normalCard{}, name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{} { }
+Player::Player(string _name, long long _point, int _power) : normalCard{}, name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{}, AbilityUsed(false) { }
 
 // cctor
-Player::Player(const Player& other) : name{other.name}, point{other.point}, power{other.power}, abilityCard{other.abilityCard} {
+Player::Player(const Player& other) : name{other.name}, point{other.point}, power{other.power}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}{
     setAllCombo(other.allCombo);
 }
 
@@ -17,6 +17,7 @@ Player& Player::operator=(const Player& other) {
     name = other.name;
     point = other.point;
     power = other.power;
+    AbilityUsed = other.AbilityUsed;
     abilityCard = other.abilityCard;
     setAllCombo(other.allCombo);
     return *this;
@@ -72,11 +73,39 @@ void Player::clearCombo() {
 }
 
 bool Player::operator>(const Player& otherPlayer) const {
-    return power > otherPlayer.getPower();
+    int temp1 = 0;
+    for (int i = 0; i < allCombo.size(); i++) {
+        if (allCombo[i].getValue() > temp1) {
+            temp1 = allCombo[i].getValue();
+        }
+    }
+
+    int temp2 = 0;
+    for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
+        if (otherPlayer.allCombo[i].getValue() > temp1) {
+            temp2 = otherPlayer.allCombo[i].getValue();
+        }
+    }
+
+    return temp1 > temp2;
 }
 
 bool Player::operator<(const Player& otherPlayer) const {
-    return power < otherPlayer.getPower();
+    int temp1 = 0;
+    for (int i = 0; i < allCombo.size(); i++) {
+        if (allCombo[i].getValue() > temp1) {
+            temp1 = allCombo[i].getValue();
+        }
+    }
+
+    int temp2 = 0;
+    for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
+        if (otherPlayer.allCombo[i].getValue() > temp1) {
+            temp2 = otherPlayer.allCombo[i].getValue();
+        }
+    }
+
+    return temp1 < temp2;
 }
 
 void Player::getCommand() {
@@ -87,13 +116,21 @@ void Player::getCommand() {
     // Masih nunggu command class untuk diimplementasi
 }
 
-void Player::computePower(const TableCard& tableCard) {
+void Player::computePower(const TableCard& tableCard) const {
     // Masih nunggu combo class untuk diimplementasi
     // Masih nunggu generic function buat dapetin value tertinggi
 }
 
 int Player::getPower() const {
     return power;
+}
+
+bool Player::isAbilityUsed() const {
+    return  AbilityUsed;
+}
+
+void Player::setAbilityUsed(bool _AbilityUsed) {
+    AbilityUsed = _AbilityUsed;
 }
 
 // int main() {

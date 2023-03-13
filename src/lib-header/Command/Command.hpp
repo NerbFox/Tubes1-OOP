@@ -5,6 +5,7 @@
 
 class Command {
     private : 
+        friend class Game;
     public : 
         virtual void action(Game) = 0;
         virtual void action(Player) = 0;
