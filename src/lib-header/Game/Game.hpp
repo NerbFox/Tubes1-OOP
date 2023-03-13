@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <vector>
+#include <utility>
 #include "../Player/Player.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/DeckCard.hpp"

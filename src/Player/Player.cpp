@@ -38,7 +38,7 @@ void Player::addPoint(long long pointsToAdd) {
 }
 
 // set the ability card of the player
-void Player::setAbilityCard(const Ability& card) {
+void Player::setAbilityCard(Ability *card) {
     abilityCard = card;
 }    
 
