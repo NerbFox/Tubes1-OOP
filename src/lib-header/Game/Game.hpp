@@ -15,7 +15,8 @@ class Game {
     friend class Switch;
     friend class Swap;
     friend class Quadruple;
-    friend class Quarter;    
+    friend class Quarter;   
+    friend class Abilityless; 
     
     private :
         deque<pair<Player,bool>> playerQueue;

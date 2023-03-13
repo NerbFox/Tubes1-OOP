@@ -26,8 +26,5 @@ void ReRoll::action(Game game) {
     // put the card back to the deck
     game.deckCard+(card1);
     game.deckCard+(card2);
-    
-    // game.deckCard+(game.deckCard.getTopCard());
-    // }
-    // game.playerPointer->takeCard(2);
+    game.playerPointer.first->setAbilityUsed(true);
 }

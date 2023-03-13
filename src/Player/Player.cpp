@@ -5,10 +5,10 @@
 using namespace std;
 
 // ctor
-Player::Player(string _name, long long _point, int _power) : normalCard{}, name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{} { }
+Player::Player(string _name, long long _point, int _power) : normalCard{}, name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{}, AbilityUsed(false) { }
 
 // cctor
-Player::Player(const Player& other) : name{other.name}, point{other.point}, power{other.power}, abilityCard{other.abilityCard} {
+Player::Player(const Player& other) : name{other.name}, point{other.point}, power{other.power}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}{
     setAllCombo(other.allCombo);
 }
 
@@ -17,6 +17,7 @@ Player& Player::operator=(const Player& other) {
     name = other.name;
     point = other.point;
     power = other.power;
+    AbilityUsed = other.AbilityUsed;
     abilityCard = other.abilityCard;
     setAllCombo(other.allCombo);
     return *this;
@@ -122,6 +123,14 @@ void Player::computePower(const TableCard& tableCard) const {
 
 int Player::getPower() const {
     return power;
+}
+
+bool Player::isAbilityUsed() const {
+    return  AbilityUsed;
+}
+
+void Player::setAbilityUsed(bool _AbilityUsed) {
+    AbilityUsed = _AbilityUsed;
 }
 
 // int main() {
