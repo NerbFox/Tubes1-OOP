@@ -4,7 +4,7 @@
 using namespace std;
 
 // ctor
-Player::Player(string _name, long long _point, int _power) : name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{} { }
+Player::Player(string _name, long long _point, int _power) : normalCard{}, name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{} { }
 
 // cctor
 Player::Player(const Player& other) : name{other.name}, point{other.point}, power{other.power}, abilityCard{other.abilityCard} {
@@ -41,6 +41,11 @@ void Player::addPoint(long long pointsToAdd) {
 void Player::setAbilityCard(const Ability& card) {
     abilityCard = card;
 }    
+
+// update player's normal card at certain index
+void Player::setNormalCard(const Card& card, int index) {
+    normalCard.updateAt(card, index);
+}
 
 // set all of the combo that the player have
 void Player::setAllCombo(const vector<Combo>& _allCombo) {

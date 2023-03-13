@@ -13,7 +13,7 @@ class Game {
         vector<pair<Player,bool>> playerQueue;
         TableCard tableCard;
         DeckCard deckCard;
-        int reward;
+        long long reward;
         int countPermainan;
         int countRonde;
 

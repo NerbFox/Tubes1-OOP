@@ -16,6 +16,12 @@ class PlayerCard : public InventoryHolder<array<Card, 2>> {
 
     // method for removing a specific card the container. 
     void operator-(const Card& removedCard);
+
+    // method for update the container at certain index. 
+    void updateAt(Card updateCard, int index);
+
+    // assignment operator. 
+    // PlayerCard& operator=(const Card& PlayerCard);    
 };  
 
 
