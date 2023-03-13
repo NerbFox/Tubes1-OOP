@@ -5,7 +5,7 @@
 using namespace std;
 
 // ctor
-Player::Player(string _name, long long _point) : normalCard{}, name{_name}, point{_point}, abilityCard{}, allCombo{}, AbilityUsed(false) { }
+Player::Player(string _name) : normalCard{}, name{_name}, point{0}, abilityCard{}, allCombo{}, AbilityUsed(false) { }
 
 // cctor
 Player::Player(const Player& other) : name{other.name}, point{other.point}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}{

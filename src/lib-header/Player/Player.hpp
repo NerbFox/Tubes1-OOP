@@ -25,7 +25,7 @@ protected:
 
 public:
     // ctor
-    Player(string _name = "", long long _point = 0);
+    Player(string _name = "");
 
     // cctor
     Player(const Player& other);
