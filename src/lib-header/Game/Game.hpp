@@ -19,6 +19,9 @@ class Game {
     friend class Quadruple;
     friend class Quarter;   
     friend class Abilityless; 
+    friend class Double;
+    friend class Half;
+    friend class Next;
     
     private :
         deque<Player> playerQueue;
@@ -33,14 +36,7 @@ class Game {
 
         const int MAX_PLAYER = 7;
         const int MAX_ROUND = 6;
-        const long long MAX_POINT = 4294967296; //2 ^ 32
-        const int multiplier = 2;
-         
-
-
-        friend class Command;
-        friend class Quadruple;
-        friend class Quarter;
+        const long long MAX_POINT = 4294967296; //2 ^ 32         
 
     public : 
         // Ctor
