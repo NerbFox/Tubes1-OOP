@@ -6,7 +6,7 @@ class Swap : public Ability {
     public:
         Swap();
         ~Swap();
-        void RunSwapCard();
+        void action(Game game);
 };
 
 #endif
