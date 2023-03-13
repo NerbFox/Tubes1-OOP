@@ -15,23 +15,40 @@ class Player {
 protected:
     string name;                  // player's name
     long long point;              // player's current points
-    const int CARD_LEN = 2;       // the number of card in the player's hand
     Ability abilityCard;          // the player's ability card
     vector<Combo> allCombo;       // a vector containing all of the player's combos
     int power;                    // the player's current power (nilai combo paling tinggi yang dia punya)
 
 public:
-    // returns the player's name
-    string getName() const;                      
-    
+    // ctor
+    Player(string _name = "", long long _point = 0, int _power = 0);
+
+    // cctor
+    Player(const Player& other);
+
+    // cctor
+    Player& operator=(const Player& other);
+
     // sets the player's name to the given string
     void setName(const string& newName);         
+
+    // returns the player's name
+    string getName() const;                      
     
     // returns the player's current point total
     long long getPoint() const;                       
 
     // adds the given number of points to the player's total
-    void addPoint(long long pointsToAdd);            
+    void addPoint(long long pointsToAdd);        
+
+    // set the ability card of the player
+    void setAbilityCard(const Ability& card);    
+
+    // set all of the combo that the player have
+    void setAllCombo(const vector<Combo>& _allCombo); 
+
+    // clear the combo that the player has
+    void clearCombo();
     
     // returns true if this player's power is greater than the other player's
     bool operator>(const Player& otherPlayer) const;  
