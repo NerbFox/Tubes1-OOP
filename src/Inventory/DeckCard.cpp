@@ -72,7 +72,7 @@ void DeckCard::operator-(const Card& removedCard){
   cardContainer.pop();
 }
 
-int main () {
-  cout << "test";
-  return 0;
-}
+// int main () {
+//   cout << "test";
+//   return 0;
+// }

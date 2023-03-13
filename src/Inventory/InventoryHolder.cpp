@@ -8,3 +8,8 @@ using namespace std;
 // ctor
 template <typename T>
 InventoryHolder<T>::InventoryHolder() : cardContainer{} {}
+
+template <typename T>
+int InventoryHolder<T>::getLength() {
+  return T.size();
+}

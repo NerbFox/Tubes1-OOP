@@ -25,3 +25,14 @@ void PlayerCard::operator-(const Card& removedCard) {
     // throw exception("Player card is not found")
   }  
 }
+
+void PlayerCard::updateAt(Card updateCard, int index) {
+  cardContainer[index] = updateCard;
+}
+
+// // assignment operator. 
+// PlayerCard& PlayerCard::operator=(const PlayerCard& other) {
+//   cardContainer[0] = other.cardContainer[0];
+//   cardContainer[1] = other.cardContainer[1];
+//   return *this;
+// }  

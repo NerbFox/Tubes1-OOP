@@ -8,6 +8,7 @@
 #include "../Command/Ability.hpp"
 #include "../Card/Combo.hpp"
 #include "../Inventory/TableCard.hpp"
+#include "../Inventory/PlayerCard.hpp"
 
 using namespace std;
 
@@ -15,7 +16,8 @@ class Player {
 protected:
     string name;                  // player's name
     long long point;              // player's current points
-    Ability abilityCard;          // the player's ability card
+    PlayerCard normalCard;        // player's normal card
+    Ability *abilityCard;         // player's ability card
     vector<Combo> allCombo;       // a vector containing all of the player's combos
     int power;                    // the player's current power (nilai combo paling tinggi yang dia punya)
 
@@ -42,7 +44,10 @@ public:
     void addPoint(long long pointsToAdd);        
 
     // set the ability card of the player
-    void setAbilityCard(const Ability& card);    
+    void setAbilityCard(Ability *card);    
+
+    // update player's normal card at certain index
+    void setNormalCard(const Card& card, int index);
 
     // set all of the combo that the player have
     void setAllCombo(const vector<Combo>& _allCombo); 
@@ -63,7 +68,7 @@ public:
     void computePower(const TableCard& tableCard);    
     
     // returns the player's current power
-    int getPower() const;                             
+    int getPower() const;                
 };
 
 #endif
