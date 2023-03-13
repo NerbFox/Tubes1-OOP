@@ -17,6 +17,7 @@ void Abilityless::action(Game game) {
      langsung pemegang kemampuan ini terkena abilityless (karena semua kartu kemampuan sudah 
      dipakai) dan harus memilih aksi selain power.
     */
+    game.playerPointer.first->setAbilityUsed(true);
     int indeksPemain = 0;
     int i = 1;
     int pilihan;
@@ -28,7 +29,7 @@ void Abilityless::action(Game game) {
         }
         cout << i << ". " <<  currentPair.first.getName() << endl;
     }
-    
+
 
 
 }

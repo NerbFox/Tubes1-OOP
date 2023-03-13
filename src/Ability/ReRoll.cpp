@@ -12,6 +12,7 @@ void ReRoll::action(Game game) {
     //     return;
     // }
     // else {
+    game.playerPointer.first->setAbilityUsed(true);
     int index = 0;
     
     // take 2 cards from the player's main deck
@@ -26,5 +27,4 @@ void ReRoll::action(Game game) {
     // put the card back to the deck
     game.deckCard+(card1);
     game.deckCard+(card2);
-    game.playerPointer.first->setAbilityUsed(true);
 }
