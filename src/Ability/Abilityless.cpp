@@ -18,24 +18,16 @@ void Abilityless::action(Game game) {
      dipakai) dan harus memilih aksi selain power.
     */
     game.playerPointer.first->setAbilityUsed(true);
-    int indeksPemain = 0;
+    int indeksPemain = game.getIndexPlayerPointer();
     int i = 1;
     int pilihan;
     cout << "Abilityless diaktifkan" << endl;
     cout << "Silahkan pilih pemain yang kartu abilitynya ingin dimatikan:\n";
     for (auto currentPair : game.playerQueue) {
-        if (currentPair.first.getName() != game.playerPointer.first->getName()) {
-            indeksPemain = i-1;
-        }
         cout << i << ". " <<  currentPair.first.getName() << endl;
     }
-    cout << "Pilih pemain: ";
-    cin >> pilihan;
-    cout << endl;
+    pilihan = 0;
     while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
-        // exception with class IndexNotValidException
-        // IndexNotValidException I(pilihan);
-        // IndexOutOfBoundsException I2(pilihan, 7);
         try {
             cout << "\nPilih pemain: "; 
             cin >> pilihan;

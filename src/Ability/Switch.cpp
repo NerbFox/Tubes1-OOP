@@ -17,22 +17,30 @@ void Switch::action(Game game)
 
     // print playerQueue bertipe dequeue dari game 
     // dengan format no. nama pemain
-    int pilihan;
+    int pilihan = 0;
     int i = 1;
-    int indeksPemain = 0;
+    int indeksPemain = game.getIndexPlayerPointer();
     for (auto currentPair : game.playerQueue) {
-        if (currentPair.first.getName() != game.playerPointer.first->getName()) {
-            indeksPemain = i-1;
-        }
         cout << i << ". " <<  currentPair.first.getName() << endl;
     }
-    cout << "Pilih pemain: ";
-    cin >> pilihan;
-    cout << endl;
     while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
-        cout << "Pilihan tidak valid. Pilih pemain: "; // throw exception
-        cin >> pilihan;
-        cout << endl;
+        try {
+            cout << "\nPilih pemain: "; 
+            cin >> pilihan;
+            cout << endl;
+            if (pilihan>7 || pilihan<1 ) {
+                throw IndexOutOfBoundsException(pilihan, 7);
+            }
+            if (pilihan == indeksPemain) {
+                throw IndexNotValidException(pilihan);
+            }
+        }
+        catch (const IndexNotValidException &err) {
+            cout << err.what() << endl;
+        }
+        catch (const IndexOutOfBoundsException &err){
+            cout << err.what() << endl;
+        }
     }
     // take 2 cards from the player's card deck and put it to the other player's card deck 
     pilihan--;

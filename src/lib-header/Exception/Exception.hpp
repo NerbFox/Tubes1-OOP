@@ -50,3 +50,12 @@ class InvalidInputException : public exception {
         ~InvalidInputException();
         const char* what() const throw();
 };
+
+class SameIndexException : public exception {
+    private:
+        int index;
+    public:
+        SameIndexException(int _index);
+        ~SameIndexException();
+        const char* what() const throw();
+};
