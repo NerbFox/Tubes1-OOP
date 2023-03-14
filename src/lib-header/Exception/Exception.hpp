@@ -24,8 +24,9 @@ class NamaDuplikatException : public exception {
 class IndexOutOfBoundsException : public exception {
     private:
         int index;
+        int batas;
     public:
-        IndexOutOfBoundsException(int _index);
+        IndexOutOfBoundsException(int _index, int _batas);
         ~IndexOutOfBoundsException();
         const char* what() const throw();
 };
@@ -36,5 +37,16 @@ class IndexNotValidException : public exception {
     public:
         IndexNotValidException(int _index);
         ~IndexNotValidException();
+        const char* what() const throw();
+};
+
+
+template <class T>
+class InvalidInputException : public exception {
+    private:
+        T input;
+    public:
+        InvalidInputException(T _input);
+        ~InvalidInputException();
         const char* what() const throw();
 };

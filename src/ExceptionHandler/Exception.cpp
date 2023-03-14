@@ -18,12 +18,12 @@ const char* NamaDuplikatException::what() const throw() {
   return msg.c_str();
 }
 
-IndexOutOfBoundsException::IndexOutOfBoundsException(int _index) : index(_index) {}
+IndexOutOfBoundsException::IndexOutOfBoundsException(int _index, int _batas) : index(_index), batas(_batas) {}
 
 IndexOutOfBoundsException::~IndexOutOfBoundsException(){}
 
 const char* IndexOutOfBoundsException::what() const throw() {
-  string msg = "IndexOutOfBoundsException : Index " + to_string(index) + " tidak valid, index harus berada diantara 1 dan 7";
+  string msg = "IndexOutOfBoundsException : Index " + to_string(index) + " tidak valid, index harus berada diantara 1 dan " + to_string(batas);
   return msg.c_str();
 }
 
@@ -35,3 +35,16 @@ const char* IndexNotValidException::what() const throw() {
   string msg = "IndexNotValidException : Index " + to_string(index) + " tidak valid, index tidak boleh diri sendiri";
   return msg.c_str();
 }
+
+template <class T>
+InvalidInputException<T>::InvalidInputException(T _input) : input(_input) {}
+
+template <class T>
+InvalidInputException<T>::~InvalidInputException(){}
+
+template <class T>
+const char* InvalidInputException<T>::what() const throw() {
+  string msg = "InvalidInputException : Input " + to_string(input) + " tidak valid, input harus berupa angka";
+  return msg.c_str();
+}
+
