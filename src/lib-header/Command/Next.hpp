@@ -1,7 +1,7 @@
 #ifndef NEXT_HPP
 #define NEXT_HPP
 
-#include "../Command/Command.hpp"
+#include "Command.hpp"
 
 class Next : public Command {
     friend class Game;

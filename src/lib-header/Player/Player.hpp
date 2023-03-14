@@ -21,12 +21,11 @@ protected:
     PlayerCard normalCard;        // player's normal card
     Ability *abilityCard;         // player's ability card
     vector<Combo> allCombo;       // a vector containing all of the player's combos
-    int power;                    // the player's current power (nilai combo paling tinggi yang dia punya)
-    bool AbilityUsed;           // true if the player has used his ability card
+    bool AbilityUsed;             // true if the player has used his ability card
 
 public:
     // ctor
-    Player(string _name = "", long long _point = 0, int _power = 0);
+    Player(string _name = "");
 
     // cctor
     Player(const Player& other);
@@ -45,9 +44,7 @@ public:
     // pop player's normal card at certain index
     Card getNormalCard(int index);
     // request command input from the user and process it
-    void getCommand();      
-    // returns the player's current power
-    int getPower() const;     
+    void getCommand();        
     // bool isAbilityUsed
     bool isAbilityUsed() const;
     
@@ -77,10 +74,6 @@ public:
     
     // returns true if this player's power is less than the other player's
     bool operator<(const Player& otherPlayer) const;  
-    
-    // computes the player's current power based on the cards at hand and on the table
-    void computePower(const TableCard& tableCard) const;    
-    
 };
 
 #endif

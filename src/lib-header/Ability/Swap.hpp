@@ -1,6 +1,6 @@
 #ifndef SWAP_HPP
 #define SWAP_HPP
-#include "../lib-header/Command/Ability.hpp"
+#include "../Command/Ability.hpp"
 
 class Swap : public Ability {
     public:

@@ -1,6 +1,6 @@
 #ifndef SWITCH_HPP
 #define SWITCH_HPP
-#include "../lib-header/Command/Ability.hpp"
+#include "../Command/Ability.hpp"
 
 class Switch : public Ability {
     /*menukar 2 kartu main deck milik diri sendiri dengan 2 kartu main deck milik pemain lain. Harus 

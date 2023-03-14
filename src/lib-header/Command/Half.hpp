@@ -1,7 +1,7 @@
 #ifndef HALF_HPP
 #define HALF_HPP
 
-#include "../Command/Command.hpp"
+#include "Command.hpp"
 
 class Half : public Command {
     friend class Game;

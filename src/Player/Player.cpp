@@ -5,10 +5,10 @@
 using namespace std;
 
 // ctor
-Player::Player(string _name, long long _point, int _power) : normalCard{}, name{_name}, point{_point}, power{_power}, abilityCard{}, allCombo{}, AbilityUsed(false) { }
+Player::Player(string _name) : normalCard{}, name{_name}, point{0}, abilityCard{}, allCombo{}, AbilityUsed(false) { }
 
 // cctor
-Player::Player(const Player& other) : name{other.name}, point{other.point}, power{other.power}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}{
+Player::Player(const Player& other) : name{other.name}, point{other.point}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}{
     setAllCombo(other.allCombo);
 }
 
@@ -16,7 +16,6 @@ Player::Player(const Player& other) : name{other.name}, point{other.point}, powe
 Player& Player::operator=(const Player& other) {
     name = other.name;
     point = other.point;
-    power = other.power;
     AbilityUsed = other.AbilityUsed;
     abilityCard = other.abilityCard;
     setAllCombo(other.allCombo);
@@ -114,15 +113,6 @@ void Player::getCommand() {
     cin >> command;
     
     // Masih nunggu command class untuk diimplementasi
-}
-
-void Player::computePower(const TableCard& tableCard) const {
-    // Masih nunggu combo class untuk diimplementasi
-    // Masih nunggu generic function buat dapetin value tertinggi
-}
-
-int Player::getPower() const {
-    return power;
 }
 
 bool Player::isAbilityUsed() const {

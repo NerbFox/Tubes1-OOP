@@ -9,6 +9,12 @@
 #include "../Inventory/DeckCard.hpp"
 #include "../Command/Ability.hpp"
 #include "../Ability/ReRoll.hpp"
+#include "../Ability/Switch.hpp"
+#include "../Ability/Swap.hpp"
+#include "../Ability/Quadruple.hpp"
+#include "../Ability/Quarter.hpp"
+#include "../Ability/Abilityless.hpp"
+#include "../Ability/ReverseDirection.hpp"
 
 using namespace std;
 
@@ -32,7 +38,7 @@ class Game {
         long long reward;
         int countPermainan;
         int countRonde;
-        deque<Ability> abilityCardQueue;
+        deque<Ability*> abilityCardQueue;
 
         pair<Player*,int> playerPointer; 
 
