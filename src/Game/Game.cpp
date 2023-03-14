@@ -8,6 +8,7 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRond
     playerPointer.first = &playerQueue[0].first;
     playerPointer.second = 0;
     playerQueue[0].second = true;
+    setAbilityCard();
 }
 
 Game::~Game(){
@@ -126,11 +127,6 @@ void Game::setAbilityCard(){
     abilityCardQueue.push_back(abilityCard6);
     abilityCardQueue.push_back(abilityCard7);
 
-    // Distribute ability card to player
-    for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
-    }
-
 }
 
 // set all ability card player
@@ -236,7 +232,7 @@ void Game::fetchDeckOption() {
 }
 
 void Game::shuffleAbilityCard(){
-      // Create a vector of cards from the queue
+    // Create a vector of cards from the queue
     std::vector<Ability*> cards;
     while (!abilityCardQueue.empty()) {
         cards.push_back(abilityCardQueue.front());
@@ -263,13 +259,15 @@ void Game::shuffleDeckCard(){
 }
 
 void Game::distributeAbilityCard(){
-    this->shuffleAbilityCard();
+    // shuffle ability card and distribute to player
+    this->shuffleAbilityCard(); 
     for (int i = 0; i < MAX_PLAYER; i++){
         playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
     }
 }
 
 void Game::distributeDeckCard(){
+    // distribute deck card to player
     for (int i = 0; i < MAX_PLAYER; i++){
         playerQueue[i].first.setNormalCard(deckCard.getTopCard(), 0);
         deckCard-1;
