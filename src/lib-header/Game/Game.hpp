@@ -2,6 +2,8 @@
 #define GAME_HPP
 
 #include <deque>
+#include <iostream>
+#include <unordered_set>
 #include "../Player/Player.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/DeckCard.hpp"
@@ -24,7 +26,7 @@ class Game {
     friend class Next;
     
     private :
-        deque<Player> playerQueue;
+        deque<pair<Player,bool>> playerQueue;
         TableCard tableCard;
         DeckCard deckCard;
         long long reward;
@@ -32,7 +34,7 @@ class Game {
         int countRonde;
         deque<Ability> abilityCardQueue;
 
-        Player* playerPointer; 
+        pair<Player*,int> playerPointer; 
 
         const int MAX_PLAYER = 7;
         const int MAX_ROUND = 6;
@@ -56,12 +58,6 @@ class Game {
 
         // Ganti round, round count bertambah 1
         void nextRound();
-
-        // Menambahkan reward menjadi 2 kali sebelumnya
-        void doubleReward();
-
-        // Mengurangi reward menjadi 1/2 kali sebelumnya
-        void halfReward();
 
         // Melakukan reverse urutan
         void reverseOrder();

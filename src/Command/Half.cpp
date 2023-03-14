@@ -11,4 +11,5 @@ Half::~Half(){
 
 void Half::action(Game game){
     game.reward /= multipiler;
+    game.nextPlayer();
 }

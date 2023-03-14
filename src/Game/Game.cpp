@@ -1,11 +1,34 @@
 #include "../lib-header/Game/Game.hpp"
-#include <iostream> 
 
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
+    bool valid;
+    unordered_set<string> nameTaken;
     for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue.push_back(make_pair(Player(), false));
+        valid = false;
+        string input;
+        
+        cout << "Masukkan nama player-" << i+1 << ": ";
+        try{
+            getline(cin, input);
+            if (nameTaken.count(input) > 0) {
+                throw "";
+            }   
+            else if (input.length() > 20){
+                throw "";
+            }
+            else { 
+                playerQueue.push_back(make_pair(Player(input), false));
+                nameTaken.insert(input);
+            }
+        }
+        catch (const ){
+        }
+        catch (const ){
+        }
     }
-    playerPointer = &playerQueue[0];
+    playerPointer.first = &playerQueue[0].first;
+    playerPointer.second = 0;
+    playerQueue[0].second = true;
 }
 
 Game::~Game(){}
@@ -16,7 +39,12 @@ void Game::turn(){
 
 void Game::nextPlayer() {
     if (!isEveryoneHaveTurn()){
-        playerPointer
+        int i = 0;
+        while (playerQueue[i].second){
+            i++;
+        }
+        playerPointer.first = &playerQueue[i].first;
+        playerPointer.second = i;
     }
     else {
         Game::nextRound();
@@ -38,6 +66,12 @@ void Game::nextRound(){
         playerPointer.second = 0;
 
         countRonde++;
+        // kondisional untuk round 2
+            // Random methodnya udh ada blom ya ? 
+        if (countRonde == 2){
+            setAbilityCard();
+        }
+        // Kondisional untuk round selain 2
     } else {
         if (resolveWinner() != -1){
             printStandings();
@@ -46,14 +80,6 @@ void Game::nextRound(){
             countPermainan++;
         }
     }
-}
-
-void Game::doubleReward(){
-    this->reward *= multiplier;
-}
-
-void Game::halfReward(){
-    this->reward /= multiplier;
 }
 
 void Game::reverseOrder() {
@@ -87,7 +113,7 @@ int Game::isHaveWinner(){
     return -1; // default invalid
 }
 
-void Game::printStandings(int pivot){
+void Game::printStandings(){
     vector<Player> result;
     for (int i = 0; i < MAX_PLAYER; i++){
         
