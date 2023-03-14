@@ -6,24 +6,28 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRond
     for (int i = 0; i < MAX_PLAYER; i++){
         valid = false;
         string input;
-        
+
         cout << "Masukkan nama player-" << i+1 << ": ";
         try{
             getline(cin, input);
             if (nameTaken.count(input) > 0) {
-                throw "";
+                throw NamaDuplikatException(input);
             }   
             else if (input.length() > 20){
-                throw "";
+                throw NamaPanjangException(input.length());
             }
             else { 
                 playerQueue.push_back(make_pair(Player(input), false));
                 nameTaken.insert(input);
             }
         }
-        catch (const ){
+        catch (const NamaDuplikatException &err){
+            cout << err.what() << endl;
+            i--;
         }
-        catch (const ){
+        catch (const NamaPanjangException &err){
+            cout << err.what() << endl;
+            i--;
         }
     }
     playerPointer.first = &playerQueue[0].first;
