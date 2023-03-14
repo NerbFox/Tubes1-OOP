@@ -3,7 +3,12 @@
 using namespace std;
 
 // Constructor
-BaseCard::BaseCard(float _value) : value{_value} { }
+BaseCard::BaseCard(float _value) : value{_value} {
+  colorCode["hijau"] = 0;
+  colorCode["biru"] = 1;
+  colorCode["kuning"] = 2;
+  colorCode["merah"] = 3;
+}
 
 // Copy constructor
 BaseCard::BaseCard(const BaseCard& other) : value{other.value} { }

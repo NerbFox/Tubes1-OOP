@@ -1,9 +1,12 @@
 #ifndef BASE_CARD_HPP
 #define BASE_CARD_HPP
+#include <map>
+#include <string>
 
 class BaseCard {
 protected:
     float value; // The value of the card.
+    map<string, int> colorCode;
 
 public:
     // Constructor
