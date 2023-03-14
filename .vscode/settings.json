@@ -11,6 +11,10 @@
         "initializer_list": "cpp",
         "xstring": "cpp",
         "string": "cpp",
+<<<<<<< HEAD
         "new": "cpp"
+=======
+        "ostream": "cpp"
+>>>>>>> bd49828bc4aaae8cf17d30d6998257859781ac72
     }
 }

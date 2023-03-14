@@ -1,66 +1,70 @@
 #ifndef EXCEPTION_HPP
 #define EXCEPTION_HPP
 
-#include <exception>
 #include <string>
 #include <iostream>
 using namespace std;
 
-class NamaPanjangException : public exception {
-  private:
-    int length;
-  public:
-    NamaPanjangException(int _length);
-    ~NamaPanjangException();
-    const char* what() const throw();
+class BaseException {
+    public : 
+        virtual string what() const = 0; 
 };
 
-class NamaDuplikatException : public exception {
+class NamaPanjangException : public BaseException {
+    private:
+        int length;
+    public:
+        NamaPanjangException(int _length);
+        ~NamaPanjangException();
+        string what() const;
+};
+
+class NamaDuplikatException : public BaseException {
     private: 
         string nama; 
         char* msgptr;
     public:
         NamaDuplikatException(string str);
         ~NamaDuplikatException();
-        const char* what() const throw();
+        string what() const;
 };
 
-class IndexOutOfBoundsException : public exception {
+class IndexOutOfBoundsException : public BaseException {
     private:
         int index;
         int batas;
     public:
         IndexOutOfBoundsException(int _index, int _batas);
         ~IndexOutOfBoundsException();
-        const char* what() const throw();
+        string what() const;
 };
 
-class IndexNotValidException : public exception {
+class IndexNotValidException : public BaseException {
     private:
         int index;
     public:
         IndexNotValidException(int _index);
         ~IndexNotValidException();
-        const char* what() const throw();
+        string what() const;
 };
 
 
-class InvalidInputException : public exception {
+class InvalidInputException : public BaseException {
     private:
         string input;
     public:
         InvalidInputException(string _input);
         ~InvalidInputException();
-        const char* what() const throw();
+        string what() const;
 };
 
-class SameIndexException : public exception {
+class SameIndexException : public BaseException {
     private:
         int index;
     public:
         SameIndexException(int _index);
         ~SameIndexException();
-        const char* what() const throw();
+        string what() const;
 };
 
 #endif

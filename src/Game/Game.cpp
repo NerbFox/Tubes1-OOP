@@ -47,10 +47,6 @@ Game::~Game(){
     abilityCardQueue.clear();
 }
 
-void Game::turn(){
-
-}
-
 void Game::nextPlayer() {
     if (!isEveryoneHaveTurn()){
         int i = 0;
