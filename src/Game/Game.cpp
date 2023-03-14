@@ -2,38 +2,7 @@
 #include "../lib-header/Exception/Exception.hpp"
 
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
-    bool valid;
-    unordered_set<string> nameTaken;
-    cout << "====================Candy Kingdom Card Game====================\n";
-    cout << "Masukkan nama untuk semua player. Tiap player harus memiliki nama yang berbeda\n";
-    for (int i = 0; i < MAX_PLAYER; i++){
-        valid = false;
-        string input;
-
-        while (!valid){ 
-            try{
-                cout << "Masukkan nama untuk player-" << i+1 << ": ";
-                getline(cin, input);
-                if (nameTaken.count(input) > 0) {
-                    throw NamaDuplikatException(input);
-                }   
-                else if (input.length() > 20){
-                    throw NamaPanjangException(input.length());
-                }
-                else { 
-                    playerQueue.push_back(make_pair(Player(input), false));
-                    nameTaken.insert(input);
-                    valid = true;
-                }
-            }
-            catch (const NamaDuplikatException &err){
-                cout << err.what() << endl;
-            }
-            catch (const NamaPanjangException &err){
-                cout << err.what() << endl;
-            }
-        }
-    }
+    fetchPlayerName();
     playerPointer.first = &playerQueue[0].first;
     playerPointer.second = 0;
     playerQueue[0].second = true;
@@ -192,6 +161,41 @@ int Game::getIndexPlayerPointer(){
         }
     }
     return indexPemain;
+}
+
+void Game::fetchPlayerName() {
+    bool valid;
+    unordered_set<string> nameTaken;
+    cout << "====================Candy Kingdom Card Game====================\n";
+    cout << "Masukkan nama untuk semua player. Tiap player harus memiliki nama yang berbeda\n";
+    for (int i = 0; i < MAX_PLAYER; i++){
+        valid = false;
+        string input;
+
+        while (!valid){ 
+            try{
+                cout << "Masukkan nama untuk player-" << i+1 << ": ";
+                getline(cin, input);
+                if (nameTaken.count(input) > 0) {
+                    throw NamaDuplikatException(input);
+                }   
+                else if (input.length() > 20){
+                    throw NamaPanjangException(input.length());
+                }
+                else { 
+                    playerQueue.push_back(make_pair(Player(input), false));
+                    nameTaken.insert(input);
+                    valid = true;
+                }
+            }
+            catch (const NamaDuplikatException &err){
+                cout << err.what() << endl;
+            }
+            catch (const NamaPanjangException &err){
+                cout << err.what() << endl;
+            }
+        }
+    }
 }
 
 // int main() {

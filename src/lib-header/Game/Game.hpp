@@ -96,6 +96,9 @@ class Game {
         
         // get index player pointer
         int getIndexPlayerPointer();
+
+        // init player name
+        void fetchPlayerName();
 };  
 
 // P2 P3 P4 P5 P6 P7 P1 <-
