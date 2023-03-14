@@ -2,10 +2,10 @@
 #define ABILITY_HPP
 #include <string>
 #include "Command.hpp"
-#include "../Game/Game.hpp"
-#include "../Exception/Exception.hpp"
 #include <iostream>
 using namespace std;
+
+class Game;
 
 class Ability : public Command {
     /*Kartu Ability akan diberikan ke pemain pada ronde kedua. Pemain dapat menggunakan ability dan 
