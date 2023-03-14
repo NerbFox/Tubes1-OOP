@@ -2,6 +2,7 @@
 #define NEXT_HPP
 
 #include "Command.hpp"
+using namespace std;
 
 class Next : public Command {
     friend class Game;

@@ -2,6 +2,7 @@
 #define HALF_HPP
 
 #include "Command.hpp"
+using namespace std;
 
 class Half : public Command {
     friend class Game;

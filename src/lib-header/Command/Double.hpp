@@ -3,6 +3,8 @@
 
 #include "Command.hpp"
 
+using namespace std;
+
 class Double : public Command {
     friend class Game;
 

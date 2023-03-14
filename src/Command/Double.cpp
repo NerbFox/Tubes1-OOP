@@ -1,4 +1,5 @@
 #include "../lib-header/Command/Double.hpp"
+#include "../lib-header/Game/Game.hpp"
 
 // ctor
 Double::Double(){

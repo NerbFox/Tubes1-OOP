@@ -1,4 +1,5 @@
 #include "../lib-header/Command/Half.hpp"
+#include "../lib-header/Game/Game.hpp"
 
 // ctor
 Half::Half(){

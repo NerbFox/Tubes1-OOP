@@ -1,4 +1,5 @@
 #include "../lib-header/Command/Next.hpp"
+#include "../lib-header/Game/Game.hpp"
 
 // ctor
 Next::Next(){
