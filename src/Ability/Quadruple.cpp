@@ -1,4 +1,5 @@
 #include "../lib-header/Ability/Quadruple.hpp"
+#include "../lib-header/Game/Game.hpp"
 
 using namespace std;
 

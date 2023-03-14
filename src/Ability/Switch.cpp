@@ -1,4 +1,6 @@
 #include "../lib-header/Ability/Switch.hpp"
+#include "../lib-header/Game/Game.hpp"
+#include "../lib-header/Exception/Exception.hpp"
 
 Switch::Switch()
 {

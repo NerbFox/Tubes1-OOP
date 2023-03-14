@@ -1,4 +1,6 @@
 #include "../lib-header/Ability/Swap.hpp"
+#include "../lib-header/Game/Game.hpp"
+#include "../lib-header/Exception/Exception.hpp"
 
 Swap::Swap() {
     Ability::setType("SWAP");

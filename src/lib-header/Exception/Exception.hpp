@@ -1,3 +1,6 @@
+#ifndef EXCEPTION_HPP
+#define EXCEPTION_HPP
+
 #include <exception>
 #include <string>
 #include <iostream>
@@ -58,3 +61,5 @@ class SameIndexException : public exception {
         ~SameIndexException();
         const char* what() const throw();
 };
+
+#endif

@@ -1,4 +1,6 @@
 #include "../lib-header/Ability/Abilityless.hpp"
+#include "../lib-header/Game/Game.hpp"
+#include "../lib-header/Exception//Exception.hpp"
 
 Abilityless::Abilityless() {
     // Do nothing

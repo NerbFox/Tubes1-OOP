@@ -1,7 +1,7 @@
 #ifndef COMMAND_HPP
 #define COMMAND_HPP
 
-#include "../Game/Game.hpp"
+// #include "../Game/Game.hpp"
 
 class Game;
 

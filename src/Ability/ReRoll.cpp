@@ -1,4 +1,5 @@
 #include "../lib-header/Ability/ReRoll.hpp"
+#include "../lib-header/Game/Game.hpp"
 
 ReRoll::ReRoll() {
     Ability::setType("RE-ROLL");
