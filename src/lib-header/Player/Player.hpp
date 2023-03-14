@@ -22,6 +22,7 @@ protected:
     Ability *abilityCard;         // player's ability card
     vector<Combo> allCombo;       // a vector containing all of the player's combos
     bool AbilityUsed;             // true if the player has used his ability card
+    Command *nextCommand;
 
 public:
     // ctor

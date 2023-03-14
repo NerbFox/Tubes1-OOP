@@ -1,7 +1,7 @@
 #include "../lib-header/Ability/Swap.hpp"
 
 Swap::Swap() {
-    Ability::setType("Swap");
+    Ability::setType("SWAP");
 }
 
 // action

@@ -4,7 +4,7 @@ using namespace std;
 
 Quarter::Quarter() {
     // Do Nothing
-    Ability::setType("Quarter");
+    Ability::setType("QUARTER");
 }
 
 Quarter::~Quarter() {

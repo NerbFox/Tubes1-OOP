@@ -2,7 +2,7 @@
 
 Abilityless::Abilityless() {
     // Do nothing
-    Ability::setType("Abilityless");
+    Ability::setType("ABILITYLESS");
 }
 
 Abilityless::~Abilityless() {
