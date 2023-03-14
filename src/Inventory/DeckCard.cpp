@@ -33,6 +33,12 @@ DeckCard::DeckCard() : InventoryHolder{} {
   }
 }
 
+// baca dari file
+void DeckCard::fetchCardFromFile(const string filedir) {
+  // pertama2 pop dulu semua
+  // trs masukin ke container dengan cara cardContainer.push(angka, warna));
+}
+
 // Method to shuffle card in deck.
 void DeckCard::shuffleCard() {
   // Create a vector of cards from the queue

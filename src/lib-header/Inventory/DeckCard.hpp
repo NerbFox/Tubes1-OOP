@@ -13,6 +13,9 @@ class DeckCard : public InventoryHolder<queue<Card>>{
     // ctor, isi dengan 52 kartu yang ada di poker
     DeckCard();
 
+    // ctor dari file
+    void fetchCardFromFile(const string filedir);
+
     // Shuffle card in deck.
     void shuffleCard();
 

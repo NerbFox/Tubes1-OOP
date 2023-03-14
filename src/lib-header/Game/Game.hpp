@@ -34,7 +34,7 @@ class Game {
     private :
         deque<pair<Player,bool>> playerQueue;
         TableCard tableCard;
-        DeckCard deckCard;
+
         long long reward;
         int countPermainan;
         int countRonde;
@@ -47,6 +47,7 @@ class Game {
         const long long MAX_POINT = 4294967296; //2 ^ 32         
 
     public : 
+        DeckCard deckCard;
         // Ctor
         Game();
 
@@ -97,7 +98,7 @@ class Game {
         // get index player pointer
         int getIndexPlayerPointer();
 
-        // init player name
+        // fetch player name
         void fetchPlayerName();
 };  
 
