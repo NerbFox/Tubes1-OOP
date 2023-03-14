@@ -1,6 +1,6 @@
 #ifndef ABILITYLESS_HPP
 #define ABILITYLESS_HPP
-#include "../lib-header/Command/Ability.hpp"
+#include "../Command/Ability.hpp"
 
 class Abilityless : public Ability {
     /* mematikan kartu ability milik pemain lain. Harus digunakan saat giliran (preventif), tidak
