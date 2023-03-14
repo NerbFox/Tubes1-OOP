@@ -188,14 +188,15 @@ void Game::setAbilityUsedPlayer(int idx, bool condition){
 
 // get index player pointer
 int Game::getIndexPlayerPointer(){
-    int i = 0;
+    int i = 0; int indexPemain = 0;
     for (auto currentPair : this->playerQueue) {
         if (currentPair.first.getName() != this->playerPointer.first->getName()) {
             i++;
         } else {
-            return i;
+            indexPemain = i;
         }
     }
+    return indexPemain;
 }
 
 // int main() {
