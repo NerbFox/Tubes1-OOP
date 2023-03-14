@@ -1,10 +1,11 @@
 #ifndef COMBO_HPP
 #define COMBO_HPP
-#include "../Player/Player.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/InventoryHolder.hpp"
 #include <array>
 #include <tuple>
+
+class Player;
 
 class Combo : public BaseCard {
     protected:
