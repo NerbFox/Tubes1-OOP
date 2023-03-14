@@ -25,16 +25,18 @@ void Swap::action(Game game){
         }
         cout << i << ". " <<  currentPair.first.getName() << endl;
     }
-    // cout << "Pilih pemain pertama: ";
-    // cin >> pilihanP1; cout << endl;
-    // cout << "Pilih pemain kedua: ";
-    // cin >> pilihanP2; cout << endl;
     
     while (pilihanP1>7 || pilihanP1<1 || pilihanP1 == indeksPemain) {
         try{
             // cout << "Tidak boleh menukar kartu sendiri.\n";
             cout << "Pilih pemain pertama: ";
             cin >> pilihanP1; cout << endl;
+            // if pilihan not an integer
+            if(cin.fail()){
+                cin.clear();
+                cin.ignore(256,'\n');
+                throw NotIntegerException();
+            }
             if(pilihanP1>7 || pilihanP1<1){
                 throw IndexOutOfBoundsException(pilihanP1, 7);
             }
@@ -44,6 +46,12 @@ void Swap::action(Game game){
         }
         catch (const IndexOutOfBoundsException &err){
             cout << err.what() << endl;
+        }
+        catch (const NotIntegerException &err){
+            cout << err.what() << endl;
+        }
+        catch(...){
+            cout << "Input tidak valid" << endl;
         }
     }   
     while (pilihanP2>7 || pilihanP2<1 || pilihanP2 == indeksPemain || pilihanP2 == pilihanP1) {
@@ -60,6 +68,11 @@ void Swap::action(Game game){
             if (pilihanP2 == pilihanP1) {
                 throw SameIndexException(pilihanP2);
             }
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(256,'\n');
+                throw NotIntegerException();
+            }
         }
         catch (const IndexNotValidException &err) {
             cout << err.what() << endl;
@@ -69,6 +82,12 @@ void Swap::action(Game game){
         }
         catch (const SameIndexException &err){
             cout << err.what() << endl;
+        }
+        catch (const NotIntegerException &err){
+            cout << err.what() << endl;
+        }
+        catch(...){
+            cout << "Input tidak valid" << endl;
         }
     }
     // take 1 cards from the player's card deck and put it to the other player's card deck
@@ -82,10 +101,21 @@ void Swap::action(Game game){
             if (pilihanKartuP1 != 1 || pilihanKartuP1!=2) {
                 throw IndexOutOfBoundsException(pilihanKartuP1, 2);
             }
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(256,'\n');
+                throw NotIntegerException();
+            }
         }
         catch (const IndexOutOfBoundsException &err) {
             cout << err.what() << endl;
         }   
+        catch (const NotIntegerException &err){
+            cout << err.what() << endl;
+        }
+        catch(...){
+            cout << "Input tidak valid" << endl;
+        }
     }
     while (pilihanKartuP2 != 1 || pilihanKartuP2!=2){
         try {
@@ -94,10 +124,21 @@ void Swap::action(Game game){
             if (pilihanKartuP2 != 1 || pilihanKartuP2!=2) {
                 throw IndexOutOfBoundsException(pilihanKartuP2, 2);
             }
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(256,'\n');
+                throw NotIntegerException();
+            }
         }
         catch (const IndexOutOfBoundsException &err) {
             cout << err.what() << endl;
         }   
+        catch (const NotIntegerException &err){
+            cout << err.what() << endl;
+        }
+        catch(...){
+            cout << "Input tidak valid" << endl;
+        }
     }
     pilihanKartuP1--; pilihanKartuP2--; pilihanP1--; pilihanP2--;
     Card card1 = game.playerQueue[pilihanP1].first.getNormalCard(pilihanKartuP1);
