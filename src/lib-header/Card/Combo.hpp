@@ -2,6 +2,7 @@
 #define COMBO_HPP
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/InventoryHolder.hpp"
+#include "BaseCard.hpp"
 #include <array>
 #include <tuple>
 
@@ -11,13 +12,30 @@ class Combo : public BaseCard {
     protected:
         int comboId;
         vector<Card> finalSetCard;
+        // vector<pair<int, float>> allCombo;
 
     public:
-        Combo(int comboId, Player player, TableCard tableCard);
+        Combo(Player player, TableCard tableCard);
 
         Combo(const Combo& other);
 
         int getComboId();
+
+        // void checkPair();
+
+        // void checkTwoPair();
+
+        // void checkThreeOfAKind();
+
+        // void checkFullHouse();
+
+        // void checkFourOfAKind();
+
+        // void checkFlush();
+
+        // void checkStraight();
+
+        // void checkStraightFlush();
 
         void computeValue();
 
