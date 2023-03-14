@@ -2,6 +2,18 @@
 #include "../lib-header/Command/Ability.hpp"
 #include <iostream>
 
+#include "../lib-header/Command/Double.hpp"
+#include "../lib-header/Command/Half.hpp"
+#include "../lib-header/Command/Next.hpp"
+
+#include "../lib-header/Ability/Abilityless.hpp"
+#include "../lib-header/Ability/Quadruple.hpp"
+#include "../lib-header/Ability/Quarter.hpp"
+#include "../lib-header/Ability/ReRoll.hpp"
+#include "../lib-header/Ability/ReverseDirection.hpp"
+#include "../lib-header/Ability/Swap.hpp"
+#include "../lib-header/Ability/Switch.hpp"
+
 using namespace std;
 
 // ctor
@@ -108,11 +120,31 @@ bool Player::operator<(const Player& otherPlayer) const {
 }
 
 void Player::getCommand() {
-    string command;
-    cout << "Please input command\n>> ";
-    cin >> command;
-    
-    // Masih nunggu command class untuk diimplementasi
+    string enteredCmd;
+    cout << "Giliran "<< name <<". Masukkan command\n>>";
+    cin >> enteredCmd;
+
+    if (enteredCmd == "DOUBLE" || enteredCmd == "HALF" || enteredCmd == "NEXT") {
+        if (enteredCmd == "DOUBLE") {
+            nextCommand = new Double();
+        } else if (enteredCmd == "HALF") {
+            nextCommand = new Half();
+        } else {
+            nextCommand = new Next();
+        } 
+        nextCommand->action()
+        delete nextCommand;
+    } else if (enteredCmd == "ABILITYLESS" || enteredCmd == "QUADRUPLE" || enteredCmd == "QUARTER" || 
+               enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
+
+                    if (enteredCmd == abilityCard->getType()) {
+                        abilityCard->action();
+                    }
+                }
+
+    else {
+        // throw "Invalid command input"
+    }
 }
 
 bool Player::isAbilityUsed() const {

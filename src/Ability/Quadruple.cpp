@@ -4,7 +4,7 @@ using namespace std;
 
 Quadruple::Quadruple() {
     // Do nothing
-    Ability::setType("Quadruple");
+    Ability::setType("QUADRUPLE");
 }
 
 Quadruple::~Quadruple() {

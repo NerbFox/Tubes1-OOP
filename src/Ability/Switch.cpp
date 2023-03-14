@@ -2,7 +2,7 @@
 
 Switch::Switch()
 {
-    Ability::setType("Switch");
+    Ability::setType("SWICTH");
 }
 
 // action

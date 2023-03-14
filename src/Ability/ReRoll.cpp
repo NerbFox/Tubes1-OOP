@@ -1,7 +1,7 @@
 #include "../lib-header/Ability/ReRoll.hpp"
 
 ReRoll::ReRoll() {
-    Ability::setType("ReRoll");
+    Ability::setType("RE-ROLL");
 }
 
 // action
