@@ -67,4 +67,12 @@ class SameIndexException : public BaseException {
         string what() const;
 };
 
+// input not valid cause user haven't input anything
+class EmptyInputException : public BaseException {
+    public:
+        EmptyInputException();
+        ~EmptyInputException();
+        string what() const;
+};
+
 #endif

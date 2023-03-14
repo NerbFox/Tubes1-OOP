@@ -176,7 +176,14 @@ void Game::fetchPlayerName() {
             try{
                 cout << "Masukkan nama untuk player-" << i+1 << ": ";
                 getline(cin, input);
-                if (nameTaken.count(input) > 0) {
+                // remove space in the front
+                while (input[0] == ' '){
+                    input.erase(0,1);
+                }
+                if (input.empty()){
+                    throw EmptyInputException();
+                }
+                else if (nameTaken.count(input) > 0) {
                     throw NamaDuplikatException(input);
                 }   
                 else if (input.length() > 20){
@@ -192,6 +199,9 @@ void Game::fetchPlayerName() {
                 cout << err.what() << endl;
             }
             catch (const NamaPanjangException &err){
+                cout << err.what() << endl;
+            }
+            catch (const EmptyInputException &err){
                 cout << err.what() << endl;
             }
         }
