@@ -19,4 +19,22 @@ class NamaDuplikatException : public exception {
         NamaDuplikatException(string str);
         ~NamaDuplikatException();
         const char* what() const throw();
-    }
+};
+
+class IndexOutOfBoundsException : public exception {
+    private:
+        int index;
+    public:
+        IndexOutOfBoundsException(int _index);
+        ~IndexOutOfBoundsException();
+        const char* what() const throw();
+};
+
+class IndexNotValidException : public exception {
+    private:
+        int index;
+    public:
+        IndexNotValidException(int _index);
+        ~IndexNotValidException();
+        const char* what() const throw();
+};
