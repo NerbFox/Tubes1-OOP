@@ -75,4 +75,12 @@ class EmptyInputException : public BaseException {
         string what() const;
 };
 
+// input not interger
+class NotIntegerException : public BaseException {
+    public:
+        NotIntegerException();
+        ~NotIntegerException();
+        string what() const;
+};
+
 #endif

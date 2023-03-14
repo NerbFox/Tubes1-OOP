@@ -36,11 +36,19 @@ void Switch::action(Game game)
             if (pilihan == indeksPemain) {
                 throw IndexNotValidException(pilihan);
             }
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(256,'\n');
+                throw NotIntegerException();
+            }
         }
         catch (const IndexNotValidException &err) {
             cout << err.what() << endl;
         }
         catch (const IndexOutOfBoundsException &err){
+            cout << err.what() << endl;
+        }
+        catch (const NotIntegerException &err){
             cout << err.what() << endl;
         }
     }
