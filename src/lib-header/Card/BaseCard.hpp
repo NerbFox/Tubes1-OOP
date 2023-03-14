@@ -3,6 +3,8 @@
 #include <map>
 #include <string>
 
+using namespace std;
+
 class BaseCard {
 protected:
     float value; // The value of the card.

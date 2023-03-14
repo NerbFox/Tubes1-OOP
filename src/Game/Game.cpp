@@ -4,6 +4,7 @@
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
     bool valid;
     unordered_set<string> nameTaken;
+    cout << "====================Candy Kingdom Card Game====================\n";
     cout << "Masukkan nama untuk semua player. Tiap player harus memiliki nama yang berbeda\n";
     for (int i = 0; i < MAX_PLAYER; i++){
         valid = false;

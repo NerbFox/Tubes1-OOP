@@ -14,17 +14,10 @@ const char* NamaPanjangException::what() const throw() {
 
 NamaDuplikatException::NamaDuplikatException(string str) : nama(str) {}
 
-NamaDuplikatException::~NamaDuplikatException(){
-  delete[] msgptr;
-}
+NamaDuplikatException::~NamaDuplikatException(){}
 
 const char* NamaDuplikatException::what() const throw() {
-  string msg = "NamaDuplikatException : Nama \"" + nama + "\" telah digunakan, silahkan gunakan nama lain\n" ;
-  msgptr = new char[msg.length() + 1];
-  // Copy the message string to the allocated memory
-  strcpy(msgptr, msg.c_str());
-  // Return the pointer to the allocated memory
-  return msgptr;
+  return "NamaDuplikatException : Nama telah digunakan, silahkan gunakan nama lain\n" ;
 }
 
 // return msg.c_str();
