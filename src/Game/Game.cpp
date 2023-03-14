@@ -258,6 +258,10 @@ void Game::shuffleAbilityCard(){
     }
 }
 
+void Game::shuffleDeckCard(){
+    this->deckCard.shuffleCard();
+}
+
 void Game::distributeAbilityCard(){
     this->shuffleAbilityCard();
     for (int i = 0; i < MAX_PLAYER; i++){
