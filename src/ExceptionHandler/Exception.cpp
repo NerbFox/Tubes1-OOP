@@ -5,7 +5,7 @@ NamaPanjangException::NamaPanjangException(int _length) : length(_length) {}
 NamaPanjangException::~NamaPanjangException(){}
 
 const char* NamaPanjangException::what() const throw() {
-  string msg = "NamaPanjangException : Karakter berjumlah : " + to_string(length) + ", seharusnya karakter berjumlah kurang dari 20.";
+  string msg = "NamaPanjangException : Karakter berjumlah : " + to_string(length) + ", kurangi karakter supaya berjumlah kurang dari 20.";
   return msg.c_str();
 }
 

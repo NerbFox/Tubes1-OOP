@@ -73,7 +73,7 @@ class Game {
         int isHaveWinner();
 
         // Mencetak hasil kelasemen akhir permainan
-        void printStandings(); 
+        void printLeaderboard(); 
 
         bool isEveryoneHaveTurn();
 

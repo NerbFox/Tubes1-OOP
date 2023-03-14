@@ -3,11 +3,12 @@
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
     bool valid;
     unordered_set<string> nameTaken;
+    cout << "Masukkan nama untuk semua player. Tiap player harus memiliki nama yang berbeda\n";
     for (int i = 0; i < MAX_PLAYER; i++){
         valid = false;
         string input;
 
-        cout << "Masukkan nama player-" << i+1 << ": ";
+        cout << "Masukkan nama untuk player-" << i+1 << ": ";
         try{
             getline(cin, input);
             if (nameTaken.count(input) > 0) {
@@ -83,8 +84,8 @@ void Game::nextRound(){
         }
         // Kondisional untuk round selain 2
     } else {
-        if (resolveWinner() != -1){
-            printStandings();
+        if (isHaveWinner() != -1){
+            printLeaderboard();
         } else {
             countRonde = 0;
             countPermainan++;
@@ -123,13 +124,10 @@ int Game::isHaveWinner(){
     return -1; // default invalid
 }
 
-void Game::printStandings(){
-    vector<Player> result;
+void Game::printLeaderboard(){
+    cout << "Leaderboard";
     for (int i = 0; i < MAX_PLAYER; i++){
-        
-        for (int i = 0; i < result.size(); i++){
-            if (result.size() == 0 || result[i])
-        }
+        cout << i+1 << ". " << playerQueue[i].first.getName() << " : " << playerQueue[i].first.getPoint() << endl;   
     }
 }
 
@@ -160,7 +158,7 @@ void Game::setAbilityCard(){
 
     // Distribute ability card to player
     for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].setAbilityCard(abilityCardQueue[i]);
+        playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
     }
 
 }
@@ -168,7 +166,7 @@ void Game::setAbilityCard(){
 // set all ability card player
 void Game::setConditionAbilityCardPlayer(bool condition){
     for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].setAbilityUsed(condition);
+        playerQueue[i].first.setAbilityUsed(condition);
     }
 }
 
