@@ -34,17 +34,19 @@ void Abilityless::action(Game game) {
     cout << endl;
     while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
         // exception with class IndexNotValidException
-        IndexNotValidException I(pilihan);
-        IndexOutOfBoundsException I2(pilihan, 7);
-        if (pilihan==indeksPemain) {
-            I.what();
+        // IndexNotValidException I(pilihan);
+        // IndexOutOfBoundsException I2(pilihan, 7);
+        try {
+            cout << "\nPilih pemain: "; 
+            cin >> pilihan;
+            cout << endl;
+            game.setAbilityUsedPlayer(pilihan-1, true);
         }
-        else if (pilihan>7 || pilihan<1) {
-            I2.what();
+        catch (const IndexNotValidException &err) {
+            cout << err.what() << endl;
         }
-        cout << "\nPilih pemain: "; // throw exception
-        cin >> pilihan;
-        cout << endl;
+        catch (const IndexOutOfBoundsException &err){
+            cout << err.what() << endl;
+        }
     }
-    game.playerQueue[pilihan-1].first.setAbilityUsed(true);
 }

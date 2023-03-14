@@ -172,6 +172,30 @@ void Game::setConditionAbilityCardPlayer(bool condition){
     }
 }
 
+// set abilityUsed player
+void Game::setAbilityUsedPlayer(int idx, bool condition){
+    int indexPemain = this->getIndexPlayerPointer();
+    playerQueue[idx].setAbilityUsed(condition);
+    if (idx < 0 || idx > MAX_PLAYER){
+        throw IndexOutOfBoundsException(idx, MAX_PLAYER);
+    }
+    if (idx==indexPemain) {
+        throw IndexNotValidException(idx) ;
+    }
+}
+
+// get index player pointer
+int Game::getIndexPlayerPointer(){
+    int i = 0;
+    for (auto currentPair : this->playerQueue) {
+        if (currentPair.first.getName() != this->playerPointer.first->getName()) {
+            i++;
+        } else {
+            return i;
+        }
+    }
+}
+
 // int main() {
 //     cout << "test";
 
