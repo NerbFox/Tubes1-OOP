@@ -6,7 +6,6 @@
         "iostream": "cpp",
         "algorithm": "cpp",
         "typeinfo": "cpp",
-        "deque": "cpp",
-        "array": "cpp"
+        "deque": "cpp"
     }
 }

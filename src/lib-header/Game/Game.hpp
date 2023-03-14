@@ -5,6 +5,8 @@
 #include "../Player/Player.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/DeckCard.hpp"
+#include "../Command/Ability.hpp"
+#include "../Ability/ReRoll.hpp"
 
 using namespace std;
 
@@ -17,27 +19,24 @@ class Game {
     friend class Quadruple;
     friend class Quarter;   
     friend class Abilityless; 
+    friend class Double;
+    friend class Half;
+    friend class Next;
     
     private :
-        deque<pair<Player,bool>> playerQueue;
+        deque<Player> playerQueue;
         TableCard tableCard;
         DeckCard deckCard;
         long long reward;
         int countPermainan;
         int countRonde;
+        deque<Ability> abilityCardQueue;
 
-        pair<Player*,int> playerPointer; 
+        Player* playerPointer; 
 
         const int MAX_PLAYER = 7;
         const int MAX_ROUND = 6;
-        const long long MAX_POINT = 4294967296; //2 ^ 32
-        const int multiplier = 2;
-         
-
-
-        friend class Command;
-        friend class Quadruple;
-        friend class Quarter;
+        const long long MAX_POINT = 4294967296; //2 ^ 32         
 
     public : 
         // Ctor
@@ -68,7 +67,10 @@ class Game {
         void reverseOrder();
 
         // Melakukan pengecekan untuk menentukan pemenang
-        Player resolveWinner();
+        int isHaveWinner();
+
+        // Mencetak hasil kelasemen akhir permainan
+        void printStandings(); 
 
         bool isEveryoneHaveTurn();
 
@@ -78,8 +80,14 @@ class Game {
         // Mengambil Deck Card 
         DeckCard getDeckCard(); 
 
+        // get max player
+        int getMaxPlayer();
 
+        // set ability card kepada player
+        void setAbilityCard();
 
+        // set all ability card players 
+        void setConditionAbilityCardPlayer(bool);
         
 };  
 
