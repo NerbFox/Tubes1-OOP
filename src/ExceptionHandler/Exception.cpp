@@ -57,3 +57,12 @@ string SameIndexException::what() const{
   string msg = "SameIndexException : Index " + to_string(index) + " tidak valid, index tidak boleh sama";
   return msg;
 }
+
+EmptyInputException::EmptyInputException() {}
+
+EmptyInputException::~EmptyInputException(){}
+
+string EmptyInputException::what() const{
+  string msg = "EmptyInputException : Input tidak valid, input tidak boleh kosong";
+  return msg;
+}
