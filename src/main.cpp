@@ -1,9 +1,12 @@
 #include "lib-header/Game/Game.hpp"
-
+using namespace std;
 
 int main() {
-  Game gameState;
-
+  try {
+    Game gameState;
+  } catch (const char& err) {
+    cout << err;
+  }
     
 
 }

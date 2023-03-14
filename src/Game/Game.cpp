@@ -147,7 +147,7 @@ void Game::setAbilityCard(){
     Ability* abilityCard1 = new Switch();
     Ability* abilityCard2 = new ReRoll();
     Ability* abilityCard3 = new Swap();
-    Ability* abilityCard4 = new ReversDirection();
+    Ability* abilityCard4 = new ReverseDirection();
     Ability* abilityCard5 = new Quarter();
     Ability* abilityCard6 = new Quadruple();
     Ability* abilityCard7 = new Abilityless();    
