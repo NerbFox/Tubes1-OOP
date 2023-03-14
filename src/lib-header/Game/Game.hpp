@@ -91,7 +91,12 @@ class Game {
 
         // set all ability card players 
         void setConditionAbilityCardPlayer(bool);
+
+        // set abilityUsed to a certain index of playerQueue
+        void setAbilityUsedPlayer(int, bool);
         
+        // get index player pointer
+        int getIndexPlayerPointer();
 };  
 
 // P2 P3 P4 P5 P6 P7 P1 <-

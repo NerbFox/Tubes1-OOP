@@ -11,46 +11,91 @@ void Swap::action(Game game){
     game.playerPointer.first->setAbilityUsed(true);
     cout << "Swap diaktifkan" << endl;
     cout << "Pilih 2 pemain yang ingin ditukar kartunya: " << endl;
-    int pilihanP1;
-    int pilihanP2;
+    int pilihanP1 = 0;
+    int pilihanP2 = 0;
     int i = 1;
     int indeksPemain = 0;
-    int pilihanKartuP1;
-    int pilihanKartuP2;
+    int pilihanKartuP1 = 0;
+    int pilihanKartuP2 = 0;
     for (auto currentPair : game.playerQueue) {
         if (currentPair.first.getName() != game.playerPointer.first->getName()) {
             indeksPemain = i-1;
         }
         cout << i << ". " <<  currentPair.first.getName() << endl;
     }
-    cout << "Pilih pemain pertama: ";
-    cin >> pilihanP1; cout << endl;
-    cout << "Pilih pemain kedua: ";
-    cin >> pilihanP2; cout << endl;
+    // cout << "Pilih pemain pertama: ";
+    // cin >> pilihanP1; cout << endl;
+    // cout << "Pilih pemain kedua: ";
+    // cin >> pilihanP2; cout << endl;
     
-    while (pilihanP1>7 || pilihanP1<1 || (pilihanP1 == indeksPemain || pilihanP2 == indeksPemain) ||  pilihanP2 == pilihanP1 ) {
-        cout << "Pilihan tidak valid!\n";
-        cout << "Tidak boleh menukar kartu sendiri.\n";
-        cout << "Pilih pemain pertama: ";
-        cin >> pilihanP1; cout << endl;
-        cout << "Pilih pemain kedua: ";
-        cin >> pilihanP2; cout << endl;
-        cout << endl;
+    while (pilihanP1>7 || pilihanP1<1 || pilihanP1 == indeksPemain) {
+        try{
+            // cout << "Tidak boleh menukar kartu sendiri.\n";
+            cout << "Pilih pemain pertama: ";
+            cin >> pilihanP1; cout << endl;
+            if(pilihanP1>7 || pilihanP1<1){
+                throw IndexOutOfBoundsException(pilihanP1, 7);
+            }
+        }
+        catch (const IndexNotValidException &err) {
+            cout << err.what() << endl;
+        }
+        catch (const IndexOutOfBoundsException &err){
+            cout << err.what() << endl;
+        }
     }   
+    while (pilihanP2>7 || pilihanP2<1 || pilihanP2 == indeksPemain || pilihanP2 == pilihanP1) {
+        try{
+            // cout << "Tidak boleh menukar kartu sendiri.\n";
+            cout << "Pilih pemain kedua: ";
+            cin >> pilihanP2; cout << endl;
+            if(pilihanP2>7 || pilihanP2<1){
+                throw IndexOutOfBoundsException(pilihanP2, 7);
+            }
+            if (pilihanP2 == indeksPemain) {
+                throw IndexNotValidException(pilihanP2);
+            }
+            if (pilihanP2 == pilihanP1) {
+                throw SameIndexException(pilihanP2);
+            }
+        }
+        catch (const IndexNotValidException &err) {
+            cout << err.what() << endl;
+        }
+        catch (const IndexOutOfBoundsException &err){
+            cout << err.what() << endl;
+        }
+        catch (const SameIndexException &err){
+            cout << err.what() << endl;
+        }
+    }
     // take 1 cards from the player's card deck and put it to the other player's card deck
     cout << "Pilih kartu yang ingin ditukar: " << endl;
     cout << "1. Kanan" << endl;
     cout << "2. Kiri" << endl;
-    cout << "Pemain pertama: " << endl;
-    cin >> pilihanKartuP1; cout << endl;
-    cout << "Pemain kedua: " << endl;
-    cin >> pilihanKartuP2; cout << endl;
-    while (pilihanKartuP1 != 1 || pilihanKartuP1!=2 || pilihanKartuP2 !=1 || pilihanKartuP2 !=2){
-        cout << "Pilihan tidak valid!\n"; // nanti pakai exception
-        cout << "Pemain pertama: " << endl;
-        cin >> pilihanKartuP1; cout << endl;
-        cout << "Pemain kedua: " << endl;
-        cin >> pilihanKartuP2; cout << endl;
+    while (pilihanKartuP1 != 1 || pilihanKartuP1!=2){
+        try {
+            cout << "Pilih kartu pemain pertama: ";
+            cin >> pilihanKartuP1; cout << endl;
+            if (pilihanKartuP1 != 1 || pilihanKartuP1!=2) {
+                throw IndexOutOfBoundsException(pilihanKartuP1, 2);
+            }
+        }
+        catch (const IndexOutOfBoundsException &err) {
+            cout << err.what() << endl;
+        }   
+    }
+    while (pilihanKartuP2 != 1 || pilihanKartuP2!=2){
+        try {
+            cout << "Pilih kartu pemain kedua: ";
+            cin >> pilihanKartuP2; cout << endl;
+            if (pilihanKartuP2 != 1 || pilihanKartuP2!=2) {
+                throw IndexOutOfBoundsException(pilihanKartuP2, 2);
+            }
+        }
+        catch (const IndexOutOfBoundsException &err) {
+            cout << err.what() << endl;
+        }   
     }
     pilihanKartuP1--; pilihanKartuP2--; pilihanP1--; pilihanP2--;
     Card card1 = game.playerQueue[pilihanP1].first.getNormalCard(pilihanKartuP1);

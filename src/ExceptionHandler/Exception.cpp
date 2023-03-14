@@ -45,3 +45,11 @@ const char* InvalidInputException::what() const throw() {
   return msg.c_str();
 }
 
+SameIndexException::SameIndexException(int _index) : index(_index) {}
+
+SameIndexException::~SameIndexException(){}
+
+const char* SameIndexException::what() const throw() {
+  string msg = "SameIndexException : Index " + to_string(index) + " tidak valid, index tidak boleh sama";
+  return msg.c_str();
+}
