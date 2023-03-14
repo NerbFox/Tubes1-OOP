@@ -11,7 +11,9 @@ BaseCard::BaseCard(float _value) : value{_value} {
 }
 
 // Copy constructor
-BaseCard::BaseCard(const BaseCard& other) : value{other.value} { }
+BaseCard::BaseCard(const BaseCard& other) : value{other.value} { 
+  colorCode = other.colorCode;
+}
 
 // Returns the value of the card.
 float BaseCard::getValue() const {
