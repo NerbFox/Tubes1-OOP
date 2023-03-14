@@ -3,6 +3,7 @@
 #include <string>
 #include "Command.hpp"
 #include "../Game/Game.hpp"
+#include "../Exception/Exception.hpp"
 #include <iostream>
 using namespace std;
 
