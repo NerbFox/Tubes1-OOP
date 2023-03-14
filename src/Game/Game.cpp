@@ -216,6 +216,7 @@ void Game::fetchDeckOption() {
             cout << "Urutan kartu deck ingin diacak atau baca dari file?\n0 : random\n1 : baca dari file\n>> ";
             cin >> input;
             if (input == "0") {
+                deckCard.shuffleCard();
                 valid = true;
             } else if (input == "1") {
                 string fildeir;
