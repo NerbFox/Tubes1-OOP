@@ -1,5 +1,7 @@
 #include "../lib-header/Game/Game.hpp"
 #include "../lib-header/Exception/Exception.hpp"
+#include <random>
+#include <algorithm>
 
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
     fetchPlayerName();
@@ -233,8 +235,41 @@ void Game::fetchDeckOption() {
     }
 }
 
-// int main() {
-//     cout << "test";
+void Game::shuffleAbilityCard(){
+      // Create a vector of cards from the queue
+    std::vector<Ability*> cards;
+    while (!abilityCardQueue.empty()) {
+        cards.push_back(abilityCardQueue.front());
+        abilityCardQueue.pop_front();
+    }
 
-//     return 0;
-// }
+    // Shuffle the vector using the Fisher-Yates algorithm
+    random_device rd;
+    mt19937 gen(rd());
+    for (int i = cards.size() - 1; i > 0; --i) {
+        uniform_int_distribution<> dis(0, i);
+        int j = dis(gen);
+        swap(cards[i], cards[j]);
+    }
+
+    // Add the shuffled cards back to the queue
+    for (const auto& card : cards) {
+        abilityCardQueue.push_front(card);
+    }
+}
+
+void Game::distributeAbilityCard(){
+    this->shuffleAbilityCard();
+    for (int i = 0; i < MAX_PLAYER; i++){
+        playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
+    }
+}
+
+void Game::distributeDeckCard(){
+    for (int i = 0; i < MAX_PLAYER; i++){
+        playerQueue[i].first.setNormalCard(deckCard.getTopCard(), 0);
+        deckCard-1;
+        playerQueue[i].first.setNormalCard(deckCard.getTopCard(), 1);
+        deckCard-1;
+    }
+}
