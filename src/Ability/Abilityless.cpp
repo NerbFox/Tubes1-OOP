@@ -33,7 +33,16 @@ void Abilityless::action(Game game) {
     cin >> pilihan;
     cout << endl;
     while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
-        cout << "Pilihan tidak valid. Pilih pemain: "; // throw exception
+        // exception with class IndexNotValidException
+        IndexNotValidException I(pilihan);
+        IndexOutOfBoundsException I2(pilihan, 7);
+        if (pilihan==indeksPemain) {
+            I.what();
+        }
+        else if (pilihan>7 || pilihan<1) {
+            I2.what();
+        }
+        cout << "\nPilih pemain: "; // throw exception
         cin >> pilihan;
         cout << endl;
     }
