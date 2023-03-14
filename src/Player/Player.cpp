@@ -125,25 +125,30 @@ void Player::getCommand(Game game) {
     cout << "Giliran "<< name <<". Masukkan command\n>>";
     cin >> enteredCmd;
 
-    if (enteredCmd == "DOUBLE" || enteredCmd == "HALF" || enteredCmd == "NEXT") {
-        if (enteredCmd == "DOUBLE") {
-            nextCommand = new Double();
-        } else if (enteredCmd == "HALF") {
-            nextCommand = new Half();
-        } else {
-            nextCommand = new Next();
-        } 
-        nextCommand->action(game);
-        delete nextCommand;
-    } else if (enteredCmd == "ABILITYLESS" || enteredCmd == "QUADRUPLE" || enteredCmd == "QUARTER" || 
-               enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
+    try {
+        if (enteredCmd == "DOUBLE" || enteredCmd == "HALF" || enteredCmd == "NEXT") {
+            if (enteredCmd == "DOUBLE") {
+                nextCommand = new Double();
+            } else if (enteredCmd == "HALF") {
+                nextCommand = new Half();
+            } else {
+                nextCommand = new Next();
+            } 
+            nextCommand->action(game);
+            delete nextCommand;
+        } else if (enteredCmd == "ABILITYLESS" || enteredCmd == "QUADRUPLE" || enteredCmd == "QUARTER" || 
+                enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
 
-                    if (enteredCmd == abilityCard->getType()) {
-                        abilityCard->action(game);
+                        if (enteredCmd == abilityCard->getType()) {
+                            abilityCard->action(game);
+                        }
                     }
-                }
-    else {
-        throw InvalidInputException("input command salah/tidak ada");
+        else {
+            throw InvalidInputException("input command salah/tidak ada");
+        }
+    } catch (const InvalidInputException &err) {
+        cout << err.what() << endl;
+        getCommand(game);
     }
 }
 
