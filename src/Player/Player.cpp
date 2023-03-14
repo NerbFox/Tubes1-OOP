@@ -1,5 +1,9 @@
 #include "../lib-header/Player/Player.hpp"
 #include "../lib-header/Command/Ability.hpp"
+#include "../lib-header/Game/Game.hpp"
+#include "../lib-header/Command/Command.hpp"
+
+
 #include <iostream>
 
 #include "../lib-header/Command/Double.hpp"

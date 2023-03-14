@@ -1,4 +1,5 @@
 #include "../lib-header/Game/Game.hpp"
+#include "../lib-header/Exception/Exception.hpp"
 
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
     bool valid;

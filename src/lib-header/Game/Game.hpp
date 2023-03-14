@@ -15,7 +15,6 @@
 #include "../Ability/Quarter.hpp"
 #include "../Ability/Abilityless.hpp"
 #include "../Ability/ReverseDirection.hpp"
-#include "../Exception/Exception.hpp"
 
 using namespace std;
 

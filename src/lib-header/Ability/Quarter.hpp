@@ -12,4 +12,4 @@ class Quarter : public Ability {
         void action(Game game);
 };
 
-#endif;
+#endif

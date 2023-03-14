@@ -4,15 +4,15 @@
 #include <iostream>
 #include <string>
 #include <vector>
-// #include "../Command/Command.hpp"
-// #include "../Command/Ability.hpp"
 #include "../Card/Combo.hpp"
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/PlayerCard.hpp"
 
 using namespace std;
 
+class Game;
 class Ability;
+class Command;
 
 class Player {
 protected:
