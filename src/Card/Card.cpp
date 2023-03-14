@@ -33,10 +33,5 @@ bool Card::isEmpty() const {
 }
 
 void Card::computeValue() {
-    // Belum selesai
+    value = number + colorCode[color] * 0.33;
 }
-
-// int main() {
-//   cout << "test";
-//   return 0;
-// }
