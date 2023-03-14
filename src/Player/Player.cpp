@@ -6,6 +6,7 @@
 #include "../lib-header/Command/Half.hpp"
 #include "../lib-header/Command/Next.hpp"
 
+#include "../lib-header/Exception/Exception.hpp"
 #include "../lib-header/Ability/Abilityless.hpp"
 #include "../lib-header/Ability/Quadruple.hpp"
 #include "../lib-header/Ability/Quarter.hpp"
@@ -119,7 +120,7 @@ bool Player::operator<(const Player& otherPlayer) const {
     return temp1 < temp2;
 }
 
-void Player::getCommand() {
+void Player::getCommand(Game game) {
     string enteredCmd;
     cout << "Giliran "<< name <<". Masukkan command\n>>";
     cin >> enteredCmd;
@@ -132,18 +133,17 @@ void Player::getCommand() {
         } else {
             nextCommand = new Next();
         } 
-        nextCommand->action()
+        nextCommand->action(game);
         delete nextCommand;
     } else if (enteredCmd == "ABILITYLESS" || enteredCmd == "QUADRUPLE" || enteredCmd == "QUARTER" || 
                enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
 
                     if (enteredCmd == abilityCard->getType()) {
-                        abilityCard->action();
+                        abilityCard->action(game);
                     }
                 }
-
     else {
-        // throw "Invalid command input"
+        throw InvalidInputException("input command salah/tidak ada");
     }
 }
 

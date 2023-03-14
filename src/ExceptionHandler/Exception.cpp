@@ -36,15 +36,12 @@ const char* IndexNotValidException::what() const throw() {
   return msg.c_str();
 }
 
-template <class T>
-InvalidInputException<T>::InvalidInputException(T _input) : input(_input) {}
+InvalidInputException::InvalidInputException(string _input) : input(_input) {}
 
-template <class T>
-InvalidInputException<T>::~InvalidInputException(){}
+InvalidInputException::~InvalidInputException(){}
 
-template <class T>
-const char* InvalidInputException<T>::what() const throw() {
-  string msg = "InvalidInputException : Input " + to_string(input) + " tidak valid, input harus berupa angka";
+const char* InvalidInputException::what() const throw() {
+  string msg = "InvalidInputException : Input tidak valid, " + input;
   return msg.c_str();
 }
 

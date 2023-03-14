@@ -41,12 +41,11 @@ class IndexNotValidException : public exception {
 };
 
 
-template <class T>
 class InvalidInputException : public exception {
     private:
-        T input;
+        string input;
     public:
-        InvalidInputException(T _input);
+        InvalidInputException(string _input);
         ~InvalidInputException();
         const char* what() const throw();
 };
