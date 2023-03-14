@@ -14,6 +14,7 @@ class ReversDirection : public Ability {
 
         void FirstReverseStage();
         void SecondReverseStage();
+        void action(Game game);
 };
 
 #endif

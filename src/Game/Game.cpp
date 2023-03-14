@@ -8,7 +8,13 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRond
     playerPointer = &playerQueue[0];
 }
 
-Game::~Game(){}
+Game::~Game(){
+    for (int i = 0; i < MAX_PLAYER; i++){
+        delete abilityCardQueue[i];
+    }
+    playerQueue.clear();
+    abilityCardQueue.clear();
+}
 
 void Game::turn(){
 
@@ -105,28 +111,34 @@ int Game::getMaxPlayer(){
 
 // set ability card kepada player
 void Game::setAbilityCard(){
-    // Ability abilityCard1;
-    // Ability abilityCard2;
-    // Ability abilityCard3;
-    // Ability abilityCard4;
+    // set ability card
+    Ability* abilityCard1 = new Switch();
+    Ability* abilityCard2 = new ReRoll();
+    Ability* abilityCard3 = new Swap();
+    Ability* abilityCard4 = new ReversDirection();
+    Ability* abilityCard5 = new Quarter();
+    Ability* abilityCard6 = new Quadruple();
+    Ability* abilityCard7 = new Abilityless();    
 
-    // abilityCard1 = ReRoll();
-    // abilityCard2 = DoubleReward();
-    // ...
-
-    // abilityCardQueue.push_back(abilityCard1);
-    // abilityCardQueue.push_back(abilityCard2);
-    // ...
+    abilityCardQueue.push_back(abilityCard1);
+    abilityCardQueue.push_back(abilityCard2);
+    abilityCardQueue.push_back(abilityCard3);
+    abilityCardQueue.push_back(abilityCard4);
+    abilityCardQueue.push_back(abilityCard5);
+    abilityCardQueue.push_back(abilityCard6);
+    abilityCardQueue.push_back(abilityCard7);
 
     // Distribute ability card to player
-    // .. 
+    for (int i = 0; i < MAX_PLAYER; i++){
+        playerQueue[i].setAbilityCard(abilityCardQueue[i]);
+    }
 
 }
 
 // set all ability card player
 void Game::setConditionAbilityCardPlayer(bool condition){
     for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].first.setAbilityUsed(condition);
+        playerQueue[i].setAbilityUsed(condition);
     }
 }
 
