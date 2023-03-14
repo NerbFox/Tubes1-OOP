@@ -45,7 +45,7 @@ InvalidInputException::InvalidInputException(string _input) : input(_input) {}
 InvalidInputException::~InvalidInputException(){}
 
 string InvalidInputException::what() const {
-  string msg = "InvalidInputException : Input tidak valid, " + input;
+  string msg = "InvalidInputException : Input tidak valid, " + input ;
   return msg;
 }
 

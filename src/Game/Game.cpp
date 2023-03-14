@@ -208,6 +208,30 @@ void Game::fetchPlayerName() {
     }
 }
 
+void Game::fetchDeckOption() {
+    bool valid = false;
+    while (!valid) {
+        try {
+            string input;
+            cout << "Urutan kartu deck ingin diacak atau baca dari file?\n0 : random\n1 : baca dari file\n>> ";
+            cin >> input;
+            if (input == "0") {
+                valid = true;
+            } else if (input == "1") {
+                string fildeir;
+                cout << "Letakkan file pada folder test\nMasukkan nama file (contoh: test1.txt)\n>> ";
+                cin >> fildeir;
+                deckCard.fetchCardFromFile(fildeir);
+                valid = true;
+            } else {
+                throw InvalidInputException("masukkan angka 0 atau 1");
+            }            
+        } catch (const InvalidInputException& err) {
+            cout << err.what() << endl;
+        }
+    }
+}
+
 // int main() {
 //     cout << "test";
 
