@@ -4,9 +4,7 @@ using namespace std;
 int main() {
   try {
     Game gameState;
-  } catch (const char& err) {
+  } catch (const char* err) {
     cout << err;
   }
-    
-
 }

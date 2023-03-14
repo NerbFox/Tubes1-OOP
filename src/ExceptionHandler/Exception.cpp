@@ -1,4 +1,7 @@
 #include "../lib-header/Exception/Exception.hpp"
+#include <cstring>
+
+using namespace std;
 
 NamaPanjangException::NamaPanjangException(int _length) : length(_length) {}
 
@@ -11,13 +14,20 @@ const char* NamaPanjangException::what() const throw() {
 
 NamaDuplikatException::NamaDuplikatException(string str) : nama(str) {}
 
-NamaDuplikatException::~NamaDuplikatException(){}
+NamaDuplikatException::~NamaDuplikatException(){
+  delete[] msgptr;
+}
 
 const char* NamaDuplikatException::what() const throw() {
   string msg = "NamaDuplikatException : Nama \"" + nama + "\" telah digunakan, silahkan gunakan nama lain\n" ;
-  return msg.c_str();
+  msgptr = new char[msg.length() + 1];
+  // Copy the message string to the allocated memory
+  strcpy(msgptr, msg.c_str());
+  // Return the pointer to the allocated memory
+  return msgptr;
 }
 
+// return msg.c_str();
 IndexOutOfBoundsException::IndexOutOfBoundsException(int _index, int _batas) : index(_index), batas(_batas) {}
 
 IndexOutOfBoundsException::~IndexOutOfBoundsException(){}

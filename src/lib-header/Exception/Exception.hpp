@@ -18,6 +18,7 @@ class NamaPanjangException : public exception {
 class NamaDuplikatException : public exception {
     private: 
         string nama; 
+        char* msgptr;
     public:
         NamaDuplikatException(string str);
         ~NamaDuplikatException();

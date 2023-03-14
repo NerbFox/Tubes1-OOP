@@ -9,9 +9,9 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRond
         valid = false;
         string input;
 
-        cout << "Masukkan nama untuk player-" << i+1 << ": ";
         while (!valid){ 
             try{
+                cout << "Masukkan nama untuk player-" << i+1 << ": ";
                 getline(cin, input);
                 if (nameTaken.count(input) > 0) {
                     throw NamaDuplikatException(input);
@@ -27,11 +27,9 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRond
             }
             catch (const NamaDuplikatException &err){
                 cout << err.what() << endl;
-                i--;
             }
             catch (const NamaPanjangException &err){
                 cout << err.what() << endl;
-                i--;
             }
         }
     }

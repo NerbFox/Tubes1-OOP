@@ -8,8 +8,10 @@ using namespace std;
 // ctor, isi dengan 52 kartu yang ada di poker
 DeckCard::DeckCard() : InventoryHolder{} {
   for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 13; i++) {
+    for (int j = 0; j < 13; j++) {
       string color;
+      // cout << "i: "<< i << endl;
+      // cout << "j: "<< j << endl;
       switch (i) {
         case 0:
           color = "hijau";
