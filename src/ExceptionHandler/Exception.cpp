@@ -5,7 +5,7 @@ NamaPanjangException::NamaPanjangException(int _length) : length(_length) {}
 NamaPanjangException::~NamaPanjangException(){}
 
 const char* NamaPanjangException::what() const throw() {
-  string msg = "NamaPanjangException : Karakter berjumlah : " + to_string(length) + ", kurangi karakter supaya berjumlah kurang dari 20.";
+  string msg = "NamaPanjangException : Karakter berjumlah : " + to_string(length) + ", kurangi karakter supaya berjumlah kurang dari 20\n";
   return msg.c_str();
 }
 
@@ -14,7 +14,7 @@ NamaDuplikatException::NamaDuplikatException(string str) : nama(str) {}
 NamaDuplikatException::~NamaDuplikatException(){}
 
 const char* NamaDuplikatException::what() const throw() {
-  string msg = "NamaDuplikatException : Nama \"" + nama + "\" telah digunakan, silahkan gunakan nama lain" ;
+  string msg = "NamaDuplikatException : Nama \"" + nama + "\" telah digunakan, silahkan gunakan nama lain\n" ;
   return msg.c_str();
 }
 

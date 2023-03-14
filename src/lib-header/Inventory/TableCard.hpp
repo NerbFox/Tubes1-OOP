@@ -16,6 +16,9 @@ class TableCard : public InventoryHolder<vector<Card>> {
 
     // Method to remove the first card from container n times.
     void operator-(int n);
+
+    // returns the container of card 
+    Card getContainerAt(int index);
 };  
 
 

@@ -19,3 +19,7 @@ void TableCard::operator-(int n) {
     cardContainer.erase(cardContainer.begin());
   }
 }
+
+Card TableCard::getContainerAt(int index) {
+  return cardContainer[index];
+}

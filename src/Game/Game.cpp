@@ -173,7 +173,7 @@ void Game::setConditionAbilityCardPlayer(bool condition){
 // set abilityUsed player
 void Game::setAbilityUsedPlayer(int idx, bool condition){
     int indexPemain = this->getIndexPlayerPointer();
-    playerQueue[idx].setAbilityUsed(condition);
+    playerQueue[idx].first.setAbilityUsed(condition);
     if (idx < 0 || idx > MAX_PLAYER){
         throw IndexOutOfBoundsException(idx, MAX_PLAYER);
     }
