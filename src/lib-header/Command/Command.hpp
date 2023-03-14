@@ -3,6 +3,8 @@
 
 #include "../Game/Game.hpp"
 
+class Game;
+
 class Command {
     friend class Game;
     
