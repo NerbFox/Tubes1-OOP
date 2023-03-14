@@ -73,16 +73,29 @@ void Swap::action(Game game){
     cout << "Pilih kartu yang ingin ditukar: " << endl;
     cout << "1. Kanan" << endl;
     cout << "2. Kiri" << endl;
-    // cout << "Pemain pertama: " << endl;
-    // cin >> pilihanKartuP1; cout << endl;
-    // cout << "Pemain kedua: " << endl;
-    // cin >> pilihanKartuP2; cout << endl;
-    while (pilihanKartuP1 != 1 || pilihanKartuP1!=2 || pilihanKartuP2 !=1 || pilihanKartuP2 !=2){
-        cout << "Pilihan tidak valid!\n"; // nanti pakai exception
-        cout << "Pemain pertama: " << endl;
-        cin >> pilihanKartuP1; cout << endl;
-        cout << "Pemain kedua: " << endl;
-        cin >> pilihanKartuP2; cout << endl;
+    while (pilihanKartuP1 != 1 || pilihanKartuP1!=2){
+        try {
+            cout << "Pilih kartu pemain pertama: ";
+            cin >> pilihanKartuP1; cout << endl;
+            if (pilihanKartuP1 != 1 || pilihanKartuP1!=2) {
+                throw IndexOutOfBoundsException(pilihanKartuP1, 2);
+            }
+        }
+        catch (const IndexOutOfBoundsException &err) {
+            cout << err.what() << endl;
+        }   
+    }
+    while (pilihanKartuP2 != 1 || pilihanKartuP2!=2){
+        try {
+            cout << "Pilih kartu pemain kedua: ";
+            cin >> pilihanKartuP2; cout << endl;
+            if (pilihanKartuP2 != 1 || pilihanKartuP2!=2) {
+                throw IndexOutOfBoundsException(pilihanKartuP2, 2);
+            }
+        }
+        catch (const IndexOutOfBoundsException &err) {
+            cout << err.what() << endl;
+        }   
     }
     pilihanKartuP1--; pilihanKartuP2--; pilihanP1--; pilihanP2--;
     Card card1 = game.playerQueue[pilihanP1].first.getNormalCard(pilihanKartuP1);
