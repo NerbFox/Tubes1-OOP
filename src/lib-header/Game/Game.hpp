@@ -107,6 +107,9 @@ class Game {
         // shuffle ability card
         void shuffleAbilityCard();
 
+        // shuffle deck card
+        void shuffleDeckCard();
+
         // distribute ability card
         void distributeAbilityCard();
 
