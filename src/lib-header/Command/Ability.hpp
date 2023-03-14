@@ -1,7 +1,7 @@
 #ifndef ABILITY_HPP
 #define ABILITY_HPP
 #include <string>
-#include "../Command/Command.hpp"
+#include "Command.hpp"
 #include "../Game/Game.hpp"
 #include <iostream>
 using namespace std;

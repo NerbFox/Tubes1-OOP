@@ -2,11 +2,11 @@
 #define GAME_HPP
 
 #include <deque>
-#include "../Player/Player.hpp"
-#include "../Inventory/TableCard.hpp"
-#include "../Inventory/DeckCard.hpp"
-#include "../Command/Ability.hpp"
-#include "../Ability/ReRoll.hpp"
+#include "../lib-header/Player/Player.hpp"
+#include "../lib-header/Inventory/TableCard.hpp"
+#include "../lib-header/Inventory/DeckCard.hpp"
+#include "../lib-header/Command/Ability.hpp"
+#include "../lib-header/Ability/ReRoll.hpp"
 
 using namespace std;
 

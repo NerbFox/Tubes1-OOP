@@ -1,7 +1,7 @@
 #ifndef DOUBLE_HPP
 #define DOUBLE_HPP
 
-#include "../Command/Command.hpp"
+#include "Command.hpp"
 
 class Double : public Command {
     friend class Game;
