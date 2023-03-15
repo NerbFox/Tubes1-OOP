@@ -7,9 +7,10 @@
 using namespace std;
 
 class Card : public BaseCard {
-protected:
+private:
     int number;         // The number of the card.
     string color;  // The color of the card.
+    const int comboId = 1;
 
 public:
     // Constructor

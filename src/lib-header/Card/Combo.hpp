@@ -3,39 +3,46 @@
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/InventoryHolder.hpp"
 #include "BaseCard.hpp"
-#include <array>
+#include <map>
 #include <tuple>
 
 class Player;
 
 class Combo : public BaseCard {
-    protected:
+    private:
         int comboId;
+        vector<Card> cardCombo;
         vector<Card> finalSetCard;
-        // vector<pair<int, float>> allCombo;
+        vector<tuple<vector<Card>, int, float>> allCombo;
 
     public:
-        Combo(Player player, TableCard tableCard);
+        Combo(int comboId, Player player, TableCard tableCard);
 
         Combo(const Combo& other);
 
         int getComboId();
 
-        // void checkPair();
+        vector<Card> getFinalSetCard();
 
-        // void checkTwoPair();
+        vector<tuple<vector<Card>, int, float>> getAllCombo();
 
-        // void checkThreeOfAKind();
+        map<int, int> getCardFreqByNumber();
 
-        // void checkFullHouse();
+        map<string, int> getCardFreqByColor();
 
-        // void checkFourOfAKind();
+        map<int, int> getComboFreq();
 
-        // void checkFlush();
+        void checkPair();
 
-        // void checkStraight();
+        void checkTwoPair();
 
-        // void checkStraightFlush();
+        void checkThreeOfAKind();
+
+        void checkFullHouse();
+
+        void checkFourOfAKind();
+
+        void checkStraightAndFlush();
 
         void computeValue();
 
