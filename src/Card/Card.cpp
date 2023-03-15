@@ -16,6 +16,11 @@ Card& Card::operator=(const Card& other) {
     return *this;
 }
 
+// Not equal operator
+bool Card::operator!=(const Card& other) {
+    return (number != other.number || color != other.color);
+}
+
 string Card::getColor() const {
     return color;
 }

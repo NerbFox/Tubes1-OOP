@@ -10,7 +10,6 @@ class Card : public BaseCard {
 private:
     int number;         // The number of the card.
     string color;  // The color of the card.
-    const int comboId = 1;
 
 public:
     // Constructor
@@ -21,6 +20,9 @@ public:
 
     // Assignment operator
     Card& operator=(const Card& other);
+
+    // Not equal operator
+    bool operator!=(const Card& other);
 
     // Returns the color of the card.
     string getColor() const; 
