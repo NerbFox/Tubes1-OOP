@@ -5,12 +5,12 @@
 
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(0), countRonde(0), abilityCardQueue{}{
     fetchPlayerName();
+    setAbilityCard();
     playerPointer.first = playerQueue[0].first;
     playerPointer.second = 0;
     playerQueue[0].second = true;
-    setAbilityCard();
     cout << "\nGame is starting...\n";
-    system("clear");
+    std::system("clear");
 }
 
 Game::~Game(){
@@ -54,9 +54,7 @@ void Game::nextRound(){
         countRonde++;
         // kondisional untuk round 2
             // Random methodnya udh ada blom ya ? 
-        if (countRonde == 1){
-            setAbilityCard();
-        }
+
         // Kondisional untuk round selain 2
     } else {
         if (isHaveWinner() != -1){
@@ -161,7 +159,7 @@ void Game::fetchPlayerName() {
     bool valid;
     unordered_set<string> nameTaken;
     // remove output that have been printed before
-    system("clear");
+    std::system("clear");
     cout << "====================Candy Kingdom Card Game====================\n";
     cout << "Masukkan nama untuk semua player\n";
     cout << "Setiap player harus memiliki nama yang berbeda\n";
@@ -241,7 +239,7 @@ void Game::fetchDeckOption() {
             } else if (input == "1") {
                 // fetch deck card from file
                 string fildeir;
-                cout << "Letakkan file pada folder test\nMasukkan nama file (contoh: test1.txt)\n>> ";
+                cout << "Letakkan file pada folder test\nMasukkan nama file (contoh: test1)\n>> ";
                 cin >> fildeir;
                 try {
 
@@ -257,34 +255,36 @@ void Game::fetchDeckOption() {
                 }
                 // shuffle ability card
                 shuffleAbilityCard();
-                system("clear");
             }
         }
     }
     // distribute deck cards to players
+    std::system("clear");
     distributeDeckCard();
 }
 
 void Game::shuffleAbilityCard(){
-    // Create a vector of cards from the queue
-    std::vector<Ability*> cards;
-    while (!abilityCardQueue.empty()) {
-        cards.push_back(abilityCardQueue.front());
+    // cout << "\n\n=====before=====\n";
+    vector<Ability *> vec(abilityCardQueue.size());
+    int size = abilityCardQueue.size();
+    // cout << size;
+    for (size_t i = 0; i < size; ++i) {
+        vec[i] = abilityCardQueue.front();
+        // cout << vec[i]->getType() << endl;        
         abilityCardQueue.pop_front();
     }
 
-    // Shuffle the vector using the Fisher-Yates algorithm
+    // Shuffle the temporary vector
     random_device rd;
-    mt19937 gen(rd());
-    for (int i = cards.size() - 1; i > 0; --i) {
-        uniform_int_distribution<> dis(0, i);
-        int j = dis(gen);
-        swap(cards[i], cards[j]);
-    }
+    mt19937 g(rd());
+    shuffle(vec.begin(), vec.end(), g);
 
-    // Add the shuffled cards back to the queue
-    for (const auto& card : cards) {
-        abilityCardQueue.push_front(card);
+    // cout << "\n\n=====after=====\n";
+
+    // Push the shuffled elements back into the queue
+    for (Ability* ability : vec) {
+        // cout << ability->getType() << endl;
+        abilityCardQueue.push_back(ability);
     }
 }
 
@@ -294,7 +294,7 @@ void Game::shuffleDeckCard(){
 
 void Game::distributeAbilityCard(){
     // distribute ability cards to player
-    // this->shuffleAbilityCard(); 
+    this->shuffleAbilityCard(); 
     for (int i = 0; i < MAX_PLAYER; i++){
         playerQueue[i].first->setAbilityCard(abilityCardQueue[i]);
     }
@@ -310,12 +310,15 @@ void Game::distributeDeckCard(){
     }
 }
 
+int Game::getRound() {
+    return countRonde;
+}
+
 void Game::startGame() {
     fetchDeckOption();
     distributeDeckCard();
     // belum set semua player ability = false ketika mulai game baru
-    cout << "\n====================Candy Kingdom Card Game====================\n";
-    cout << "\nMemulai Permainan ke-" << countPermainan+1 << endl;
+    cout << "\n=========================Permainan ke-" << countPermainan+1 << "=========================" << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
         if (countRonde == 1) {
             cout << "\nKartu ability telah dibagikan!\n";
@@ -323,7 +326,7 @@ void Game::startGame() {
         }
         
         for (int j = 0; j < MAX_PLAYER; j++) {
-            cout << "\n==========================Ronde ke-"  << countRonde+1 << "==========================\n";
+            cout << "\n===========================Ronde ke-"  << countRonde+1 << "===========================\n";
             cout << "Poin Hadiah : " << reward << "\n\n";            
             cout << "Giliran " << playerPointer.first->getName() << endl;
             cout << "Poin Kamu : " << playerPointer.first->getPoint() << endl;
@@ -342,9 +345,7 @@ void Game::startGame() {
             }
             playerPointer.first->getCommand(*this);
             nextPlayer();
+            std::system("clear");
         }
     }
-
-
-
 }

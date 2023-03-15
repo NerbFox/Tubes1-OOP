@@ -15,6 +15,7 @@
 #include "../Ability/Quarter.hpp"
 #include "../Ability/Abilityless.hpp"
 #include "../Ability/ReverseDirection.hpp"
+#include <limits>
 
 using namespace std;
 
@@ -116,6 +117,9 @@ class Game {
 
         // distribute deck card
         void distributeDeckCard();
+
+        // get round from  
+        int getRound();
 };  
 
 // P2 P3 P4 P5 P6 P7 P1 <-

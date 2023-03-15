@@ -150,14 +150,20 @@ void Player::getCommand(Game& game) {
             delete nextCommand;
         } else if (enteredCmd == "ABILITYLESS" || enteredCmd == "QUADRUPLE" || enteredCmd == "QUARTER" || 
                 enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
-                        if (isAbilityUsed()) {
-                            throw InvalidInputException("Kartu telah digunakan!");
-                        } else if (enteredCmd != abilityCard->getType()) {
-                            throw InvalidInputException("Kamu tidak memiliki kartu tersebut!");
+                        if (game.getRound() != 0) {
+                            if (isAbilityUsed()) {
+                                throw InvalidInputException("Kartu telah digunakan!");
+                            } else if (enteredCmd != abilityCard->getType()) {
+                                throw InvalidInputException("Kamu tidak memiliki kartu tersebut!");
+                            } else {
+                                abilityCard->action(game);
+                                cout << endl << name << " melakukan "<< enteredCmd << "!\n";
+                            }
                         } else {
-                            abilityCard->action(game);
-                            cout << endl << name << " melakukan "<< enteredCmd << "!\n";
+                            throw InvalidInputException("Kartu abiliity belum dibagikan!");
                         }
+                        
+
                     }
         else {
             throw InvalidInputException("input command salah/tidak ada");
