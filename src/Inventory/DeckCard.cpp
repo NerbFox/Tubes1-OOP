@@ -53,7 +53,7 @@ void DeckCard::fetchCardFromFile(const string filedir) {
 
   unordered_set<pair<string,int>> cardTaken;
   input.open("../../test/" + filedir);
-  while(!input.fail()){
+  while(count > 0){
     input >> num;
     input >> warna;
 
@@ -66,6 +66,7 @@ void DeckCard::fetchCardFromFile(const string filedir) {
         if (cardTaken.count(temp) == 0){
           cardContainer.push(Card(stoi(num), warna));
           cardTaken.insert(temp);
+          count--;
         }
         else {
           throw InvalidInputException("Kartu " + warna + "-" + num + "Duplikat");
