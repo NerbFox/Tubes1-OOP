@@ -44,7 +44,6 @@ Player& Player::operator=(const Player& other) {
 Player::~Player() {
     cout << "dtor player " << name << endl;
     delete abilityCard; 
-    delete nextCommand;
 }
 
 void Player::setName(const string& newName) {

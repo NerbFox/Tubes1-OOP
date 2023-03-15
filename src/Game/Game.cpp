@@ -297,7 +297,7 @@ void Game::startGame() {
 
     cout << "\nMemulai Permainan ke-" << countPermainan+1 << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
-        if (countRonde == 2) {
+        if (countRonde == 1) {
             cout << "Kartu ability telah dibagikan!\n";
             distributeAbilityCard();
         }
@@ -315,9 +315,9 @@ void Game::startGame() {
             if (countRonde >= 1) {
                 cout << "Ability : " << playerPointer.first->getAbilityCard()->getType() << " - " ;
                 if (playerPointer.first->isAbilityUsed()){
-                    cout << "bisa digunakan\n";
-                } else {
                     cout << "tidak bisa digunakan\n";
+                } else {
+                    cout << "bisa digunakan\n";
                 }
             }
             playerPointer.first->getCommand(*this);
