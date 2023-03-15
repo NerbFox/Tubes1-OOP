@@ -109,36 +109,98 @@ void Combo::checkFourOfAKind() {
     }
 }
 
-void Combo::checkStraightAndFlush() {
-    for (int i = 0; i < finalSetCard.size() - 4; i++) {
-        bool isStraight = true;
-        bool isFlush = true;
-        vector<Card> fiveSetCard;
-        for (int j = 0; j < finalSetCard.size() - 1; j++) {
-            if (finalSetCard[j].getNumber() <= finalSetCard[j + 1].getNumber()) {
-                isStraight = false;
-            }
-            if (finalSetCard[j].getColor() != finalSetCard[j + 1].getColor()) {
-                isFlush = false;
-            }
-            fiveSetCard.push_back(finalSetCard[j]);
-        }
-
-        if (isStraight && isFlush) {
-            float valueSet = fiveSetCard[0].getNumber() + colorCode[fiveSetCard[0].getColor()] * 0.33;
-            allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
-        } else if (isStraight) {
-            float valueSet = fiveSetCard[0].getNumber();
-            allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
-        } else if (isFlush) {
-            float valueSet = 0.0f;
-            for (int i = 0; i < fiveSetCard.size(); i++) {
-                value += fiveSetCard[fiveSetCard.size() - 1 - i].getNumber() * (pow(100, i));
-            }   
-            valueSet += colorCode[fiveSetCard[0].getColor()] * 0.33;
-            allCombo.push_back(make_tuple(fiveSetCard, 6, valueSet));
+bool Combo::isStraight(vector<Card> fiveSetCard) {
+    for (int i = 0; i < fiveSetCard.size() - 1; i++) {
+        if (fiveSetCard[i].getNumber() - fiveSetCard[i + 1].getNumber() != 1) {
+            return false;
         }
     }
+    return true;
+}
+
+bool Combo::isFlush(vector<Card> fiveSetCard) {
+    for (int i = 0; i < fiveSetCard.size() - 1; i++) {
+        if (fiveSetCard[i].getColor() != fiveSetCard[i + 1].getColor()) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void Combo::checkStraightAndFlush() {
+    
+    vector<Card> fiveSetCard;
+
+    for (int i = 0; i < 4; i++) {
+        fiveSetCard.push_back(finalSetCard[i]);
+        for (int j = i + 1; j < 5;j++) {
+            fiveSetCard.push_back(finalSetCard[j]);
+            for (int k = j + 1; k < 6; k++) {
+                fiveSetCard.push_back(finalSetCard[k]);
+                for (int l = k + 1; k < 7; l++) {
+                    fiveSetCard.push_back(finalSetCard[l]);
+                    for (int m = l + 1; m < 8; m++) {
+                        fiveSetCard.push_back(finalSetCard[m]);
+
+                        if (isStraight(fiveSetCard) && isFlush(fiveSetCard)) {
+                            float valueSet = fiveSetCard[0].getNumber() + colorCode[fiveSetCard[0].getColor()] * 0.33;
+                            allCombo.push_back(make_tuple(fiveSetCard, 9, valueSet));
+                        } else if (isStraight(fiveSetCard)) {
+                            float valueSet = fiveSetCard[0].getNumber();
+                            allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
+                        } else if (isFlush(fiveSetCard)) {
+                            float valueSet = 0.0f;
+                            for (int i = 0; i < fiveSetCard.size(); i++) {
+                                value += fiveSetCard[fiveSetCard.size() - 1 - i].getNumber() * (pow(100, i));
+                            }   
+                            valueSet += colorCode[fiveSetCard[0].getColor()] * 0.33;
+                            allCombo.push_back(make_tuple(fiveSetCard, 6, valueSet));
+                        }
+                        
+                        fiveSetCard.pop_back();
+                    }
+                    fiveSetCard.pop_back();
+                }
+                fiveSetCard.pop_back();
+            }
+            fiveSetCard.pop_back();
+        }
+        fiveSetCard.pop_back();
+    }
+    
+    // for (int i = 0; i < finalSetCard.size() - 4; i++) {
+    //     bool isStraight = true;
+    //     bool isFlush = true;
+    //     vector<Card> fiveSetCard;
+    //     for (int j = 0; j < finalSetCard.size() - 1; j++) {
+    //         if (finalSetCard[j].getNumber() <= finalSetCard[j + 1].getNumber()) {
+    //             isStraight = false;
+    //         }
+    //         if (finalSetCard[j].getColor() != finalSetCard[j + 1].getColor()) {
+    //             isFlush = false;
+    //         }
+    //         fiveSetCard.push_back(finalSetCard[j]);
+    //     }
+
+    //     if (isStraight && isFlush) {
+    //         float valueSet = fiveSetCard[0].getNumber() + colorCode[fiveSetCard[0].getColor()] * 0.33;
+    //         allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
+    //     } else if (isStraight) {
+    //         float valueSet = fiveSetCard[0].getNumber();
+    //         allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
+    //     } else if (isFlush) {
+    //         float valueSet = 0.0f;
+    //         for (int i = 0; i < fiveSetCard.size(); i++) {
+    //             value += fiveSetCard[fiveSetCard.size() - 1 - i].getNumber() * (pow(100, i));
+    //         }   
+    //         valueSet += colorCode[fiveSetCard[0].getColor()] * 0.33;
+    //         allCombo.push_back(make_tuple(fiveSetCard, 6, valueSet));
+    //     }
+    // }
+}
+
+void Combo::checkTwoPair() {
+    
 }
 
 // INCOMPLETE

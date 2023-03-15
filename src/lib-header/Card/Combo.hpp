@@ -44,6 +44,10 @@ class Combo : public BaseCard {
 
         void checkStraightAndFlush();
 
+        bool isStraight(vector<Card>);
+
+        bool isFlush(vector<Card>);
+
         void computeValue();
 
         
