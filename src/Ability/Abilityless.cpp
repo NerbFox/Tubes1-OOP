@@ -62,5 +62,17 @@ void Abilityless::action(Game& game) {
             cout << "Input tidak valid" << endl;
         }
     }
+    // check if player has already abilityless 
+    if (game.playerQueue[pilihan-1].first->isAbilityUsed()){
+        cout << "Yahh, sayang sekali kartu kamu digunakan kepada pemain " << game.playerQueue[pilihan-1].first->getName() << 
+        " yang sudah menggunakan kartu ability-nya\n";
+    }
+    else {
+        cout << "Kartu ability pemain " << game.playerQueue[pilihan-1].first->getName() << " telah dimatikan" << endl; 
+    }
     game.setAbilityUsedPlayer(pilihan-1, true);
+    cout << "Tekan enter untuk melanjutkan" << endl;
+    string input;
+    getline(cin, input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

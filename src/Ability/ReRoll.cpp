@@ -32,7 +32,7 @@ void ReRoll::action(Game& game) {
     cout << "2. ";
     game.playerPointer.first->getNormalCard(1).printCard();
     cout << endl;
-    // input anyting to continue
+    cout << "Tekan enter untuk melanjutkan" << endl;
     string input;
     getline(cin, input);
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
