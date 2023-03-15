@@ -3,9 +3,9 @@
 #include <random>
 #include <algorithm>
 
-Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
+Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1), abilityCardQueue{}{
     fetchPlayerName();
-    playerPointer.first = &playerQueue[0].first;
+    playerPointer.first = playerQueue[0].first;
     playerPointer.second = 0;
     playerQueue[0].second = true;
     setAbilityCard();
@@ -13,8 +13,9 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRond
 
 Game::~Game(){
     for (int i = 0; i < MAX_PLAYER; i++){
-        delete abilityCardQueue[i];
+        delete playerQueue[i].first;
     }
+    abilityCardQueue.clear();
     playerQueue.clear();
     abilityCardQueue.clear();
 }
@@ -25,7 +26,7 @@ void Game::nextPlayer() {
         while (playerQueue[i].second){
             i++;
         }
-        playerPointer.first = &playerQueue[i].first;
+        playerPointer.first = playerQueue[i].first;
         playerPointer.second = i;
     }
     else {
@@ -35,7 +36,7 @@ void Game::nextPlayer() {
 
 void Game::nextRound(){
     if (countRonde < MAX_ROUND){
-        pair<Player,bool> temp;
+        pair<Player*,bool> temp;
         temp = playerQueue.front();
         playerQueue.pop_front();
         playerQueue.push_back(temp);
@@ -44,7 +45,7 @@ void Game::nextRound(){
             playerQueue[i].second = false;
         }
 
-        playerPointer.first = &playerQueue[0].first;
+        playerPointer.first = playerQueue[0].first;
         playerPointer.second = 0;
 
         countRonde++;
@@ -65,7 +66,7 @@ void Game::nextRound(){
 }
 
 bool Game::isEveryoneHaveTurn(){
-    deque<pair<Player,bool>>::iterator it;
+    deque<pair<Player*,bool>>::iterator it;
     for (it = playerQueue.begin(); it != playerQueue.end(); ++it){
         if (!it->second) return false;
     }
@@ -82,7 +83,7 @@ DeckCard Game::getDeckCard(){
 
 int Game::isHaveWinner(){
     for (int idx = 0; idx < MAX_PLAYER; idx++){
-        if (playerQueue[idx].first.getPoint() >= MAX_POINT) return idx;
+        if (playerQueue[idx].first->getPoint() >= MAX_POINT) return idx;
     }
     return -1; // default invalid
 }
@@ -90,7 +91,7 @@ int Game::isHaveWinner(){
 void Game::printLeaderboard(){
     cout << "Leaderboard";
     for (int i = 0; i < MAX_PLAYER; i++){
-        cout << i+1 << ". " << playerQueue[i].first.getName() << " : " << playerQueue[i].first.getPoint() << endl;   
+        cout << i+1 << ". " << playerQueue[i].first->getName() << " : " << playerQueue[i].first->getPoint() << endl;   
     }
 }
 
@@ -124,14 +125,14 @@ void Game::setAbilityCard(){
 // set all ability card player
 void Game::setConditionAbilityCardPlayer(bool condition){
     for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].first.setAbilityUsed(condition);
+        playerQueue[i].first->setAbilityUsed(condition);
     }
 }
 
 // set abilityUsed player
 void Game::setAbilityUsedPlayer(int idx, bool condition){
     int indexPemain = this->getIndexPlayerPointer();
-    playerQueue[idx].first.setAbilityUsed(condition);
+    playerQueue[idx].first->setAbilityUsed(condition);
     if (idx < 0 || idx > MAX_PLAYER){
         throw IndexOutOfBoundsException(idx, MAX_PLAYER);
     }
@@ -144,7 +145,7 @@ void Game::setAbilityUsedPlayer(int idx, bool condition){
 int Game::getIndexPlayerPointer(){
     int i = 0; int indexPemain = 0;
     for (auto currentPair : this->playerQueue) {
-        if (currentPair.first.getName() != this->playerPointer.first->getName()) {
+        if (currentPair.first->getName() != this->playerPointer.first->getName()) {
             i++;
         } else {
             indexPemain = i;
@@ -180,7 +181,8 @@ void Game::fetchPlayerName() {
                     throw NamaPanjangException(input.length());
                 }
                 else { 
-                    playerQueue.push_back(make_pair(Player(input), false));
+                    Player *newPlayer = new Player(input);
+                    playerQueue.push_back(make_pair(newPlayer, false));
                     nameTaken.insert(input);
                     valid = true;
                 }
@@ -237,9 +239,10 @@ void Game::fetchDeckOption() {
         // shuffle ability card
         shuffleAbilityCard();
     }
-    // distribute ability cards and deck cards to players
-    distributeAbilityCard();
+    // distribute deck cards to players
+    cout << "test5\n";
     distributeDeckCard();
+    cout << "test6\n";
 }
 
 void Game::shuffleAbilityCard(){
@@ -273,16 +276,16 @@ void Game::distributeAbilityCard(){
     // distribute ability cards to player
     // this->shuffleAbilityCard(); 
     for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
+        playerQueue[i].first->setAbilityCard(abilityCardQueue[i]);
     }
 }
 
 void Game::distributeDeckCard(){
     // distribute deck card to player
     for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].first.setNormalCard(deckCard.getTopCard(), 0);
+        playerQueue[i].first->setNormalCard(deckCard.getTopCard(), 0);
         deckCard-1;
-        playerQueue[i].first.setNormalCard(deckCard.getTopCard(), 1);
+        playerQueue[i].first->setNormalCard(deckCard.getTopCard(), 1);
         deckCard-1;
     }
 }

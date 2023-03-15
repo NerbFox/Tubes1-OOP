@@ -33,7 +33,7 @@ class Game {
     friend class ReverseDirection;
     
     private :
-        deque<pair<Player,bool>> playerQueue;
+        deque<pair<Player*,bool>> playerQueue;
         TableCard tableCard;
 
         long long reward;

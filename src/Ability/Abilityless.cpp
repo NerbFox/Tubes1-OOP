@@ -26,7 +26,7 @@ void Abilityless::action(Game game) {
     cout << "Abilityless diaktifkan" << endl;
     cout << "Silahkan pilih pemain yang kartu abilitynya ingin dimatikan:\n";
     for (auto currentPair : game.playerQueue) {
-        cout << i << ". " <<  currentPair.first.getName() << endl;
+        cout << i << ". " <<  currentPair.first->getName() << endl;
     }
     pilihan = 0;
     while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {

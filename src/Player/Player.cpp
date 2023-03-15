@@ -41,7 +41,10 @@ Player& Player::operator=(const Player& other) {
 }
 
 // dtor
-Player::~Player() {delete abilityCard; delete nextCommand; }
+Player::~Player() {
+    delete abilityCard; 
+    delete nextCommand;
+}
 
 void Player::setName(const string& newName) {
     name = newName;
