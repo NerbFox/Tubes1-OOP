@@ -1,5 +1,6 @@
 #include "../lib-header/Ability/Quarter.hpp"
 #include "../lib-header/Game/Game.hpp"
+#include "../lib-header/Exception/Exception.hpp"
 
 using namespace std;
 
@@ -14,6 +15,11 @@ Quarter::~Quarter() {
 
 // Action
 void Quarter::action(Game& game) {
-    game.playerPointer.first->setAbilityUsed(true);
-    game.reward /= DEVISORQ;
+    if (game.reward > 1){
+        game.playerPointer.first->setAbilityUsed(true);
+        game.reward /= DEVISORQ;
+    }
+    else {
+        throw InvalidInputException("Poin telah mencapai minimum (1 poin)");
+    }
 }

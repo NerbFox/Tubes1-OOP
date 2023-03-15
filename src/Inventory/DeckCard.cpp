@@ -42,7 +42,7 @@ void DeckCard::fetchCardFromFile(const string filedir) {
 
 
   // VALIDASI PERTAMA : cek jumlah kartu
-  cek.open("../../test/" + filedir);
+  cek.open("../test/" + filedir);
   int count = 0;
   while (getline(cek, line)) count++;
   if (count != 52) {
@@ -52,8 +52,8 @@ void DeckCard::fetchCardFromFile(const string filedir) {
   cek.close();
 
   set<pair<string,int>> cardTaken;
-  input.open("../../test/" + filedir);
-  while(!input.fail()){
+  input.open("../test/" + filedir);
+  while(count > 0){
     input >> num;
     input >> warna;
 
@@ -66,6 +66,7 @@ void DeckCard::fetchCardFromFile(const string filedir) {
         if (cardTaken.count(temp) == 0){
           cardContainer.push(Card(stoi(num), warna));
           cardTaken.insert(temp);
+          count--;
         }
         else {
           throw InvalidInputException("Kartu " + warna + "-" + num + "Duplikat");

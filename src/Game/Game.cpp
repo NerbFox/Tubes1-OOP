@@ -206,6 +206,7 @@ void Game::fetchDeckOption() {
     string input;
     bool valid = false;
     while (!valid) {
+        valid = true;
         try {
             cout << "\nUrutan kartu deck ingin diacak atau baca dari file?\n0 : random\n1 : baca dari file\n>> ";
             cin >> input;
@@ -221,25 +222,39 @@ void Game::fetchDeckOption() {
         }
         catch (const InvalidInputException& err) {
             cout << err.what() << endl;
+            valid = false;
         }
         catch (const NotIntegerException& err) {
             cout << err.what() << endl;
+            valid = false; 
         }
-    }
-    if (input == "0") {
-        // shuffle deck card and ability card
-        shuffleDeckCard();        
-        shuffleAbilityCard();
+        if (valid){
+            if (input == "0") {
+                // shuffle deck card and ability card
+                shuffleDeckCard();        
+                shuffleAbilityCard();
 
-    } else if (input == "1") {
-        // fetch deck card from file
-        string fildeir;
-        cout << "Letakkan file pada folder test\nMasukkan nama file (contoh: test1.txt)\n>> ";
-        cin >> fildeir;
-        deckCard.fetchCardFromFile(fildeir);
+            } else if (input == "1") {
+                // fetch deck card from file
+                string fildeir;
+                cout << "Letakkan file pada folder test\nMasukkan nama file (contoh: test1.txt)\n>> ";
+                cin >> fildeir;
+                try {
 
-        // shuffle ability card
-        shuffleAbilityCard();
+                    deckCard.fetchCardFromFile(fildeir);
+                }
+                catch (InvalidInputException& e) {
+                    valid = false;
+                    cout << e.what() << endl;
+                }
+                catch (...){
+                    valid = false;
+                    cout << "input tidak valid" << endl;
+                }
+                // shuffle ability card
+                shuffleAbilityCard();
+            }
+        }
     }
     // distribute deck cards to players
     distributeDeckCard();
