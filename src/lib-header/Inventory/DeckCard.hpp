@@ -1,6 +1,7 @@
 #include "InventoryHolder.hpp"
 #include "../Card/Card.hpp"
 #include <iostream>
+#include <fstream>
 #include <queue>
 
 using namespace std;

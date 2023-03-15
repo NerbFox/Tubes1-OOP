@@ -8,18 +8,12 @@ ReverseDirection::ReverseDirection() {
     Ability::setType("REVERSE");
 }
 
-void ReverseDirection::action(Game) {
-
-}
-
 ReverseDirection::~ReverseDirection() { }
 
-void FirstReverseStage() {
-
-}
-void SecondReverseStage() {
-
-}
-void action(Game game) {
-
+void ReverseDirection::action(Game game) {
+    deque<pair<Player,bool>> copy; 
+    for (int i = game.playerPointer.second + 1; i - game.playerPointer.second <= game.MAX_PLAYER; i++){
+        copy.push_front(game.playerQueue.at(i%game.MAX_PLAYER));
+    }
+    game.playerQueue.swap(copy);
 }

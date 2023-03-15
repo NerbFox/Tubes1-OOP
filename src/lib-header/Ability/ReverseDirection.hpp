@@ -4,15 +4,13 @@
 #include "../Command/Ability.hpp"
 
 class ReverseDirection : public Ability {
+    friend class Game;
     private:
         bool reverseOn;
         int pivot;
     public:
         ReverseDirection();
         ~ReverseDirection();
-
-        void FirstReverseStage();
-        void SecondReverseStage();
         void action(Game game);
 };
 

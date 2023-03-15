@@ -61,14 +61,6 @@ void Game::nextRound(){
     }
 }
 
-void Game::reverseOrder() {
-    deque<pair<Player,bool>> copy; 
-    for (int i = playerPointer.second + 1; i - playerPointer.second <= MAX_PLAYER; i++){
-        copy.push_front(playerQueue.at(i%MAX_PLAYER));
-    }
-    this->playerQueue.swap(copy);
-}
-
 bool Game::isEveryoneHaveTurn(){
     deque<pair<Player,bool>>::iterator it;
     for (it = playerQueue.begin(); it != playerQueue.end(); ++it){

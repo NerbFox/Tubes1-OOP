@@ -1,4 +1,5 @@
 #include "../lib-header/Inventory/DeckCard.hpp"
+#include "../lib-header/Exception/Exception.hpp"
 #include <iostream>
 #include <random>
 #include <algorithm>
@@ -35,6 +36,11 @@ DeckCard::DeckCard() : InventoryHolder{} {
 
 // baca dari file
 void DeckCard::fetchCardFromFile(const string filedir) {
+  ifstream input;
+
+  input.open("../../test/" + filedir);
+  if (input.fail()) throw EmptyInputException();
+
   // pertama2 pop dulu semua
   // trs masukin ke container dengan cara cardContainer.push(angka, warna));
 }

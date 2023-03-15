@@ -30,6 +30,7 @@ class Game {
     friend class Double;
     friend class Half;
     friend class Next;
+    friend class ReverseDirection;
     
     private :
         deque<pair<Player,bool>> playerQueue;
