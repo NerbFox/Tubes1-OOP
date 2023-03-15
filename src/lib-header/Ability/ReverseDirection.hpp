@@ -6,7 +6,6 @@
 class ReverseDirection : public Ability {
     friend class Game;
     private:
-        bool reverseOn;
         int pivot;
     public:
         ReverseDirection();

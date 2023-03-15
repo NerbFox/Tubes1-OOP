@@ -36,9 +36,12 @@ DeckCard::DeckCard() : InventoryHolder{} {
 
 // baca dari file
 void DeckCard::fetchCardFromFile(const string filedir) {
-  ifstream input;
+  ifstream input, cek;
 
   input.open("../../test/" + filedir);
+  cek.open("../../test/" + filedir);
+
+  // cek jumlah kartu
   if (input.fail()) throw EmptyInputException();
 
   // pertama2 pop dulu semua
