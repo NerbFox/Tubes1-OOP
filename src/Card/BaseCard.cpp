@@ -20,6 +20,10 @@ float BaseCard::getValue() const {
   return value;
 } 
 
+map<string, int> BaseCard::getColorCode() const {
+  return colorCode;
+}
+
 // Compares the value of two cards and returns true if the value of this card is less than the other card.
 bool BaseCard::operator<(const BaseCard& other) const {
   return value < other.value;
