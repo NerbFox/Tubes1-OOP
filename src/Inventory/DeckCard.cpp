@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #include <algorithm>
+#include <unordered_set>
 
 using namespace std;
 
@@ -37,13 +38,48 @@ DeckCard::DeckCard() : InventoryHolder{} {
 // baca dari file
 void DeckCard::fetchCardFromFile(const string filedir) {
   ifstream input, cek;
+  string line, warna, num;
 
-  input.open("../../test/" + filedir);
+
+  // VALIDASI PERTAMA : cek jumlah kartu
   cek.open("../../test/" + filedir);
+  int count = 0;
+  while (getline(cek, line)) count++;
+  if (count != 52) {
+    cek.close();
+    throw InvalidInputException("jumlah kartu pada file " + to_string(count) + ", seharusnya 52");
+  } 
+  cek.close();
 
-  // cek jumlah kartu
-  if (input.fail()) throw EmptyInputException();
+  unordered_set<pair<string,int>> cardTaken;
+  input.open("../../test/" + filedir);
+  while(!input.fail()){
+    input >> num;
+    input >> warna;
 
+    // VALIDASI KEDUA : cek warna
+    if (warna == "hijau" || warna == "kuning" || warna == "biru" || warna == "merah"){
+      // VALIDASI KETIGA : cek angka
+      if (stoi(num) > 0 && stoi(num) < 14){
+        // VALIDASI KEEMPAT : cek Duplikat
+        pair<string,int> temp = make_pair(warna,stoi(num));
+        if (cardTaken.count(temp) == 0){
+          cardContainer.push(Card(stoi(num), warna));
+          cardTaken.insert(temp);
+        }
+        else {
+          throw InvalidInputException("Kartu " + warna + "-" + num + "Duplikat");
+        }
+      }
+      else {
+        throw InvalidInputException("tidak ada kartu bernomor : " + num);
+      }
+    }
+    else {
+      throw InvalidInputException("tidak ada kartu berwarna : " + warna);
+    }
+  }
+  input.close();
   // pertama2 pop dulu semua
   // trs masukin ke container dengan cara cardContainer.push(angka, warna));
 }
