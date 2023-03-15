@@ -223,13 +223,23 @@ void Game::fetchDeckOption() {
         }
     }
     if (input == "0") {
-        deckCard.shuffleCard();
+        // shuffle deck card and ability card
+        shuffleDeckCard();        
+        shuffleAbilityCard();
+
     } else if (input == "1") {
+        // fetch deck card from file
         string fildeir;
         cout << "Letakkan file pada folder test\nMasukkan nama file (contoh: test1.txt)\n>> ";
         cin >> fildeir;
         deckCard.fetchCardFromFile(fildeir);
+
+        // shuffle ability card
+        shuffleAbilityCard();
     }
+    // distribute ability cards and deck cards to players
+    distributeAbilityCard();
+    distributeDeckCard();
 }
 
 void Game::shuffleAbilityCard(){
@@ -260,8 +270,8 @@ void Game::shuffleDeckCard(){
 }
 
 void Game::distributeAbilityCard(){
-    // shuffle ability card and distribute to player
-    this->shuffleAbilityCard(); 
+    // distribute ability cards to player
+    // this->shuffleAbilityCard(); 
     for (int i = 0; i < MAX_PLAYER; i++){
         playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
     }
