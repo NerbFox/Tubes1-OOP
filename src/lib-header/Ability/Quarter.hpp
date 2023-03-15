@@ -9,7 +9,7 @@ class Quarter : public Ability {
     public:
         Quarter();
         ~Quarter();
-        void action(Game game);
+        void action(Game& game);
 };
 
 #endif

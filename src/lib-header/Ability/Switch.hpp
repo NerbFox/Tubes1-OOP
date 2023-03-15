@@ -12,7 +12,7 @@ class Switch : public Ability {
         Switch();
         ~Switch();
         // action
-        void action(Game game);
+        void action(Game& game);
 };
 
 #endif

@@ -15,7 +15,7 @@ class Double : public Command {
     public : 
         Double();
         ~Double();
-        void action(Game game);
+        void action(Game &);
 };  
 
 #endif

@@ -12,7 +12,7 @@ Abilityless::~Abilityless() {
 }
 
 // action
-void Abilityless::action(Game game) {
+void Abilityless::action(Game& game) {
     /* mematikan kartu ability milik pemain lain. Harus digunakan saat giliran (preventif), tidak
      bisa mencegah seperti mematikan kartu ability ketika ada yang memakai. Sehingga, apabila
      semua pemain selain pemegang kemampuan ini sudah memakai kemampuan, maka secara tidak 

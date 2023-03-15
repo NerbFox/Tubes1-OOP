@@ -7,7 +7,7 @@ Swap::Swap() {
 }
 
 // action
-void Swap::action(Game game){
+void Swap::action(Game& game){
     /* menukar 1 kartu main deck milik pemain lain dengan 1 kartu main deck milik pemain lain. Tidak 
     boleh ditukar dengan kartu main deck diri sendiri. */
     game.playerPointer.first->setAbilityUsed(true);

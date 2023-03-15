@@ -10,7 +10,6 @@ Half::~Half(){
 
 }
 
-void Half::action(Game game){
+void Half::action(Game& game){
     game.reward /= multipiler;
-    game.nextPlayer();
 }

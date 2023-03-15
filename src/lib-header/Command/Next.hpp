@@ -13,7 +13,7 @@ class Next : public Command {
     public :
         Next(); 
         ~Next(); 
-        void action(Game game);
+        void action(Game &);
 };
 
 #endif

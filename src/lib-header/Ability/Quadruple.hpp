@@ -9,7 +9,7 @@ class Quadruple : public Ability {
     public:
         Quadruple();
         ~Quadruple();
-        void action(Game game);
+        void action(Game& game);
 };  
 
 

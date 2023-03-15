@@ -13,7 +13,7 @@ Quarter::~Quarter() {
 }
 
 // Action
-void Quarter::action(Game game) {
+void Quarter::action(Game& game) {
     game.playerPointer.first->setAbilityUsed(true);
     game.reward /= DEVISORQ;
 }

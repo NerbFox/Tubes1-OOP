@@ -29,6 +29,7 @@ void Game::nextPlayer() {
         }
         playerPointer.first = playerQueue[i].first;
         playerPointer.second = i;
+        playerQueue[i].second = true;
     }
     else {
         Game::nextRound();
@@ -294,16 +295,16 @@ void Game::startGame() {
     distributeDeckCard();
     // belum set semua player ability = false ketika mulai game baru
 
-    cout << "Memulai Permainan ke-" << countPermainan+1 << endl;
+    cout << "\nMemulai Permainan ke-" << countPermainan+1 << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
-        cout << "\nRound : " << countRonde + 1;
-        cout << "  -  Poin Hadiah : " << reward << "\n\n";
         if (countRonde == 2) {
             cout << "Kartu ability telah dibagikan!\n";
             distributeAbilityCard();
         }
         
         for (int j = 0; j < MAX_PLAYER; j++) {
+            cout << "\nRound : " << countRonde + 1;
+            cout << "  -  Poin Hadiah : " << reward << "\n\n";            
             cout << "Giliran " << playerPointer.first->getName();
             cout << "  -  Poin Kamu : " << playerPointer.first->getPoint() << endl;
             cout << "Kamu memiliki kartu berikut:\n";

@@ -140,16 +140,15 @@ void Player::getCommand(Game& game) {
     try {
         if (enteredCmd == "DOUBLE" || enteredCmd == "HALF" || enteredCmd == "NEXT") {
             if (enteredCmd == "DOUBLE") {
-                cout << "double masuk\n";
                 nextCommand = new Double();
             } else if (enteredCmd == "HALF") {
                 nextCommand = new Half();
             } else {
                 nextCommand = new Next();
             } 
-            // nextCommand->action(game);
+            nextCommand->action(game);
             cout << endl << name << " melakukan "<< enteredCmd << "!\n"; 
-            // delete nextCommand;
+            delete nextCommand;
         } else if (enteredCmd == "ABILITYLESS" || enteredCmd == "QUADRUPLE" || enteredCmd == "QUARTER" || 
                 enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
                         if (isAbilityUsed()) {
@@ -158,7 +157,6 @@ void Player::getCommand(Game& game) {
                             throw InvalidInputException("Kamu tidak memiliki kartu tersebut!");
                         } else {
                             abilityCard->action(game);
-                            setAbilityUsed(true);
                             cout << endl << name << " melakukan "<< enteredCmd << "!\n";
                         }
                     }

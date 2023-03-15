@@ -10,6 +10,5 @@ Next::~Next(){
 
 }
 
-void Next::action(Game game){
-    game.nextPlayer();
+void Next::action(Game& game){
 }
