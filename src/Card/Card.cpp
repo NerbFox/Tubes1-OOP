@@ -25,7 +25,7 @@ int Card::getNumber() const {
 }
 
 void Card::printCard() const {
-    cout << "Number: " << number << ", Color: " << color << std::endl;
+    cout << "Angka: " << number << " warna: " << color << std::endl;
 }
 
 bool Card::isEmpty() const {

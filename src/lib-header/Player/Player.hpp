@@ -45,7 +45,8 @@ public:
     // pop player's normal card at certain index
     Card getNormalCard(int index);
     // request command input from the user and process it
-    void getCommand(Game game);        
+    void getCommand(Game& game);
+    Ability* getAbilityCard();
     // bool isAbilityUsed
     bool isAbilityUsed() const;
     

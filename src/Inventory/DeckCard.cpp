@@ -3,7 +3,7 @@
 #include <iostream>
 #include <random>
 #include <algorithm>
-#include <unordered_set>
+#include <set>
 
 using namespace std;
 
@@ -51,7 +51,7 @@ void DeckCard::fetchCardFromFile(const string filedir) {
   } 
   cek.close();
 
-  unordered_set<pair<string,int>> cardTaken;
+  set<pair<string,int>> cardTaken;
   input.open("../../test/" + filedir);
   while(!input.fail()){
     input >> num;

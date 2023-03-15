@@ -42,6 +42,7 @@ Player& Player::operator=(const Player& other) {
 
 // dtor
 Player::~Player() {
+    cout << "dtor player " << name << endl;
     delete abilityCard; 
     delete nextCommand;
 }
@@ -77,14 +78,17 @@ Card Player::getNormalCard(int index) {
     return normalCard.getCards()[index];
 }
 
+Ability* Player::getAbilityCard() {
+    return abilityCard;
+}
+
 // push card to player's normal card
 
 // set all of the combo that the player have
 void Player::setAllCombo(const vector<Combo>& _allCombo) {
     for (int i = 0; i < _allCombo.size(); i++) {
         allCombo.push_back(_allCombo[i]);
-    }
-    
+    }    
 } 
 
 // clear the combo that the player has
@@ -128,27 +132,34 @@ bool Player::operator<(const Player& otherPlayer) const {
     return temp1 < temp2;
 }
 
-void Player::getCommand(Game game) {
+void Player::getCommand(Game& game) {
     string enteredCmd;
-    cout << "Giliran "<< name <<". Masukkan command\n>>";
+    cout << "\nMasukkan perintah\n>> ";
     cin >> enteredCmd;
 
     try {
         if (enteredCmd == "DOUBLE" || enteredCmd == "HALF" || enteredCmd == "NEXT") {
             if (enteredCmd == "DOUBLE") {
+                cout << "double masuk\n";
                 nextCommand = new Double();
             } else if (enteredCmd == "HALF") {
                 nextCommand = new Half();
             } else {
                 nextCommand = new Next();
             } 
-            nextCommand->action(game);
-            delete nextCommand;
+            // nextCommand->action(game);
+            cout << endl << name << " melakukan "<< enteredCmd << "!\n"; 
+            // delete nextCommand;
         } else if (enteredCmd == "ABILITYLESS" || enteredCmd == "QUADRUPLE" || enteredCmd == "QUARTER" || 
                 enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
-
-                        if (enteredCmd == abilityCard->getType()) {
+                        if (isAbilityUsed()) {
+                            throw InvalidInputException("Kartu telah digunakan!");
+                        } else if (enteredCmd != abilityCard->getType()) {
+                            throw InvalidInputException("Kamu tidak memiliki kartu tersebut!");
+                        } else {
                             abilityCard->action(game);
+                            setAbilityUsed(true);
+                            cout << endl << name << " melakukan "<< enteredCmd << "!\n";
                         }
                     }
         else {

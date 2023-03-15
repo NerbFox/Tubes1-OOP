@@ -4,10 +4,10 @@ using namespace std;
 int main() {
   try {
     Game gameState;
-    gameState.fetchDeckOption();
+    gameState.startGame();
 
 
-    cout << "exit";
+    cout << "exiting...\n";
   } catch (const char* err) {
     cout << err;
   }
