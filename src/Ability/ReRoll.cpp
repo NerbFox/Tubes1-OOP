@@ -8,17 +8,13 @@ ReRoll::ReRoll() {
 // action
 void ReRoll::action(Game game) {
     // Throw 2 cards from player's main deck and take 2 cards again
-    // if (game.playerPointer->getMainDeck().getCardCount() < 2) {
-    //     cout << "You don't have enough card to use this ability" << endl;
-    //     return;
-    // }
-    // else {
     game.playerPointer.first->setAbilityUsed(true);
     int index = 0;
     
     // take 2 cards from the player's main deck
     Card card1 = game.playerPointer.first->getNormalCard(0);
     Card card2 = game.playerPointer.first->getNormalCard(1);
+    
     // take 2 cards from the deck and put it to the player's main deck
     game.playerPointer.first->setNormalCard(game.deckCard.getTopCard(), 0);
     game.deckCard-1;

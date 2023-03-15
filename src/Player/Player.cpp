@@ -25,17 +25,18 @@ using namespace std;
 Player::Player(string _name) : normalCard{}, name{_name}, point{0}, abilityCard{}, allCombo{}, AbilityUsed(false), nextCommand{} { }
 
 // cctor
-Player::Player(const Player& other) : name{other.name}, point{other.point}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}, nextCommand{} {
+Player::Player(const Player& other) : name{other.name}, point{other.point}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}, nextCommand{}, normalCard{other.normalCard}{
     setAllCombo(other.allCombo);
 }
 
-// cctor
+// copy assignment
 Player& Player::operator=(const Player& other) {
     name = other.name;
     point = other.point;
     AbilityUsed = other.AbilityUsed;
     abilityCard = other.abilityCard;
     setAllCombo(other.allCombo);
+    normalCard = other.normalCard;
     return *this;
 }
 

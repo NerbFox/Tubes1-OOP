@@ -101,6 +101,21 @@ class Game {
 
         // fetch player name
         void fetchPlayerName();
+        
+        // fetch deck sort option
+        void fetchDeckOption();
+
+        // shuffle ability card
+        void shuffleAbilityCard();
+
+        // shuffle deck card
+        void shuffleDeckCard();
+
+        // distribute ability card
+        void distributeAbilityCard();
+
+        // distribute deck card
+        void distributeDeckCard();
 };  
 
 // P2 P3 P4 P5 P6 P7 P1 <-

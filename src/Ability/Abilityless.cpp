@@ -34,6 +34,12 @@ void Abilityless::action(Game game) {
             cout << "\nPilih pemain: "; 
             cin >> pilihan;
             cout << endl;
+            // check if the input is an integer
+            if (cin.fail()) {
+                cin.clear();
+                cin.ignore(256,'\n');
+                throw NotIntegerException();
+            }
             game.setAbilityUsedPlayer(pilihan-1, true);
         }
         catch (const IndexNotValidException &err) {
@@ -41,6 +47,13 @@ void Abilityless::action(Game game) {
         }
         catch (const IndexOutOfBoundsException &err){
             cout << err.what() << endl;
+        }
+        catch (const NotIntegerException &err){
+            cout << err.what() << endl;
+        }
+        // if still error
+        catch(...){
+            cout << "Input tidak valid" << endl;
         }
     }
 }

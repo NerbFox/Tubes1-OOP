@@ -9,7 +9,7 @@ class BaseException {
     public : 
         virtual string what() const = 0; 
 };
-
+// input not valid cause input is not in the list
 class NamaPanjangException : public BaseException {
     private:
         int length;
@@ -18,7 +18,7 @@ class NamaPanjangException : public BaseException {
         ~NamaPanjangException();
         string what() const;
 };
-
+// input not valid cause input is not in the list
 class NamaDuplikatException : public BaseException {
     private: 
         string nama; 
@@ -28,7 +28,7 @@ class NamaDuplikatException : public BaseException {
         ~NamaDuplikatException();
         string what() const;
 };
-
+// input not valid cause index is out of bound
 class IndexOutOfBoundsException : public BaseException {
     private:
         int index;
@@ -38,7 +38,7 @@ class IndexOutOfBoundsException : public BaseException {
         ~IndexOutOfBoundsException();
         string what() const;
 };
-
+// index is not valid 
 class IndexNotValidException : public BaseException {
     private:
         int index;
@@ -47,8 +47,7 @@ class IndexNotValidException : public BaseException {
         ~IndexNotValidException();
         string what() const;
 };
-
-
+// input not valid cause input is not in the list
 class InvalidInputException : public BaseException {
     private:
         string input;
@@ -57,7 +56,7 @@ class InvalidInputException : public BaseException {
         ~InvalidInputException();
         string what() const;
 };
-
+// index not valid cause index is same
 class SameIndexException : public BaseException {
     private:
         int index;
@@ -66,12 +65,18 @@ class SameIndexException : public BaseException {
         ~SameIndexException();
         string what() const;
 };
-
 // input not valid cause user haven't input anything
 class EmptyInputException : public BaseException {
     public:
         EmptyInputException();
         ~EmptyInputException();
+        string what() const;
+};
+// input not interger
+class NotIntegerException : public BaseException {
+    public:
+        NotIntegerException();
+        ~NotIntegerException();
         string what() const;
 };
 

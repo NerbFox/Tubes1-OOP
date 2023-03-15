@@ -1,11 +1,14 @@
 #include "../lib-header/Game/Game.hpp"
 #include "../lib-header/Exception/Exception.hpp"
+#include <random>
+#include <algorithm>
 
 Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1){
     fetchPlayerName();
     playerPointer.first = &playerQueue[0].first;
     playerPointer.second = 0;
     playerQueue[0].second = true;
+    setAbilityCard();
 }
 
 Game::~Game(){
@@ -116,11 +119,6 @@ void Game::setAbilityCard(){
     abilityCardQueue.push_back(abilityCard6);
     abilityCardQueue.push_back(abilityCard7);
 
-    // Distribute ability card to player
-    for (int i = 0; i < MAX_PLAYER; i++){
-        playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
-    }
-
 }
 
 // set all ability card player
@@ -200,8 +198,81 @@ void Game::fetchPlayerName() {
     }
 }
 
-// int main() {
-//     cout << "test";
+void Game::fetchDeckOption() {
+    string input;
+    bool valid = false;
+    while (!valid) {
+        try {
+            cout << "\nUrutan kartu deck ingin diacak atau baca dari file?\n0 : random\n1 : baca dari file\n>> ";
+            cin >> input;
+            if (input=="0" || input=="1"){
+                valid = true;
+            }
+            else if (input.find_first_not_of("0123456789") != string::npos){
+                throw NotIntegerException();
+            }
+            else{
+                throw InvalidInputException("masukkan angka 0 atau 1");
+            }       
+        }
+        catch (const InvalidInputException& err) {
+            cout << err.what() << endl;
+        }
+        catch (const NotIntegerException& err) {
+            cout << err.what() << endl;
+        }
+    }
+    if (input == "0") {
+        deckCard.shuffleCard();
+    } else if (input == "1") {
+        string fildeir;
+        cout << "Letakkan file pada folder test\nMasukkan nama file (contoh: test1.txt)\n>> ";
+        cin >> fildeir;
+        deckCard.fetchCardFromFile(fildeir);
+    }
+}
 
-//     return 0;
-// }
+void Game::shuffleAbilityCard(){
+    // Create a vector of cards from the queue
+    std::vector<Ability*> cards;
+    while (!abilityCardQueue.empty()) {
+        cards.push_back(abilityCardQueue.front());
+        abilityCardQueue.pop_front();
+    }
+
+    // Shuffle the vector using the Fisher-Yates algorithm
+    random_device rd;
+    mt19937 gen(rd());
+    for (int i = cards.size() - 1; i > 0; --i) {
+        uniform_int_distribution<> dis(0, i);
+        int j = dis(gen);
+        swap(cards[i], cards[j]);
+    }
+
+    // Add the shuffled cards back to the queue
+    for (const auto& card : cards) {
+        abilityCardQueue.push_front(card);
+    }
+}
+
+void Game::shuffleDeckCard(){
+    this->deckCard.shuffleCard();
+}
+
+void Game::distributeAbilityCard(){
+    // shuffle ability card and distribute to player
+    this->shuffleAbilityCard(); 
+    for (int i = 0; i < MAX_PLAYER; i++){
+        playerQueue[i].first.setAbilityCard(abilityCardQueue[i]);
+    }
+}
+
+void Game::distributeDeckCard(){
+    // distribute deck card to player
+    for (int i = 0; i < MAX_PLAYER; i++){
+        playerQueue[i].first.setNormalCard(deckCard.getTopCard(), 0);
+        deckCard-1;
+        playerQueue[i].first.setNormalCard(deckCard.getTopCard(), 1);
+        deckCard-1;
+    }
+}

@@ -66,3 +66,12 @@ string EmptyInputException::what() const{
   string msg = "EmptyInputException : Input tidak valid, input tidak boleh kosong";
   return msg;
 }
+
+NotIntegerException::NotIntegerException(){}
+
+NotIntegerException::~NotIntegerException(){}
+
+string NotIntegerException::what() const{
+  string msg = "NotIntegerException : Input tidak valid, input bukan integer";
+  return msg;
+}
