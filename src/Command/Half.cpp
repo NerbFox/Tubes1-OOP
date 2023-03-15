@@ -1,5 +1,6 @@
 #include "../lib-header/Command/Half.hpp"
 #include "../lib-header/Game/Game.hpp"
+#include "../lib-header/Exception/Exception.hpp"
 
 // ctor
 Half::Half(){
@@ -11,5 +12,10 @@ Half::~Half(){
 }
 
 void Half::action(Game& game){
-    game.reward /= multipiler;
+    if (game.reward > 1){
+        game.reward /= multipiler;
+    }
+    else {
+        throw InvalidInputException("Poin telah mencapai minimum (1 poin)");
+    }
 }
