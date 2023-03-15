@@ -50,6 +50,7 @@ class Combo : public BaseCard {
 
         void computeValue();
 
+        void sortAllCombo();
         
     // 1 kartu
     // High card

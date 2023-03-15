@@ -76,7 +76,7 @@ void Combo::checkPair() {
         if (it->second == 2) {
             vector<Card> pairSetCard;
             int numCheck = it->first;
-            copy_if(finalSetCard.begin(), finalSetCard.end(), pairSetCard.begin(), [numCheck](int num){ return num == numCheck; });
+            copy_if(finalSetCard.begin(), finalSetCard.end(), back_inserter(pairSetCard), [numCheck](Card c){ return c.getNumber() == numCheck; });
             float valuePair = pairSetCard[0].getNumber() + colorCode[pairSetCard[0].getColor()] * 0.33 + colorCode[pairSetCard[1].getColor()] * 0.0033;
             allCombo.push_back(make_tuple(pairSetCard, 2, valuePair));
         }
@@ -89,7 +89,7 @@ void Combo::checkThreeOfAKind() {
         if (it->second == 3) {
             vector<Card> threeSetCard;
             int numCheck = it->first;
-            copy_if(finalSetCard.begin(), finalSetCard.end(), threeSetCard.begin(), [numCheck](int num){ return num == numCheck; });
+            copy_if(finalSetCard.begin(), finalSetCard.end(), back_inserter(threeSetCard), [numCheck](Card c){ return c.getNumber() == numCheck; });
             float valuePair = threeSetCard[0].getNumber();
             allCombo.push_back(make_tuple(threeSetCard, 4, valuePair));
         }
@@ -102,7 +102,7 @@ void Combo::checkFourOfAKind() {
         if (it->second == 4) {
             vector<Card> fourSetCard;
             int numCheck = it->first;
-            copy_if(finalSetCard.begin(), finalSetCard.end(), fourSetCard.begin(), [numCheck](int num){ return num == numCheck; });
+            copy_if(finalSetCard.begin(), finalSetCard.end(), back_inserter(fourSetCard), [numCheck](Card c){ return c.getNumber() == numCheck; });
             float valuePair = fourSetCard[0].getNumber();
             allCombo.push_back(make_tuple(fourSetCard, 8, valuePair));
         }
@@ -125,6 +125,10 @@ bool Combo::isFlush(vector<Card> fiveSetCard) {
         }
     }
     return true;
+}
+
+void Combo::sortAllCombo() {
+    
 }
 
 void Combo::checkStraightAndFlush() {
@@ -200,7 +204,10 @@ void Combo::checkStraightAndFlush() {
 }
 
 void Combo::checkTwoPair() {
-    
+    map<int, int> freqCombo = getComboFreq();
+    if (freqCombo[2] > 1) {
+
+    }
 }
 
 // INCOMPLETE
