@@ -4,7 +4,7 @@
 
 Switch::Switch()
 {
-    Ability::setType("SWICTH");
+    Ability::setType("SWITCH");
 }
 
 // action
@@ -24,22 +24,23 @@ void Switch::action(Game& game)
     int indeksPemain = game.getIndexPlayerPointer();
     for (auto currentPair : game.playerQueue) {
         cout << i << ". " <<  currentPair.first->getName() << endl;
+        i++;
     }
-    while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
+    while (pilihan>7 || pilihan<1 || pilihan-1 == indeksPemain) {
         try {
             cout << "\nPilih pemain: "; 
             cin >> pilihan;
             cout << endl;
-            if (pilihan>7 || pilihan<1 ) {
-                throw IndexOutOfBoundsException(pilihan, 7);
-            }
-            if (pilihan == indeksPemain) {
-                throw IndexNotValidException(pilihan);
-            }
             if (cin.fail()) {
                 cin.clear();
                 cin.ignore(256,'\n');
                 throw NotIntegerException();
+            }
+            else if (pilihan>7 || pilihan<1 ) {
+                throw IndexOutOfBoundsException(pilihan, 7);
+            }
+            else if (pilihan-1 == indeksPemain) {
+                throw IndexNotValidException(pilihan);
             }
         }
         catch (const IndexNotValidException &err) {
@@ -70,4 +71,10 @@ void Switch::action(Game& game)
     cout << "2. ";
     game.playerPointer.first->getNormalCard(1).printCard();
     cout << endl;
+    // cin.clear();
+    // input anyting to continue
+    cout << "Tekan enter untuk melanjutkan" << endl;
+    string input;
+    getline(cin, input);
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

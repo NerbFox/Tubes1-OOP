@@ -27,9 +27,10 @@ void Abilityless::action(Game& game) {
     cout << "Silahkan pilih pemain yang kartu abilitynya ingin dimatikan:\n";
     for (auto currentPair : game.playerQueue) {
         cout << i << ". " <<  currentPair.first->getName() << endl;
+        i++;
     }
     pilihan = 0;
-    while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
+    while (pilihan>7 || pilihan<1 || pilihan-1 == indeksPemain) {
         try {
             cout << "\nPilih pemain: "; 
             cin >> pilihan;
@@ -40,7 +41,12 @@ void Abilityless::action(Game& game) {
                 cin.ignore(256,'\n');
                 throw NotIntegerException();
             }
-            game.setAbilityUsedPlayer(pilihan-1, true);
+            else if (pilihan>7 || pilihan<1) {
+                throw IndexOutOfBoundsException(pilihan, 7);
+            }
+            else if (pilihan-1 == indeksPemain) {
+                throw IndexNotValidException(pilihan);
+            }
         }
         catch (const IndexNotValidException &err) {
             cout << err.what() << endl;
@@ -56,4 +62,5 @@ void Abilityless::action(Game& game) {
             cout << "Input tidak valid" << endl;
         }
     }
+    game.setAbilityUsedPlayer(pilihan-1, true);
 }
