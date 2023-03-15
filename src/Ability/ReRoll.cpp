@@ -24,4 +24,7 @@ void ReRoll::action(Game& game) {
     // put the card back to the deck
     game.deckCard+(card1);
     game.deckCard+(card2);
+
+    // print the result
+    cout << "Kamu berhasil mendapatkan " << game.playerPointer.first->getNormalCard(0).getNumber() << " " << game.playerPointer.first->getNormalCard(0).getColor() << " dan " << game.playerPointer.first->getNormalCard(1).getNumber() << " " << game.playerPointer.first->getNormalCard(1).getColor() << endl;
 }
