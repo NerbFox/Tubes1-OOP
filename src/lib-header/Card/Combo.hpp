@@ -8,23 +8,50 @@
 
 class Player;
 
-class Combo : public BaseCard {
+class IndividualCombo : public BaseCard {
     private:
         int comboId;
         vector<Card> cardCombo;
-        vector<Card> finalSetCard;
-        vector<tuple<vector<Card>, int, float>> allCombo;
-
     public:
-        Combo(int comboId, Player player, TableCard tableCard);
+        IndividualCombo();
 
-        Combo(const Combo& other);
+        IndividualCombo(int);
+
+        IndividualCombo(const IndividualCombo&);
 
         int getComboId();
 
+        vector<Card> getCardCombo();
+
+        void insertCardCombo(const vector<Card>);
+
+        bool operator<(const IndividualCombo&);
+
+        bool operator>(const IndividualCombo&);
+
+        bool operator==(const IndividualCombo&);
+
+        bool operator!=(const IndividualCombo&);
+
+        void computeValue();
+
+};
+
+class Combo {
+    private:
+        float valueMax;
+        vector<Card> finalSetCard;
+        // vector<tuple<vector<Card>, int, float>> allCombo;
+        vector<IndividualCombo> allCombo;
+
+    public:
+        Combo(Player player, TableCard tableCard);
+
+        Combo(const Combo& other);
+
         vector<Card> getFinalSetCard();
 
-        vector<tuple<vector<Card>, int, float>> getAllCombo();
+        vector<IndividualCombo> getAllCombo();
 
         map<int, int> getCardFreqByNumber();
 
