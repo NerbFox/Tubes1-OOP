@@ -10,6 +10,7 @@ Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(0), countRond
     playerQueue[0].second = true;
     setAbilityCard();
     cout << "\nGame is starting...\n";
+    system("clear");
 }
 
 Game::~Game(){
@@ -159,15 +160,18 @@ int Game::getIndexPlayerPointer(){
 void Game::fetchPlayerName() {
     bool valid;
     unordered_set<string> nameTaken;
+    // remove output that have been printed before
+    system("clear");
     cout << "====================Candy Kingdom Card Game====================\n";
-    cout << "Masukkan nama untuk semua player. Tiap player harus memiliki nama yang berbeda\n";
+    cout << "Masukkan nama untuk semua player\n";
+    cout << "Setiap player harus memiliki nama yang berbeda\n";
     for (int i = 0; i < MAX_PLAYER; i++){
         valid = false;
         string input;
 
         while (!valid){ 
             try{
-                cout << "Masukkan nama untuk player-" << i+1 << ": ";
+                cout << "Nama player-" << i+1 << ": ";
                 getline(cin, input);
                 // remove space in the front
                 while (input[0] == ' '){
@@ -253,6 +257,7 @@ void Game::fetchDeckOption() {
                 }
                 // shuffle ability card
                 shuffleAbilityCard();
+                system("clear");
             }
         }
     }
@@ -309,19 +314,19 @@ void Game::startGame() {
     fetchDeckOption();
     distributeDeckCard();
     // belum set semua player ability = false ketika mulai game baru
-
+    cout << "\n====================Candy Kingdom Card Game====================\n";
     cout << "\nMemulai Permainan ke-" << countPermainan+1 << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
         if (countRonde == 1) {
-            cout << "Kartu ability telah dibagikan!\n";
+            cout << "\nKartu ability telah dibagikan!\n";
             distributeAbilityCard();
         }
         
         for (int j = 0; j < MAX_PLAYER; j++) {
-            cout << "\nRound : " << countRonde + 1;
-            cout << "  -  Poin Hadiah : " << reward << "\n\n";            
-            cout << "Giliran " << playerPointer.first->getName();
-            cout << "  -  Poin Kamu : " << playerPointer.first->getPoint() << endl;
+            cout << "\n==========================Ronde ke-"  << countRonde+1 << "==========================\n";
+            cout << "Poin Hadiah : " << reward << "\n\n";            
+            cout << "Giliran " << playerPointer.first->getName() << endl;
+            cout << "Poin Kamu : " << playerPointer.first->getPoint() << endl;
             cout << "Kamu memiliki kartu berikut:\n";
             cout << "1. ";
             playerPointer.first->getNormalCard(0).printCard();

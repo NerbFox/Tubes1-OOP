@@ -64,5 +64,7 @@ void Switch::action(Game& game)
     game.playerQueue[pilihan].first->setNormalCard(card2, 1);
     cout << "Kartu berhasil ditukar" << endl;
     // print the result
-    cout << "Kamu berhasil mendapatkan " << game.playerPointer.first->getNormalCard(0).getNumber() << " " << game.playerPointer.first->getNormalCard(0).getColor() << " dan " << game.playerPointer.first->getNormalCard(1).getNumber() << " " << game.playerPointer.first->getNormalCard(1).getColor() << endl;
+    cout << "Kamu berhasil mendapatkan : " << endl; 
+    cout << "1. " <<game.playerPointer.first->getNormalCard(0).getNumber() << " " << game.playerPointer.first->getNormalCard(0).getColor() << endl; 
+    cout << "2. " << game.playerPointer.first->getNormalCard(1).getNumber() << " " << game.playerPointer.first->getNormalCard(1).getColor() << endl;
 }
