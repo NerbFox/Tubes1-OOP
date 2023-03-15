@@ -4,12 +4,10 @@ using namespace std;
 int main() {
   try {
     Game gameState;
-    int n = gameState.deckCard.getLength();
-    gameState.deckCard.shuffleCard();
     gameState.fetchDeckOption();
 
 
-
+    cout << "exit";
   } catch (const char* err) {
     cout << err;
   }

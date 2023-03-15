@@ -20,10 +20,10 @@ void Swap::action(Game game){
     int pilihanKartuP1 = 0;
     int pilihanKartuP2 = 0;
     for (auto currentPair : game.playerQueue) {
-        if (currentPair.first.getName() != game.playerPointer.first->getName()) {
+        if (currentPair.first->getName() != game.playerPointer.first->getName()) {
             indeksPemain = i-1;
         }
-        cout << i << ". " <<  currentPair.first.getName() << endl;
+        cout << i << ". " <<  currentPair.first->getName() << endl;
     }
     
     while (pilihanP1>7 || pilihanP1<1 || pilihanP1 == indeksPemain) {
@@ -141,9 +141,9 @@ void Swap::action(Game game){
         }
     }
     pilihanKartuP1--; pilihanKartuP2--; pilihanP1--; pilihanP2--;
-    Card card1 = game.playerQueue[pilihanP1].first.getNormalCard(pilihanKartuP1);
-    Card card2 = game.playerQueue[pilihanP2].first.getNormalCard(pilihanKartuP2);
+    Card card1 = game.playerQueue[pilihanP1].first->getNormalCard(pilihanKartuP1);
+    Card card2 = game.playerQueue[pilihanP2].first->getNormalCard(pilihanKartuP2);
     // cek apakah kartu yang di ubah adalah kartu yang dipilih
-    game.playerQueue[pilihanP1].first.setNormalCard(card2, pilihanKartuP1);
-    game.playerQueue[pilihanP2].first.setNormalCard(card1, pilihanKartuP2);
+    game.playerQueue[pilihanP1].first->setNormalCard(card2, pilihanKartuP1);
+    game.playerQueue[pilihanP2].first->setNormalCard(card1, pilihanKartuP2);
 }

@@ -23,7 +23,7 @@ void Switch::action(Game game)
     int i = 1;
     int indeksPemain = game.getIndexPlayerPointer();
     for (auto currentPair : game.playerQueue) {
-        cout << i << ". " <<  currentPair.first.getName() << endl;
+        cout << i << ". " <<  currentPair.first->getName() << endl;
     }
     while (pilihan>7 || pilihan<1 || pilihan == indeksPemain) {
         try {
@@ -56,11 +56,11 @@ void Switch::action(Game game)
     pilihan--;
     Card card1 = game.playerPointer.first->getNormalCard(0);
     Card card2 = game.playerPointer.first->getNormalCard(1);
-    Card card3 = game.playerQueue[pilihan].first.getNormalCard(0);
-    Card card4 = game.playerQueue[pilihan].first.getNormalCard(1);
+    Card card3 = game.playerQueue[pilihan].first->getNormalCard(0);
+    Card card4 = game.playerQueue[pilihan].first->getNormalCard(1);
     game.playerPointer.first->setNormalCard(card3, 0);
     game.playerPointer.first->setNormalCard(card4, 1);
-    game.playerQueue[pilihan].first.setNormalCard(card1, 0);
-    game.playerQueue[pilihan].first.setNormalCard(card2, 1);
+    game.playerQueue[pilihan].first->setNormalCard(card1, 0);
+    game.playerQueue[pilihan].first->setNormalCard(card2, 1);
 
 }
