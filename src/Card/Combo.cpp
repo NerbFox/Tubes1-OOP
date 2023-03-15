@@ -5,7 +5,85 @@
 #include <algorithm>
 using namespace std;
 
-Combo::Combo(int comboId, Player player, TableCard tableCard) : comboId(comboId) {
+IndividualCombo::IndividualCombo() : comboId(0) {}
+
+IndividualCombo::IndividualCombo(int comboId) : comboId(comboId) {}
+
+int IndividualCombo::getComboId() {
+    return comboId;
+}
+
+vector<Card> IndividualCombo::getCardCombo() {
+    return cardCombo;
+}
+
+void IndividualCombo::insertCardCombo(const vector<Card> vecCard) {
+    copy(vecCard.begin(), vecCard.end(), back_inserter(cardCombo));
+}
+
+bool IndividualCombo::operator<(const IndividualCombo& other) {
+    if (comboId < other.comboId) {
+        return true;
+    } else if (comboId > other.comboId) {
+        return false;
+    } else {
+        return value < other.value;
+    }
+}
+
+bool IndividualCombo::operator>(const IndividualCombo& other) {
+    if (comboId > other.comboId) {
+        return true;
+    } else if (comboId < other.comboId) {
+        return false;
+    } else {
+        return value > other.value;
+    }
+}
+
+bool IndividualCombo::operator==(const IndividualCombo& other) {
+    return comboId == other.comboId && value == other.value;
+}
+
+bool IndividualCombo::operator!=(const IndividualCombo& other) {
+    if (comboId == other.comboId) {
+        if (cardCombo.size() == other.cardCombo.size()) {
+            for (int i = 0; i < cardCombo.size(); i++) {
+                if (cardCombo[i] != other.cardCombo[i]) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    return true;
+}
+
+void IndividualCombo::computeValue() {
+    if (comboId == 2) { // pair
+        value = cardCombo[0].getNumber() + colorCode[cardCombo[0].getColor()] * 0.33 + colorCode[cardCombo[1].getColor()] * 0.0033;
+    } else if (comboId == 3) { // two pair
+        value = cardCombo[0].getNumber();
+    } else if (comboId == 4) { // three of a kind
+        value = cardCombo[0].getNumber();
+    } else if (comboId == 5) { // straight
+        value = cardCombo[0].getNumber();
+    } else if (comboId == 6) { // flush
+        for (int i = 0; i < cardCombo.size(); i++) {
+            value += cardCombo[cardCombo.size() - 1 - i].getNumber() * (pow(100, i));
+        }   
+        value += colorCode[cardCombo[0].getColor()] * 0.33;
+    } else if (comboId == 7) { // full house
+        // map<int, int> freqNum = getCardFreqByNumber();
+        // value = 0;
+    } else if (comboId == 8) { // four of a kind
+        value = cardCombo[0].getNumber();
+    } else if (comboId == 9) { // straight flush
+        value = cardCombo[0].getNumber() + colorCode[cardCombo[0].getColor()] * 0.33;
+    }
+}
+
+Combo::Combo(Player player, TableCard tableCard) : valueMax(valueMax) {
     for (int i = 0; i < 2; i++) {
         finalSetCard.push_back(player.getNormalCard(i));
     }
@@ -17,20 +95,15 @@ Combo::Combo(int comboId, Player player, TableCard tableCard) : comboId(comboId)
 }
 
 Combo::Combo(const Combo& other) {
-    value = other.value;
-    comboId = other.comboId;
+    valueMax = other.valueMax;
     finalSetCard = other.finalSetCard;
-}
-
-int Combo::getComboId() {
-    return comboId;
 }
 
 vector<Card> Combo::getFinalSetCard() {
     return finalSetCard;
 }
 
-vector<tuple<vector<Card>, int, float>> Combo::getAllCombo() {
+vector<IndividualCombo> Combo::getAllCombo() {
     return allCombo;
 }
 
@@ -61,10 +134,10 @@ map<string, int> Combo::getCardFreqByColor() {
 map<int, int> Combo::getComboFreq() {
     map<int, int> freqCombo;
     for (int i = 0; i < allCombo.size(); i++) {
-        if (freqCombo.find(get<1>(allCombo[i])) == freqCombo.end()) {
-            freqCombo[get<1>(allCombo[i])] = 1;
+        if (freqCombo.find(allCombo[i].getComboId()) == freqCombo.end()) {
+            freqCombo[allCombo[i].getComboId()] = 1;
         } else {
-            freqCombo[get<1>(allCombo[i])]++;
+            freqCombo[allCombo[i].getComboId()]++;
         }
     }
     return freqCombo;
@@ -74,11 +147,13 @@ void Combo::checkPair() {
     map<int, int> freqNum = getCardFreqByNumber();
     for (auto it = freqNum.begin(); it != freqNum.end(); it++) {
         if (it->second == 2) {
+            IndividualCombo combo(2);
             vector<Card> pairSetCard;
             int numCheck = it->first;
             copy_if(finalSetCard.begin(), finalSetCard.end(), back_inserter(pairSetCard), [numCheck](Card c){ return c.getNumber() == numCheck; });
-            float valuePair = pairSetCard[0].getNumber() + colorCode[pairSetCard[0].getColor()] * 0.33 + colorCode[pairSetCard[1].getColor()] * 0.0033;
-            allCombo.push_back(make_tuple(pairSetCard, 2, valuePair));
+            combo.insertCardCombo(pairSetCard);
+            combo.computeValue();
+            allCombo.push_back(combo);
         }
     }
 }
@@ -87,11 +162,13 @@ void Combo::checkThreeOfAKind() {
     map<int, int> freqNum = getCardFreqByNumber();
     for (auto it = freqNum.begin(); it != freqNum.end(); it++) {
         if (it->second == 3) {
+            IndividualCombo combo(4);
             vector<Card> threeSetCard;
             int numCheck = it->first;
             copy_if(finalSetCard.begin(), finalSetCard.end(), back_inserter(threeSetCard), [numCheck](Card c){ return c.getNumber() == numCheck; });
-            float valuePair = threeSetCard[0].getNumber();
-            allCombo.push_back(make_tuple(threeSetCard, 4, valuePair));
+            combo.insertCardCombo(threeSetCard);
+            combo.computeValue();
+            allCombo.push_back(combo);
         }
     }
 }
@@ -100,11 +177,13 @@ void Combo::checkFourOfAKind() {
     map<int, int> freqNum = getCardFreqByNumber();
     for (auto it = freqNum.begin(); it != freqNum.end(); it++) {
         if (it->second == 4) {
+            IndividualCombo combo(8);
             vector<Card> fourSetCard;
             int numCheck = it->first;
             copy_if(finalSetCard.begin(), finalSetCard.end(), back_inserter(fourSetCard), [numCheck](Card c){ return c.getNumber() == numCheck; });
-            float valuePair = fourSetCard[0].getNumber();
-            allCombo.push_back(make_tuple(fourSetCard, 8, valuePair));
+            combo.insertCardCombo(fourSetCard);
+            combo.computeValue();
+            allCombo.push_back(combo);
         }
     }
 }
@@ -127,10 +206,6 @@ bool Combo::isFlush(vector<Card> fiveSetCard) {
     return true;
 }
 
-void Combo::sortAllCombo() {
-    
-}
-
 void Combo::checkStraightAndFlush() {
     
     vector<Card> fiveSetCard;
@@ -147,18 +222,20 @@ void Combo::checkStraightAndFlush() {
                         fiveSetCard.push_back(finalSetCard[m]);
 
                         if (isStraight(fiveSetCard) && isFlush(fiveSetCard)) {
-                            float valueSet = fiveSetCard[0].getNumber() + colorCode[fiveSetCard[0].getColor()] * 0.33;
-                            allCombo.push_back(make_tuple(fiveSetCard, 9, valueSet));
+                            IndividualCombo newCombo(9);
+                            newCombo.insertCardCombo(fiveSetCard);
+                            newCombo.computeValue();
+                            allCombo.push_back(newCombo);
                         } else if (isStraight(fiveSetCard)) {
-                            float valueSet = fiveSetCard[0].getNumber();
-                            allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
+                            IndividualCombo newCombo(5);
+                            newCombo.insertCardCombo(fiveSetCard);
+                            newCombo.computeValue();
+                            allCombo.push_back(newCombo);
                         } else if (isFlush(fiveSetCard)) {
-                            float valueSet = 0.0f;
-                            for (int i = 0; i < fiveSetCard.size(); i++) {
-                                value += fiveSetCard[fiveSetCard.size() - 1 - i].getNumber() * (pow(100, i));
-                            }   
-                            valueSet += colorCode[fiveSetCard[0].getColor()] * 0.33;
-                            allCombo.push_back(make_tuple(fiveSetCard, 6, valueSet));
+                            IndividualCombo newCombo(6);
+                            newCombo.insertCardCombo(fiveSetCard);
+                            newCombo.computeValue();
+                            allCombo.push_back(newCombo);
                         }
                         
                         fiveSetCard.pop_back();
@@ -171,90 +248,55 @@ void Combo::checkStraightAndFlush() {
         }
         fiveSetCard.pop_back();
     }
-    
-    // for (int i = 0; i < finalSetCard.size() - 4; i++) {
-    //     bool isStraight = true;
-    //     bool isFlush = true;
-    //     vector<Card> fiveSetCard;
-    //     for (int j = 0; j < finalSetCard.size() - 1; j++) {
-    //         if (finalSetCard[j].getNumber() <= finalSetCard[j + 1].getNumber()) {
-    //             isStraight = false;
-    //         }
-    //         if (finalSetCard[j].getColor() != finalSetCard[j + 1].getColor()) {
-    //             isFlush = false;
-    //         }
-    //         fiveSetCard.push_back(finalSetCard[j]);
-    //     }
-
-    //     if (isStraight && isFlush) {
-    //         float valueSet = fiveSetCard[0].getNumber() + colorCode[fiveSetCard[0].getColor()] * 0.33;
-    //         allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
-    //     } else if (isStraight) {
-    //         float valueSet = fiveSetCard[0].getNumber();
-    //         allCombo.push_back(make_tuple(fiveSetCard, 5, valueSet));
-    //     } else if (isFlush) {
-    //         float valueSet = 0.0f;
-    //         for (int i = 0; i < fiveSetCard.size(); i++) {
-    //             value += fiveSetCard[fiveSetCard.size() - 1 - i].getNumber() * (pow(100, i));
-    //         }   
-    //         valueSet += colorCode[fiveSetCard[0].getColor()] * 0.33;
-    //         allCombo.push_back(make_tuple(fiveSetCard, 6, valueSet));
-    //     }
-    // }
 }
 
 void Combo::checkTwoPair() {
     map<int, int> freqCombo = getComboFreq();
     if (freqCombo[2] > 1) {
+        sort(allCombo.begin(), allCombo.end(), [](IndividualCombo combo1, IndividualCombo combo2){ return combo1 > combo2; });
+        vector<IndividualCombo> pairComboVec;
+        copy_if(allCombo.begin(), allCombo.end(), back_inserter(pairComboVec), [](IndividualCombo combo){ return combo.getComboId() == 2; });
 
-    }
-}
-
-// INCOMPLETE
-// void getAllCardCombination(vector<Card> setCard) {
-
-// }
-
-// void combinationUtil(vector<Card> setCard, int comboSize, int index, vector<Card> temp, int i) {
-//     if (index == comboSize) {
+        sort(pairComboVec.begin(), pairComboVec.end(), [](IndividualCombo combo1, IndividualCombo combo2){ return combo1 > combo2; });
         
-//         return;
-//     }
-
-//     if (i >= setCard.size())
-//         return;
- 
-//     temp[index] = setCard[i];
-//     combinationUtil(setCard, comboSize, index + 1, temp, i + 1);
-//     combinationUtil(setCard, comboSize, index, temp, i + 1);
-// }
- 
-// void printCombination(vector<Card> setCard, int n, int comboSize) {
-//     vector<Card> temp(comboSize);
-//     combinationUtil(setCard, comboSize, 0, temp, 0);
-// }
-
-// INCOMPLETE
-void Combo::computeValue() {
-    if (comboId == 2) { // pair
-        value = cardCombo[0].getNumber() + colorCode[cardCombo[0].getColor()] * 0.33 + colorCode[cardCombo[1].getColor()] * 0.0033;
-    } else if (comboId == 3) { // two pair
-        value = cardCombo[0].getNumber();
-    } else if (comboId == 4) { // three of a kind
-        value = cardCombo[0].getNumber();
-    } else if (comboId == 5) { // straight
-        value = cardCombo[0].getNumber();
-    } else if (comboId == 6) { // flush
-        for (int i = 0; i < cardCombo.size(); i++) {
-            value += cardCombo[cardCombo.size() - 1 - i].getNumber() * (pow(100, i));
-        }   
-        value += colorCode[cardCombo[0].getColor()] * 0.33;
-    } else if (comboId == 7) { // full house
-        map<int, int> freqNum = getCardFreqByNumber();
-        value = 0;
-    } else if (comboId == 8) { // four of a kind
-        value = cardCombo[0].getNumber();
-    } else if (comboId == 9) { // straight flush
-        value = cardCombo[0].getNumber() + colorCode[cardCombo[0].getColor()] * 0.33;
+        do {
+            IndividualCombo newCombo(3);
+            vector<Card> tempContainer;
+            for (int i = 0; i < pairComboVec.size(); i++) {
+                copy(pairComboVec[i].getCardCombo().begin(), pairComboVec[i].getCardCombo().end(), back_inserter(tempContainer));
+            }
+            newCombo.insertCardCombo(tempContainer);
+            newCombo.computeValue();
+            allCombo.push_back(newCombo);
+        } while (next_permutation(pairComboVec.begin(), pairComboVec.end()) && pairComboVec[1] != pairComboVec[pairComboVec.size() - 1]);
     }
 }
+
+void Combo::checkFullHouse() {
+    map<int, int> freqCombo = getComboFreq();
+    if (freqCombo.find(2) != freqCombo.end() && freqCombo.find(4) != freqCombo.end()) {
+        sort(allCombo.begin(), allCombo.end(), [](IndividualCombo combo1, IndividualCombo combo2){ return combo1 > combo2; });
+        vector<IndividualCombo> pairComboVec;
+        vector<IndividualCombo> threeComboVec;
+        copy_if(allCombo.begin(), allCombo.end(), back_inserter(pairComboVec), [](IndividualCombo combo){ return combo.getComboId() == 2; });
+        copy_if(allCombo.begin(), allCombo.end(), back_inserter(threeComboVec), [](IndividualCombo combo){ return combo.getComboId() == 4; });
+        for (int i = 0; i < threeComboVec.size(); i++) {
+            IndividualCombo newCombo(7);
+            vector<Card> tempContainer;
+            for (int j = 0; j < pairComboVec.size(); i++) {
+                copy(threeComboVec[i].getCardCombo().begin(), threeComboVec[i].getCardCombo().end(), back_inserter(tempContainer));
+                copy(pairComboVec[i].getCardCombo().begin(), pairComboVec[i].getCardCombo().end(), back_inserter(tempContainer));
+            }
+            newCombo.insertCardCombo(tempContainer);
+            newCombo.computeValue();
+            allCombo.push_back(newCombo);
+        }
+    }
+}
+
+// void Combo::generateHighCard() {
+//     for (int i = 0; i < finalSetCard.size(); i++) {
+//         IndividualCombo newCombo(1);
+        
+//     }
+// }

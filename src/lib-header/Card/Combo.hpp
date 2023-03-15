@@ -75,9 +75,9 @@ class Combo {
 
         bool isFlush(vector<Card>);
 
-        void computeValue();
+        // void generateHighCard();
 
-        void sortAllCombo();
+        void computeMaxValue();
         
     // 1 kartu
     // High card
