@@ -17,8 +17,6 @@ class IndividualCombo : public BaseCard {
 
         IndividualCombo(int);
 
-        IndividualCombo(const IndividualCombo&);
-
         int getComboId();
 
         vector<Card> getCardCombo();
