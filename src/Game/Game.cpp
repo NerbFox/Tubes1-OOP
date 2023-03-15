@@ -3,12 +3,13 @@
 #include <random>
 #include <algorithm>
 
-Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(1), countRonde(1), abilityCardQueue{}{
+Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(0), countRonde(0), abilityCardQueue{}{
     fetchPlayerName();
     playerPointer.first = playerQueue[0].first;
     playerPointer.second = 0;
     playerQueue[0].second = true;
     setAbilityCard();
+    cout << "\nGame is starting...\n";
 }
 
 Game::~Game(){
@@ -28,6 +29,7 @@ void Game::nextPlayer() {
         }
         playerPointer.first = playerQueue[i].first;
         playerPointer.second = i;
+        playerQueue[i].second = true;
     }
     else {
         Game::nextRound();
@@ -51,7 +53,7 @@ void Game::nextRound(){
         countRonde++;
         // kondisional untuk round 2
             // Random methodnya udh ada blom ya ? 
-        if (countRonde == 2){
+        if (countRonde == 1){
             setAbilityCard();
         }
         // Kondisional untuk round selain 2
@@ -240,9 +242,7 @@ void Game::fetchDeckOption() {
         shuffleAbilityCard();
     }
     // distribute deck cards to players
-    cout << "test5\n";
     distributeDeckCard();
-    cout << "test6\n";
 }
 
 void Game::shuffleAbilityCard(){
@@ -288,4 +288,43 @@ void Game::distributeDeckCard(){
         playerQueue[i].first->setNormalCard(deckCard.getTopCard(), 1);
         deckCard-1;
     }
+}
+
+void Game::startGame() {
+    fetchDeckOption();
+    distributeDeckCard();
+    // belum set semua player ability = false ketika mulai game baru
+
+    cout << "\nMemulai Permainan ke-" << countPermainan+1 << endl;
+    for (int i = 0; i < MAX_ROUND; i++) {
+        if (countRonde == 2) {
+            cout << "Kartu ability telah dibagikan!\n";
+            distributeAbilityCard();
+        }
+        
+        for (int j = 0; j < MAX_PLAYER; j++) {
+            cout << "\nRound : " << countRonde + 1;
+            cout << "  -  Poin Hadiah : " << reward << "\n\n";            
+            cout << "Giliran " << playerPointer.first->getName();
+            cout << "  -  Poin Kamu : " << playerPointer.first->getPoint() << endl;
+            cout << "Kamu memiliki kartu berikut:\n";
+            cout << "1. ";
+            playerPointer.first->getNormalCard(0).printCard();
+            cout << "2. ";
+            playerPointer.first->getNormalCard(1).printCard();
+            if (countRonde >= 1) {
+                cout << "Ability : " << playerPointer.first->getAbilityCard()->getType() << " - " ;
+                if (playerPointer.first->isAbilityUsed()){
+                    cout << "bisa digunakan\n";
+                } else {
+                    cout << "tidak bisa digunakan\n";
+                }
+            }
+            playerPointer.first->getCommand(*this);
+            nextPlayer();
+        }
+    }
+
+
+
 }

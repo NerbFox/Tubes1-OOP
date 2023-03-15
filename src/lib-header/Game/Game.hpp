@@ -44,7 +44,7 @@ class Game {
         pair<Player*,int> playerPointer; 
 
         const int MAX_PLAYER = 7;
-        const int MAX_ROUND = 6;
+        const int MAX_ROUND = 7;
         const long long MAX_POINT = 4294967296; //2 ^ 32         
 
     public : 

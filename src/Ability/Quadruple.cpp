@@ -13,7 +13,7 @@ Quadruple::~Quadruple() {
 }
 
 // Action
-void Quadruple::action(Game game) {
+void Quadruple::action(Game& game) {
     game.playerPointer.first->setAbilityUsed(true);
     game.reward *= FACTORQ; 
 }

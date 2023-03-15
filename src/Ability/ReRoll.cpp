@@ -6,7 +6,7 @@ ReRoll::ReRoll() {
 }
 
 // action
-void ReRoll::action(Game game) {
+void ReRoll::action(Game& game) {
     // Throw 2 cards from player's main deck and take 2 cards again
     game.playerPointer.first->setAbilityUsed(true);
     int index = 0;

@@ -25,7 +25,7 @@ class Ability : public Command {
         // setter
         void setType(string type);
         // action
-        virtual void action(Game) = 0;
+        virtual void action(Game &) = 0;
         // virtual void action(Player) = 0;
 };  
 

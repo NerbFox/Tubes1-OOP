@@ -9,7 +9,7 @@ class ReRoll : public Ability {
         ReRoll();
         ~ReRoll();
         // action
-        void action(Game game);
+        void action(Game& game);
 };  
 
 

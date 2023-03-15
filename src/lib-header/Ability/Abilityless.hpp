@@ -14,7 +14,7 @@ class Abilityless : public Ability {
     public:
         Abilityless();
         ~Abilityless();
-        void action(Game game);        
+        void action(Game& game);        
 };  
 
 

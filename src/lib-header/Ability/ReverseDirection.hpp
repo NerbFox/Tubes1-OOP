@@ -10,7 +10,7 @@ class ReverseDirection : public Ability {
     public:
         ReverseDirection();
         ~ReverseDirection();
-        void action(Game game);
+        void action(Game& game);
 };
 
 #endif

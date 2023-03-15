@@ -14,7 +14,7 @@ class Half : public Command {
     public :
         Half();
         ~Half(); 
-        void action(Game game);
+        void action(Game &);
 };  
 
 

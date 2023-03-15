@@ -10,7 +10,6 @@ Double::~Double(){
 
 }
 
-void Double::action(Game game){
+void Double::action(Game& game){
     game.reward *= multipiler;
-    game.nextPlayer();
 }
