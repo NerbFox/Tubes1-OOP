@@ -96,39 +96,41 @@ void Player::clearCombo() {
 }
 
 bool Player::operator>(const Player& otherPlayer) const {
-    int temp1 = 0;
-    for (int i = 0; i < allCombo.size(); i++) {
-        if (allCombo[i].getValue() > temp1) {
-            temp1 = allCombo[i].getValue();
-        }
-    }
+    // int temp1 = 0;
+    // for (int i = 0; i < allCombo.size(); i++) {
+    //     if (allCombo[i].getValue() > temp1) {
+    //         temp1 = allCombo[i].getValue();
+    //     }
+    // }
 
-    int temp2 = 0;
-    for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
-        if (otherPlayer.allCombo[i].getValue() > temp1) {
-            temp2 = otherPlayer.allCombo[i].getValue();
-        }
-    }
+    // int temp2 = 0;
+    // for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
+    //     if (otherPlayer.allCombo[i].getValue() > temp1) {
+    //         temp2 = otherPlayer.allCombo[i].getValue();
+    //     }
+    // }
 
-    return temp1 > temp2;
+    // return temp1 > temp2;
+    return true;
 }
 
 bool Player::operator<(const Player& otherPlayer) const {
-    int temp1 = 0;
-    for (int i = 0; i < allCombo.size(); i++) {
-        if (allCombo[i].getValue() > temp1) {
-            temp1 = allCombo[i].getValue();
-        }
-    }
+    // int temp1 = 0;
+    // for (int i = 0; i < allCombo.size(); i++) {
+    //     if (allCombo[i].getValue() > temp1) {
+    //         temp1 = allCombo[i].getValue();
+    //     }
+    // }
 
-    int temp2 = 0;
-    for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
-        if (otherPlayer.allCombo[i].getValue() > temp1) {
-            temp2 = otherPlayer.allCombo[i].getValue();
-        }
-    }
+    // int temp2 = 0;
+    // for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
+    //     if (otherPlayer.allCombo[i].getValue() > temp1) {
+    //         temp2 = otherPlayer.allCombo[i].getValue();
+    //     }
+    // }
 
-    return temp1 < temp2;
+    // return temp1 < temp2;
+    return true;
 }
 
 void Player::getCommand(Game& game) {
