@@ -161,12 +161,15 @@ void Player::getCommand(Game& game) {
                                 abilityCard->action(game);
                                 cout << endl << name << " melakukan "<< enteredCmd << "!\n";
                             }
+                            // input anyting to continue
+                            cout << "Tekan enter untuk melanjutkan" << endl;
+                            string input;
+                            getline(cin, input);
+                            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                         } else {
                             throw InvalidInputException("Kartu abiliity belum dibagikan!");
                         }
-                        
-
-                    }
+        }
         else {
             throw InvalidInputException("input command salah/tidak ada");
         }

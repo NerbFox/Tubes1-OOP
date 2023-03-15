@@ -317,6 +317,8 @@ int Game::getRound() {
 void Game::startGame() {
     fetchDeckOption();
     distributeDeckCard();
+    setConditionAbilityCardPlayer(false);
+    
     // belum set semua player ability = false ketika mulai game baru
     cout << "\n=========================Permainan ke-" << countPermainan+1 << "=========================" << endl;
     for (int i = 0; i < MAX_ROUND; i++) {

@@ -153,8 +153,4 @@ void Swap::action(Game& game){
     // cek apakah kartu yang di ubah adalah kartu yang dipilih
     game.playerQueue[pilihanP1].first->setNormalCard(card2, pilihanKartuP1);
     game.playerQueue[pilihanP2].first->setNormalCard(card1, pilihanKartuP2);
-    cout << "Tekan enter untuk melanjutkan" << endl;
-    string input;
-    getline(cin, input);
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
