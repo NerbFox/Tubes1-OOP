@@ -16,7 +16,7 @@ class Combo {
     public:
         Combo();
 
-        Combo(Player player, TableCard tableCard);
+        Combo(Player& player, TableCard& tableCard);
 
         Combo(const Combo& other);
 
@@ -32,7 +32,7 @@ class Combo {
 
         map<int, int> getComboFreq();
 
-        void setFinalSetCard(Player player, TableCard tableCard);
+        void setFinalSetCard(Player& player, TableCard& tableCard);
 
         void clearFinalSetCard();
 

@@ -97,7 +97,7 @@ void IndividualCombo::computeValue() {
 
 Combo::Combo(){}
 
-Combo::Combo(Player player, TableCard tableCard) {
+Combo::Combo(Player& player, TableCard& tableCard) {
     for (int i = 0; i < 2; i++) {
         finalSetCard.push_back(player.getNormalCard(i));
     }
@@ -162,7 +162,7 @@ map<int, int> Combo::getComboFreq() {
     return freqCombo;
 }
 
-void Combo::setFinalSetCard(Player player, TableCard tableCard) {
+void Combo::setFinalSetCard(Player& player, TableCard& tableCard) {
     for (int i = 0; i < 2; i++) {
         finalSetCard.push_back(player.getNormalCard(i));
     }
@@ -253,15 +253,15 @@ void Combo::checkStraightAndFlush() {
     
     vector<Card> fiveSetCard;
 
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 3; i++) {
         fiveSetCard.push_back(finalSetCard[i]);
-        for (int j = i + 1; j < 5;j++) {
+        for (int j = i + 1; j < 4;j++) {
             fiveSetCard.push_back(finalSetCard[j]);
-            for (int k = j + 1; k < 6; k++) {
+            for (int k = j + 1; k < 5; k++) {
                 fiveSetCard.push_back(finalSetCard[k]);
-                for (int l = k + 1; l < 7; l++) {
+                for (int l = k + 1; l < 6; l++) {
                     fiveSetCard.push_back(finalSetCard[l]);
-                    for (int m = l + 1; m < 8; m++) {
+                    for (int m = l + 1; m < 7; m++) {
                         fiveSetCard.push_back(finalSetCard[m]);
                         if (isStraight(fiveSetCard) && isFlush(fiveSetCard)) {
                             IndividualCombo newCombo(9);

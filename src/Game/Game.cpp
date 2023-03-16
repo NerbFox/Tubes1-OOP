@@ -61,7 +61,10 @@ void Game::nextRound(){
         countRonde = 1;
         countPermainan++;
         setConditionAbilityCardPlayer(false);
-        tableCard - 5;
+        reward = 64;
+        for (int i = 0; i < MAX_PLAYER; i++) {
+            playerQueue[i].second = false;
+        }
     }
 }
 
@@ -334,13 +337,32 @@ void Game::resolveWinner() {
         playerComboTemp.generateHighCard();
         playerComboTemp.computeComboMax();
         playerQueue[i].first->setCombinations(playerComboTemp);
+        cout << "===========Player " << playerQueue[i].first->getName() << " RESULT=============" << endl;
+        vector<IndividualCombo> comboVec = (playerQueue[i].first)->getCombinations().getAllCombo();
 
-        cout << playerQueue[i].first->getName() << "RESULT" << endl;
-        vector<IndividualCombo> comboVec = (*playerQueue[i].first).getCombinations().getAllCombo();
-        //Print top 4 combinations
+        //Print top 5 combinations
         for (int j = 0; j < 5; j++) {
-            cout << "Combo ID : " << comboVec[j].getComboId();
-            cout << "Value : " << comboVec[j].getValue();
+            int comboIdPrint = comboVec[j].getComboId();
+            if (comboIdPrint == 1) {
+                cout << "Combo : High Card" << endl;
+            } else if (comboIdPrint == 2) {
+                cout << "Combo : Pair" << endl;
+            } else if (comboIdPrint == 3) {
+                cout << "Combo : Two Pair" << endl;
+            } else if (comboIdPrint == 4) {
+                cout << "Combo : Three of a Kind" << endl;
+            } else if (comboIdPrint == 5) {
+                cout << "Combo : Straight" << endl;
+            } else if (comboIdPrint == 6) {
+                cout << "Combo : Flush" << endl;
+            } else if (comboIdPrint == 7) {
+                cout << "Combo : Full House" << endl;
+            } else if (comboIdPrint == 8) {
+                cout << "Combo : Four of a Kind" << endl;
+            } else if (comboIdPrint == 9) {
+                cout << "Combo : Straight Flush" << endl;
+            }
+            cout << "Value : " << comboVec[j].getValue() << endl;
             vector<Card> cardVec = comboVec[j].getCardCombo();
             for (int k = 0; k < cardVec.size(); k++) {
                 cardVec[k].printCard();
@@ -356,7 +378,7 @@ void Game::resolveWinner() {
         }
     }
     
-    cout << "Selamat " << player->getName() << ", kamu memiliki kombinasi paling besar dengan kombinasi berikut:" << endl;
+    cout << "Selamat " << player->getName() << ", kamu memiliki kombinasi paling besar!!" << endl;
 
     cout << "Poin hadiah sebanyak " << reward << " diberikan ke " << player->getName();
     player->addPoint(reward);
@@ -403,8 +425,8 @@ void Game::startGame() {
         }
         
         for (int j = 0; j < MAX_PLAYER; j++) {
-            cout << "table card :" << tableCard.getLength() << endl;
-            cout << "deck card :" << deckCard.getLength() << endl;
+            // cout << "table card :" << tableCard.getLength() << endl;
+            // cout << "deck card :" << deckCard.getLength() << endl;
             cout << "\n===========================Ronde ke-"  << countRonde << "===========================\n";
 
             cout << "Kartu di meja: \n";
@@ -451,7 +473,9 @@ void Game::startGame() {
     }
 
 
-    // resolveWinner();
+    resolveWinner();
+    countRonde = 1;
+    tableCard - 5;
 
     printLeaderboard();
     int idxWinner = isHaveWinner(); 
