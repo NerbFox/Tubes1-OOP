@@ -3,7 +3,7 @@
 using namespace std;
 
 // Constructor
-BaseCard::BaseCard(float _value) : value{_value} {
+BaseCard::BaseCard(double _value) : value{_value} {
   colorCode["hijau"] = 0;
   colorCode["biru"] = 1;
   colorCode["kuning"] = 2;
@@ -16,7 +16,7 @@ BaseCard::BaseCard(const BaseCard& other) : value{other.value} {
 }
 
 // Returns the value of the card.
-float BaseCard::getValue() const {
+double BaseCard::getValue() const {
   return value;
 } 
 
