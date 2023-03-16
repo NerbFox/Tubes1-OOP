@@ -39,15 +39,15 @@ void Game::nextPlayer() {
 }
 
 void Game::nextRound(){
+    for (int i = 1; i < MAX_PLAYER; i++){
+        playerQueue[i].second = false;
+    }
     if (countRonde < MAX_ROUND){
         pair<Player*,bool> temp;
         temp = playerQueue.front();
         playerQueue.pop_front();
         playerQueue.push_back(temp);
 
-        for (int i = 1; i < MAX_PLAYER; i++){
-            playerQueue[i].second = false;
-        }
 
         playerPointer.first = playerQueue[0].first;
         playerPointer.second = 0;
@@ -61,7 +61,7 @@ void Game::nextRound(){
         countRonde = 1;
         countPermainan++;
         setConditionAbilityCardPlayer(false);
-        
+        tableCard - 5;
     }
 }
 
@@ -396,12 +396,15 @@ void Game::startGame() {
     // belum set semua player ability = false ketika mulai game baru
     cout << "\n=========================Permainan ke-" << countPermainan+1 << "=========================" << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
+
         if (countRonde == 2) {
             cout << "\nKartu ability telah dibagikan!\n";
             distributeAbilityCard();
         }
         
         for (int j = 0; j < MAX_PLAYER; j++) {
+            cout << "table card :" << tableCard.getLength() << endl;
+            cout << "deck card :" << deckCard.getLength() << endl;
             cout << "\n===========================Ronde ke-"  << countRonde << "===========================\n";
 
             cout << "Kartu di meja: \n";
@@ -437,17 +440,18 @@ void Game::startGame() {
                 }
             }
 
-
             playerPointer.first->getCommand(*this);
             nextPlayer();
             std::system("clear");
         }
-        tableCard + deckCard.getTopCard();
-        deckCard - 1;
+        if (countRonde < 7 && countRonde != 1) {
+            tableCard + deckCard.getTopCard();
+            deckCard - 1;
+        }
     }
 
 
-    resolveWinner();
+    // resolveWinner();
 
     printLeaderboard();
     int idxWinner = isHaveWinner(); 

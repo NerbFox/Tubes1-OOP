@@ -1,6 +1,6 @@
 #include "../lib-header/Card/Combo.hpp"
 #include "../lib-header/Player/Player.hpp"
-#include "../Inventory/TableCard.hpp"
+#include "../lib-header/Inventory/TableCard.hpp"
 #include <iostream>
 #include <cmath>
 #include <algorithm>
