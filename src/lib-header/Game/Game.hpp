@@ -96,6 +96,9 @@ class Game {
 
         // set abilityUsed to a certain index of playerQueue
         void setAbilityUsedPlayer(int, bool);
+
+        // reset all combo player
+        void resetAllComboPlayer();
         
         // get index player pointer
         int getIndexPlayerPointer();
@@ -123,6 +126,9 @@ class Game {
 
         // print an ascii art
         void splashScreen();
+
+        // Resolve winner after 7 rounds (1 game)
+        void resolveWinner();
 };  
 
 // P2 P3 P4 P5 P6 P7 P1 <-

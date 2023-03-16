@@ -60,6 +60,8 @@ void Game::nextRound(){
     } else {
         countRonde = 1;
         countPermainan++;
+        setConditionAbilityCardPlayer(false);
+        
     }
 }
 
@@ -136,6 +138,12 @@ void Game::setAbilityUsedPlayer(int idx, bool condition){
     }
     if (idx==indexPemain) {
         throw IndexNotValidException(idx) ;
+    }
+}
+
+void Game::resetAllComboPlayer() {
+    for (int i = 0; i < MAX_PLAYER; i++) {
+        playerQueue[i].first->clearCombo();
     }
 }
 
@@ -313,6 +321,47 @@ int Game::getRound() {
     return countRonde;
 }
 
+void Game::resolveWinner() {  
+    for (int i = 0; i < MAX_PLAYER; i++) {
+        Combo playerComboTemp;
+        playerComboTemp.setFinalSetCard(*playerQueue[i].first, tableCard);
+        playerComboTemp.checkPair();
+        playerComboTemp.checkThreeOfAKind();
+        playerComboTemp.checkFourOfAKind();
+        playerComboTemp.checkStraightAndFlush();
+        playerComboTemp.checkTwoPair();
+        playerComboTemp.checkFullHouse();
+        playerComboTemp.generateHighCard();
+        playerComboTemp.computeComboMax();
+        playerQueue[i].first->setCombinations(playerComboTemp);
+
+        cout << playerQueue[i].first->getName() << "RESULT" << endl;
+        vector<IndividualCombo> comboVec = (*playerQueue[i].first).getCombinations().getAllCombo();
+        //Print top 4 combinations
+        for (int j = 0; j < 5; j++) {
+            cout << "Combo ID : " << comboVec[j].getComboId();
+            cout << "Value : " << comboVec[j].getValue();
+            vector<Card> cardVec = comboVec[j].getCardCombo();
+            for (int k = 0; k < cardVec.size(); k++) {
+                cardVec[k].printCard();
+            }
+            cout << endl;
+        }
+    }
+    
+    Player* player = playerQueue[0].first; 
+    for (int i = 1; i < MAX_PLAYER; i++) {
+        if (*player < *playerQueue[i].first) {
+            player = playerQueue[i].first;
+        }
+    }
+    
+    cout << "Selamat " << player->getName() << ", kamu memiliki kombinasi paling besar dengan kombinasi berikut:" << endl;
+
+    cout << "Poin hadiah sebanyak " << reward << " diberikan ke " << player->getName();
+    player->addPoint(reward);
+}
+
 void Game::splashScreen() {
     system("clear");
     cout << MAGENTA;
@@ -395,6 +444,7 @@ void Game::startGame() {
     }
 
 
+    resolveWinner();
 
     printLeaderboard();
     int idxWinner = isHaveWinner(); 

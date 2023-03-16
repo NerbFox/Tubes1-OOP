@@ -1,4 +1,4 @@
-#include "../lib-header/command/Ability.hpp"
+#include "../lib-header/Command/Ability.hpp"
 #include "../lib-header/Game/Game.hpp"
 #include "../lib-header/Exception/Exception.hpp"
 
