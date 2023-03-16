@@ -154,7 +154,7 @@ void Player::getCommand(Game& game) {
                 enteredCmd == "RE-ROLL" || enteredCmd == "REVERSE" || enteredCmd == "SWAP" || enteredCmd == "SWITCH") {
                         if (game.getRound() != 0) {
                             if (isAbilityUsed()) {
-                                throw InvalidInputException("Kartu telah digunakan!");
+                                throw InvalidInputException("Kartu tidak dapat atau telah digunakan!");
                             } else if (enteredCmd != abilityCard->getType()) {
                                 throw InvalidInputException("Kamu tidak memiliki kartu tersebut!");
                             } else {

@@ -21,7 +21,9 @@ int main() {
   try {
     Game gameState;
     
+    
     gameState.startGame();
+
 
 
     cout << "exiting...\n";
