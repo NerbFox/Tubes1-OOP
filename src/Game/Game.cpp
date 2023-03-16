@@ -1,5 +1,6 @@
 #include "../lib-header/Game/Game.hpp"
 #include "../lib-header/Exception/Exception.hpp"
+#include "../Card/colors.hpp"
 #include <random>
 #include <algorithm>
 
@@ -315,6 +316,8 @@ int Game::getRound() {
 }
 
 void Game::splashScreen() {
+    system("clear");
+    cout << MAGENTA;
     cout << "\n\n\n\n";
     cout << "  ______         __       _____  ___    ________    ___  ___       __   ___    __      _____  ___     _______    ________       ______     ___      ___ \n";
     cout << " /\" _  \"\\       /\"\"\\     (\\\"   \\|\"  \\  |\"      \"\\  |\"  \\/\"  |     |/\"| /  \")  |\" \\    (\\\"   \\|\"  \\   /\" _   \"|  |\"      \"\\     /    \" \\   |\"  \\    /\"  |\n";
@@ -331,6 +334,7 @@ void Game::splashScreen() {
     cout << "         //  \\ _     //  __'  \\   //      /  (| (___\\ ||      //  \\ ___    //  __'  \\  |: \\.        | // ___)_                                          \n";
     cout << "        (:   _) \\   /   /  \\\\  \\ |:  __   \\  |:       :)     (:   _(  _|  /   /  \\\\  \\ |.  \\    /:  |(:      \"|                                         \n";
     cout << "         \\_______) (___/    \\___)|__|  \\___) (________/       \\_______)  (___/    \\___)|___|\\__/|___| \\_______)                                         \n\n\n";
+    cout << RESET;
 }
 
 void Game::startGame() {
