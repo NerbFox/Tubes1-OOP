@@ -416,11 +416,11 @@ void Game::startGame() {
     setConditionAbilityCardPlayer(false);
     
     // belum set semua player ability = false ketika mulai game baru
-    cout << "\n=========================Permainan ke-" << countPermainan+1 << "=========================" << endl;
+    cout << MAGENTA << "\n=========================Permainan ke-" << countPermainan+1 << "=========================" << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
 
         if (countRonde == 2) {
-            cout << "\nKartu ability telah dibagikan!\n";
+            cout << CYAN << "\nKartu ability telah dibagikan!\n";
             distributeAbilityCard();
         }
         
@@ -475,6 +475,7 @@ void Game::startGame() {
 
     resolveWinner();
     countRonde = 1;
+    reward = 64;
     tableCard - 5;
 
     printLeaderboard();

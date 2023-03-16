@@ -59,17 +59,11 @@ class Game {
         // start game
         void startGame();
 
-        // Prosedur player untuk melakukan permainan
-        void turn();
-
         // Geser pointer player ke player lain sesuai RR 
         void nextPlayer();
 
         // Ganti round, round count bertambah 1
         void nextRound();
-
-        // Melakukan reverse urutan
-        void reverseOrder();
 
         // Melakukan pengecekan untuk menentukan pemenang
         int isHaveWinner();

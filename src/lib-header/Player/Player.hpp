@@ -65,7 +65,7 @@ public:
     // update player's normal card at certain index
     void setNormalCard(const Card& card, int index);
     // set all of the combo that the player have
-    void setCombinations(const Combo& _combinations); 
+    void setCombinations(const Combo _combinations); 
 
 
     // Methods

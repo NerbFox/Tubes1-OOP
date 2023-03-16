@@ -92,7 +92,7 @@ Combo Player::getCombinations() const{
 // push card to player's normal card
 
 // set all of the combo that the player have
-void Player::setCombinations(const Combo& _combinations) {
+void Player::setCombinations(const Combo _combinations) {
     combinations = _combinations;
 } 
 
