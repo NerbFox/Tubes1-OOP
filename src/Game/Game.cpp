@@ -356,10 +356,12 @@ void Game::startGame() {
             if (tableCard.getLength() == 0) {
                 cout << "Table card kosong\n";
             } else {
-                for (int k = 0; k < tableCard.getLength(); k++) {
-                    cout << k+1 <<". ";
-                    tableCard.getContainerAt(k).printCard();
-                }
+                // cout << endl ;
+                tableCard.printCards();
+                // for (int k = 0; k < tableCard.getLength(); k++) {
+                //     cout << k+1 <<". ";
+                //     tableCard.getContainerAt(k).printCard();
+                // }
             }
 
             cout << "Poin Hadiah : " << reward << "\n\n";            
