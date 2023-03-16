@@ -1,5 +1,6 @@
 #include "../lib-header/Card/Combo.hpp"
 #include "../lib-header/Player/Player.hpp"
+#include "../Inventory/TableCard.hpp"
 #include <iostream>
 #include <cmath>
 #include <algorithm>
@@ -100,7 +101,7 @@ Combo::Combo(Player player, TableCard tableCard) {
     for (int i = 0; i < 2; i++) {
         finalSetCard.push_back(player.getNormalCard(i));
     }
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 5; i++) {
         finalSetCard.push_back(tableCard.getContainerAt(i));
     }
 
@@ -161,9 +162,14 @@ map<int, int> Combo::getComboFreq() {
     return freqCombo;
 }
 
-void Combo::setFinalSetCard(vector<Card> playerCard, vector<Card> tableCard) {
-    copy(playerCard.begin(), playerCard.end(), back_inserter(finalSetCard));
-    copy(tableCard.begin(), tableCard.end(), back_inserter(finalSetCard));
+void Combo::setFinalSetCard(Player player, TableCard tableCard) {
+    for (int i = 0; i < 2; i++) {
+        finalSetCard.push_back(player.getNormalCard(i));
+    }
+    for (int i = 0; i < 5; i++) {
+        finalSetCard.push_back(tableCard.getContainerAt(i));
+    }
+
     sort(finalSetCard.begin(), finalSetCard.end(), [](Card a, Card b){return a > b;});
 }
 
@@ -175,14 +181,9 @@ void Combo::clearAllCombo() {
     allCombo.clear();
 }
 
-void Combo::resetValueMax() {
-    comboMax = NULL;
-}
-
 void Combo::resetState() {
     clearFinalSetCard();
     clearAllCombo();
-    resetValueMax();
 }
 
 void Combo::checkPair() {
@@ -350,7 +351,7 @@ void Combo::generateHighCard() {
     sort(allCombo.begin(), allCombo.end(), [](IndividualCombo combo1, IndividualCombo combo2){ return combo1 > combo2; });
 }
 
-void Combo::computeValueMax() {
+void Combo::computeComboMax() {
     sort(allCombo.begin(), allCombo.end(), [](IndividualCombo combo1, IndividualCombo combo2){ return combo1 > combo2; });
     comboMax = allCombo[0];
 }
