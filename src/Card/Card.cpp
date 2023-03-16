@@ -37,6 +37,7 @@ int Card::getNumber() const
 void Card::printCard() const
 {
     // print the card
+    cout << "Kartu " << number << " " << color << endl;
     if (color == "merah")
     {
         cout << RED;
@@ -54,13 +55,22 @@ void Card::printCard() const
         cout << BLUE;
     }
     // print the card number with color
-    cout << "Kartu " << number << " " << color << endl;
-    cout << "-------" << endl;
-    cout << "|     |" << endl;
-    cout << "|  " << number << "  |" << endl;
-    cout << "|     |" << endl;
-    cout << "-------" << endl;
-    cout << RESET;
+    if (number >= 10){
+        cout << "--------" << endl;
+        cout << "|      |" << endl;
+        cout << "|  " << number << "  |" << endl;
+        cout << "|      |" << endl;
+        cout << "--------" << endl;
+        cout << RESET;
+    }
+    else{
+        cout << "--------" << endl;
+        cout << "|      |" << endl;
+        cout << "|  " << "0" << number << "  |" << endl;
+        cout << "|      |" << endl;
+        cout << "--------" << endl;
+        cout << RESET;
+    }
 }
 
 bool Card::isEmpty() const
