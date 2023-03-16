@@ -65,11 +65,11 @@ void IndividualCombo::computeValue() {
     } else if (comboId == 2) { // pair
         value = cardCombo[0].getNumber() + colorCode[cardCombo[0].getColor()] * 0.33 + colorCode[cardCombo[1].getColor()] * 0.0033;
     } else if (comboId == 3) { // two pair
-        value = cardCombo[0].getNumber() + colorCode[cardCombo[0].getColor()] * 0.33 + colorCode[cardCombo[1].getColor()] * 0.0033;
+        value = cardCombo[0].getNumber() * 100 + colorCode[cardCombo[0].getColor()] * 33 + colorCode[cardCombo[1].getColor()] * 0.33 + colorCode[cardCombo[1].getColor()] * 0.0033 + colorCode[cardCombo[1].getColor()] * 0.000033;
     } else if (comboId == 4) { // three of a kind
         value = cardCombo[0].getNumber();
     } else if (comboId == 5) { // straight
-        value = cardCombo[0].getNumber();
+        value = cardCombo[0].getNumber() + colorCode[cardCombo[0].getColor()];
     } else if (comboId == 6) { // flush
         for (int i = 0; i < cardCombo.size(); i++) {
             value += cardCombo[cardCombo.size() - 1 - i].getNumber() * (pow(100, i));
@@ -84,7 +84,11 @@ void IndividualCombo::computeValue() {
     }
 }
 
-Combo::Combo(Player player, TableCard tableCard) : valueMax(valueMax) {
+Combo::Combo() : valueMax(0) {
+
+}
+
+Combo::Combo(Player player, TableCard tableCard) {
     for (int i = 0; i < 2; i++) {
         finalSetCard.push_back(player.getNormalCard(i));
     }
@@ -100,11 +104,11 @@ Combo::Combo(const Combo& other) {
     finalSetCard = other.finalSetCard;
 }
 
-vector<Card> Combo::getFinalSetCard() {
+vector<Card> Combo::getFinalSetCard() const {
     return finalSetCard;
 }
 
-vector<IndividualCombo> Combo::getAllCombo() {
+vector<IndividualCombo> Combo::getAllCombo() const {
     return allCombo;
 }
 
@@ -142,6 +146,24 @@ map<int, int> Combo::getComboFreq() {
         }
     }
     return freqCombo;
+}
+
+void Combo::clearFinalSetCard() {
+    finalSetCard.clear();
+}
+
+void Combo::clearAllCombo() {
+    allCombo.clear();
+}
+
+void Combo::resetValueMax() {
+    valueMax = 0;
+}
+
+void Combo::resetState() {
+    clearFinalSetCard();
+    clearAllCombo();
+    resetValueMax();
 }
 
 void Combo::checkPair() {
@@ -304,4 +326,16 @@ void Combo::generateHighCard() {
         newCombo.computeValue();
         allCombo.push_back(newCombo);
     }
+    sort(allCombo.begin(), allCombo.end(), [](IndividualCombo combo1, IndividualCombo combo2){ return combo1 > combo2; });
 }
+
+void Combo::computeValueMax() {
+    sort(allCombo.begin(), allCombo.end(), [](IndividualCombo combo1, IndividualCombo combo2){ return combo1 > combo2; });
+    valueMax = allCombo[0].getValue();
+}
+
+// int main() {
+//     vector<IndividualCombo> temp;
+//     vector<IndividualCombo> temp2;
+//     temp2 = temp;
+// }
