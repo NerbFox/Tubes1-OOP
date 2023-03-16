@@ -44,11 +44,15 @@ public:
     long long getPoint() const;                       
     // pop player's normal card at certain index
     Card getNormalCard(int index);
+    // get all player's normal card
+    PlayerCard getAllNormalCard() const;
     // request command input from the user and process it
     void getCommand(Game& game);
     Ability* getAbilityCard();
     // bool isAbilityUsed
     bool isAbilityUsed() const;
+    // get combinations object
+    Combo getCombinations() const;
     
     
     // setter
@@ -61,7 +65,7 @@ public:
     // update player's normal card at certain index
     void setNormalCard(const Card& card, int index);
     // set all of the combo that the player have
-    void setAllCombo(const Combo& _allCombo); 
+    void setCombinations(const Combo _combinations); 
 
 
     // Methods
@@ -71,10 +75,10 @@ public:
     // clear the combo that the player has
     void clearCombo();
     
-    // returns true if this player's power is greater than the other player's
+    // returns true if this player's combinations is greater than the other player's
     bool operator>(const Player& otherPlayer) const;  
     
-    // returns true if this player's power is less than the other player's
+    // returns true if this player's combinations is less than the other player's
     bool operator<(const Player& otherPlayer) const;  
 };
 

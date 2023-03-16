@@ -5,6 +5,8 @@ ReRoll::ReRoll() {
     Ability::setType("RE-ROLL");
 }
 
+ReRoll::~ReRoll(){}
+
 // action
 void ReRoll::action(Game& game) {
     // Throw 2 cards from player's main deck and take 2 cards again

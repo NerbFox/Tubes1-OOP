@@ -5,7 +5,7 @@
 Swap::Swap() {
     Ability::setType("SWAP");
 }
-
+Swap::~Swap(){}
 // action
 void Swap::action(Game& game){
     /* menukar 1 kartu main deck milik pemain lain dengan 1 kartu main deck milik pemain lain. Tidak 

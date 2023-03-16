@@ -29,11 +29,7 @@ class DeckCard : public InventoryHolder<queue<Card>>{
     // Method to remove the first card from container n times.
     void operator-(int n);
     
-    void clearQueue() {
-      while(!cardContainer.empty()){
-        cardContainer.pop();
-      }
-    }
+    void clearQueue();
 };  
 
 

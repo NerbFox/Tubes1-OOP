@@ -76,14 +76,23 @@ Card Player::getNormalCard(int index) {
     return normalCard.getCards()[index];
 }
 
+// get all player's normal card
+PlayerCard Player::getAllNormalCard() const {
+    return normalCard;
+}
+
 Ability* Player::getAbilityCard() {
     return abilityCard;
+}
+
+Combo Player::getCombinations() const{
+    return combinations;
 }
 
 // push card to player's normal card
 
 // set all of the combo that the player have
-void Player::setAllCombo(const Combo& _combinations) {
+void Player::setCombinations(const Combo _combinations) {
     combinations = _combinations;
 } 
 

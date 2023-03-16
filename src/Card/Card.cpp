@@ -46,32 +46,32 @@ void Card::printCard() const
     // cout << "|     |" << endl;
     // cout << "-------" << endl;
 
-    if (color == "merah")
-    {
-        cout << RED;
-    }
-    else if (color == "hijau")
-    {
-        cout << GREEN;
-    }
-    else if (color == "kuning")
-    {
-        cout << YELLOW;
-    }
-    else if (color == "biru")
-    {
-        cout << BLUE;
-    }
+    // if (color == "merah")
+    // {
+    //     cout << RED;
+    // }
+    // else if (color == "hijau")
+    // {
+    //     cout << GREEN;
+    // }
+    // else if (color == "kuning")
+    // {
+    //     cout << YELLOW;
+    // }
+    // else if (color == "biru")
+    // {
+    //     cout << BLUE;
+    // }
     
-    cout << ".---------." << endl;
-    cout << "|" << setw(9) << left << number << "|" << endl;
-    for (int i=0; i<4; i++) {
-        cout << "|         |" << endl;
-    }
-    cout << "|" << setw(9) << right << number << "|" << endl;
-    cout << "'---------'" << endl;
+    // cout << ".---------." << endl;
+    // cout << "|" << setw(9) << left << number << "|" << endl;
+    // for (int i=0; i<4; i++) {
+    //     cout << "|         |" << endl;
+    // }
+    // cout << "|" << setw(9) << right << number << "|" << endl;
+    // cout << "'---------'" << endl;
 
-    cout << RESET;
+    // cout << RESET;
 }
 
 void Card::printCard(Card card2) const

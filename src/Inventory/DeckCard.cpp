@@ -130,6 +130,12 @@ void DeckCard::operator-(int n){
   }
 }
 
+void DeckCard::clearQueue() {
+  while (!cardContainer.empty()) {
+    cardContainer.pop();
+  }
+}
+
 // int main () {
 //   cout << "test";
 //   return 0;
