@@ -6,6 +6,7 @@ Switch::Switch()
 {
     Ability::setType("SWITCH");
 }
+Switch::~Switch(){}
 
 // action
 void Switch::action(Game& game)
