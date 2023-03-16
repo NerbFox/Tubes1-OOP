@@ -28,6 +28,4 @@ class Ability : public Command {
         virtual void action(Game &) = 0;
         // virtual void action(Player) = 0;
 };  
-
-
 #endif
