@@ -120,6 +120,9 @@ class Game {
 
         // get round from  
         int getRound();
+
+        // print an ascii art
+        void splashScreen();
 };  
 
 // P2 P3 P4 P5 P6 P7 P1 <-

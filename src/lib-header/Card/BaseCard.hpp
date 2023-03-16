@@ -7,18 +7,18 @@ using namespace std;
 
 class BaseCard {
 protected:
-    float value; // The value of the card.
+    double value; // The value of the card.
     map<string, int> colorCode;
 
 public:
     // Constructor
-    BaseCard(float _value = 0.0f);
+    BaseCard(double _value = 0.0);
 
     // Copy constructor
     BaseCard(const BaseCard& other);
 
     // Returns the value of the card.
-    float getValue() const; 
+    double getValue() const; 
 
     // Returns map for color code
     map<string, int> getColorCode() const;

@@ -37,9 +37,8 @@ class IndividualCombo : public BaseCard {
 
 class Combo {
     private:
-        float valueMax;
+        IndividualCombo comboMax;
         vector<Card> finalSetCard;
-        // vector<tuple<vector<Card>, int, float>> allCombo;
         vector<IndividualCombo> allCombo;
 
     public:
@@ -48,6 +47,8 @@ class Combo {
         Combo(Player player, TableCard tableCard);
 
         Combo(const Combo& other);
+
+        IndividualCombo getComboMax() const;
 
         vector<Card> getFinalSetCard() const;
 
@@ -58,6 +59,8 @@ class Combo {
         map<string, int> getCardFreqByColor();
 
         map<int, int> getComboFreq();
+
+        void setFinalSetCard(vector<Card> playerCard, vector<Card> tableCard);
 
         void clearFinalSetCard();
 

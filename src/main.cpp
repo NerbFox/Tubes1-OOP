@@ -40,8 +40,9 @@ int main()
   // cout << getMax(vec);
   try {
     Game gameState;
-
+    
     gameState.startGame();
+
 
     cout << "exiting...\n";
   } catch (const char* err) {
