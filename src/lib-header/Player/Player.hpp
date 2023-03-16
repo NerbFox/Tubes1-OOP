@@ -20,7 +20,7 @@ protected:
     long long point;              // player's current points
     PlayerCard normalCard;        // player's normal card
     Ability *abilityCard;         // player's ability card
-    vector<Combo> allCombo;       // a vector containing all of the player's combos
+    Combo combinations;           // An object containing all of the player's combos
     bool AbilityUsed;             // true if the player has used his ability card
     Command *nextCommand;
 
@@ -61,7 +61,7 @@ public:
     // update player's normal card at certain index
     void setNormalCard(const Card& card, int index);
     // set all of the combo that the player have
-    void setAllCombo(const vector<Combo>& _allCombo); 
+    void setAllCombo(const Combo& _allCombo); 
 
 
     // Methods

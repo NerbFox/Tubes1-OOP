@@ -37,25 +37,38 @@ class IndividualCombo : public BaseCard {
 
 class Combo {
     private:
-        float valueMax;
+        IndividualCombo comboMax;
         vector<Card> finalSetCard;
-        // vector<tuple<vector<Card>, int, float>> allCombo;
         vector<IndividualCombo> allCombo;
 
     public:
+        Combo();
+
         Combo(Player player, TableCard tableCard);
 
         Combo(const Combo& other);
 
-        vector<Card> getFinalSetCard();
+        IndividualCombo getComboMax() const;
 
-        vector<IndividualCombo> getAllCombo();
+        vector<Card> getFinalSetCard() const;
+
+        vector<IndividualCombo> getAllCombo() const;
 
         map<int, int> getCardFreqByNumber();
 
         map<string, int> getCardFreqByColor();
 
         map<int, int> getComboFreq();
+
+        void setFinalSetCard(vector<Card> playerCard, vector<Card> tableCard);
+
+        void clearFinalSetCard();
+
+        void clearAllCombo();
+
+        void resetValueMax();
+
+        void resetState();
 
         void checkPair();
 
@@ -75,28 +88,7 @@ class Combo {
 
         void generateHighCard();
 
-        void computeMaxValue();
-        
-    // 1 kartu
-    // High card
-    
-    // 2 kartu
-    // Pair, Two Pair
-
-    // 3 kartu
-    // Three of a kind
-
-    // 3 kartu dan 2 kartu
-    // full house
-
-    // 4 kartu
-    // Four of a kind
-
-    // 5 kartu
-    // Flush, straight flush, straight
-
-
-
+        void computeValueMax();
 };  
 
 

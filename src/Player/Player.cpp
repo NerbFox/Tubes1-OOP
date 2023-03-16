@@ -3,7 +3,6 @@
 #include "../lib-header/Game/Game.hpp"
 #include "../lib-header/Command/Command.hpp"
 
-
 #include <iostream>
 
 #include "../lib-header/Command/Double.hpp"
@@ -22,11 +21,11 @@
 using namespace std;
 
 // ctor
-Player::Player(string _name) : normalCard{}, name{_name}, point{0}, abilityCard{}, allCombo{}, AbilityUsed(false), nextCommand{} { }
+Player::Player(string _name) : normalCard{}, name{_name}, point{0}, abilityCard{}, combinations{}, AbilityUsed(false), nextCommand{} { }
 
 // cctor
 Player::Player(const Player& other) : name{other.name}, point{other.point}, abilityCard{other.abilityCard}, AbilityUsed{other.AbilityUsed}, nextCommand{}, normalCard{other.normalCard}{
-    setAllCombo(other.allCombo);
+    combinations = other.combinations;
 }
 
 // copy assignment
@@ -35,7 +34,7 @@ Player& Player::operator=(const Player& other) {
     point = other.point;
     AbilityUsed = other.AbilityUsed;
     abilityCard = other.abilityCard;
-    setAllCombo(other.allCombo);
+    combinations = other.combinations;
     normalCard = other.normalCard;
     return *this;
 }
@@ -84,53 +83,51 @@ Ability* Player::getAbilityCard() {
 // push card to player's normal card
 
 // set all of the combo that the player have
-void Player::setAllCombo(const vector<Combo>& _allCombo) {
-    for (int i = 0; i < _allCombo.size(); i++) {
-        allCombo.push_back(_allCombo[i]);
-    }    
+void Player::setAllCombo(const Combo& _combinations) {
+    combinations = _combinations;
 } 
 
 // clear the combo that the player has
 void Player::clearCombo() {
-    allCombo.clear();
+    combinations.resetState();
 }
 
 bool Player::operator>(const Player& otherPlayer) const {
-    // int temp1 = 0;
-    // for (int i = 0; i < allCombo.size(); i++) {
-    //     if (allCombo[i].getValue() > temp1) {
-    //         temp1 = allCombo[i].getValue();
-    //     }
-    // }
+    int sizeComboPlayer = combinations.getAllCombo().size();
+    int sizeComboOtherPlayer = otherPlayer.combinations.getAllCombo().size();
+    int sizeMin = (sizeComboPlayer >= sizeComboOtherPlayer) ? sizeComboOtherPlayer : sizeComboPlayer;
 
-    // int temp2 = 0;
-    // for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
-    //     if (otherPlayer.allCombo[i].getValue() > temp1) {
-    //         temp2 = otherPlayer.allCombo[i].getValue();
-    //     }
-    // }
-
-    // return temp1 > temp2;
-    return true;
+    for (int i = 0; i < sizeMin; i++) {
+        if (combinations.getAllCombo()[i] > otherPlayer.combinations.getAllCombo()[i]) {
+            return true;
+        } else if (combinations.getAllCombo()[i] < otherPlayer.combinations.getAllCombo()[i]) {
+            return false;
+        }
+    }
+    if (sizeMin == sizeComboOtherPlayer && sizeMin != sizeComboPlayer) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 bool Player::operator<(const Player& otherPlayer) const {
-    // int temp1 = 0;
-    // for (int i = 0; i < allCombo.size(); i++) {
-    //     if (allCombo[i].getValue() > temp1) {
-    //         temp1 = allCombo[i].getValue();
-    //     }
-    // }
+    int sizeComboPlayer = combinations.getAllCombo().size();
+    int sizeComboOtherPlayer = otherPlayer.combinations.getAllCombo().size();
+    int sizeMin = (sizeComboPlayer >= sizeComboOtherPlayer) ? sizeComboOtherPlayer : sizeComboPlayer;
 
-    // int temp2 = 0;
-    // for (int i = 0; i < otherPlayer.allCombo.size(); i++) {
-    //     if (otherPlayer.allCombo[i].getValue() > temp1) {
-    //         temp2 = otherPlayer.allCombo[i].getValue();
-    //     }
-    // }
-
-    // return temp1 < temp2;
-    return true;
+    for (int i = 0; i < sizeMin; i++) {
+        if (combinations.getAllCombo()[i] < otherPlayer.combinations.getAllCombo()[i]) {
+            return true;
+        } else if (combinations.getAllCombo()[i] > otherPlayer.combinations.getAllCombo()[i]) {
+            return false;
+        }
+    }
+    if (sizeMin == sizeComboOtherPlayer && sizeMin != sizeComboPlayer) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 void Player::getCommand(Game& game) {
