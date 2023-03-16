@@ -61,7 +61,6 @@ void Game::nextRound(){
         countRonde = 1;
         countPermainan++;
         setConditionAbilityCardPlayer(false);
-        tableCard - 5;
     }
 }
 
@@ -325,41 +324,41 @@ void Game::resolveWinner() {
     for (int i = 0; i < MAX_PLAYER; i++) {
         Combo playerComboTemp;
         playerComboTemp.setFinalSetCard(*playerQueue[i].first, tableCard);
-        playerComboTemp.checkPair();
-        playerComboTemp.checkThreeOfAKind();
-        playerComboTemp.checkFourOfAKind();
-        playerComboTemp.checkStraightAndFlush();
-        playerComboTemp.checkTwoPair();
-        playerComboTemp.checkFullHouse();
-        playerComboTemp.generateHighCard();
-        playerComboTemp.computeComboMax();
-        playerQueue[i].first->setCombinations(playerComboTemp);
+        // playerComboTemp.checkPair();
+        // playerComboTemp.checkThreeOfAKind();
+        // playerComboTemp.checkFourOfAKind();
+        // playerComboTemp.checkStraightAndFlush();
+        // playerComboTemp.checkTwoPair();
+        // playerComboTemp.checkFullHouse();
+        // playerComboTemp.generateHighCard();
+        // playerComboTemp.computeComboMax();
+        // playerQueue[i].first->setCombinations(playerComboTemp);
 
-        cout << playerQueue[i].first->getName() << "RESULT" << endl;
-        vector<IndividualCombo> comboVec = (*playerQueue[i].first).getCombinations().getAllCombo();
+        // cout << "RESULT     Name :" << playerQueue[i].first->getName() << endl;
+        // vector<IndividualCombo> comboVec = (*playerQueue[i].first).getCombinations().getAllCombo();
         //Print top 4 combinations
-        for (int j = 0; j < 5; j++) {
-            cout << "Combo ID : " << comboVec[j].getComboId();
-            cout << "Value : " << comboVec[j].getValue();
-            vector<Card> cardVec = comboVec[j].getCardCombo();
-            for (int k = 0; k < cardVec.size(); k++) {
-                cardVec[k].printCard();
-            }
-            cout << endl;
-        }
+        // for (int j = 0; j < 5; j++) {
+        //     cout << "Combo ID : " << comboVec[j].getComboId() << endl;
+        //     cout << "Value : " << comboVec[j].getValue() << endl;
+        //     vector<Card> cardVec = comboVec[j].getCardCombo();
+        //     for (int k = 0; k < cardVec.size(); k++) {
+        //         cardVec[k].printCard();
+        //     }
+        //     cout << endl;
+        // }
     }
     
-    Player* player = playerQueue[0].first; 
-    for (int i = 1; i < MAX_PLAYER; i++) {
-        if (*player < *playerQueue[i].first) {
-            player = playerQueue[i].first;
-        }
-    }
+    // Player* player = playerQueue[0].first; 
+    // for (int i = 1; i < MAX_PLAYER; i++) {
+    //     if (*player < *playerQueue[i].first) {
+    //         player = playerQueue[i].first;
+    //     }
+    // }
     
-    cout << "Selamat " << player->getName() << ", kamu memiliki kombinasi paling besar dengan kombinasi berikut:" << endl;
+    // cout << "Selamat " << player->getName() << ", kamu memiliki kombinasi paling besar dengan kombinasi berikut:" << endl;
 
-    cout << "Poin hadiah sebanyak " << reward << " diberikan ke " << player->getName();
-    player->addPoint(reward);
+    // cout << "Poin hadiah sebanyak " << reward << " diberikan ke " << player->getName();
+    // player->addPoint(reward);
 }
 
 void Game::splashScreen() {
@@ -451,7 +450,8 @@ void Game::startGame() {
     }
 
 
-    // resolveWinner();
+    resolveWinner();
+    tableCard - 5;
 
     printLeaderboard();
     int idxWinner = isHaveWinner(); 
