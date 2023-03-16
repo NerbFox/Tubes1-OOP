@@ -122,7 +122,7 @@ void DeckCard::operator+(const Card& newCard){
 // Method to remove the first card from container n times.
 void DeckCard::operator-(int n){
   if (n > cardContainer.size()) {
-    throw "the number of cards that wanted to be removed is bigger than the number of cards in the container";
+    throw "the number of cards that wanted to be removed is bigger than the number of cards in the deck card\n";
   }
 
   for (int i = 0; i < n; i++) {

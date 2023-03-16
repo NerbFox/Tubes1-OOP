@@ -12,7 +12,7 @@ void TableCard::operator+(const Card& newCard) {
 // Method to remove the first card from container n times.
 void TableCard::operator-(int n) {
   if (n > cardContainer.size()) {
-    throw "number of cards will be removed is bigger than the number of cards in the container";
+    throw "number of cards will be removed is bigger than the number of cards in the table card\n";
   }
 
   for (int i = 0; i < n; i++) {

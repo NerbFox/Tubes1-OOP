@@ -4,7 +4,7 @@
 #include <random>
 #include <algorithm>
 
-Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(0), countRonde(0), abilityCardQueue{}{
+Game::Game() : tableCard(), deckCard(), reward(64), countPermainan(0), countRonde(1), abilityCardQueue{}{
     fetchPlayerName();
     setAbilityCard();
     playerPointer.first = playerQueue[0].first;
@@ -58,12 +58,8 @@ void Game::nextRound(){
 
         // Kondisional untuk round selain 2
     } else {
-        if (isHaveWinner() != -1){
-            printLeaderboard();
-        } else {
-            countRonde = 0;
-            countPermainan++;
-        }
+        countRonde = 1;
+        countPermainan++;
     }
 }
 
@@ -91,7 +87,7 @@ int Game::isHaveWinner(){
 }
 
 void Game::printLeaderboard(){
-    cout << "Leaderboard";
+    cout << "Leaderboard :\n";
     for (int i = 0; i < MAX_PLAYER; i++){
         cout << i+1 << ". " << playerQueue[i].first->getName() << " : " << playerQueue[i].first->getPoint() << endl;   
     }
@@ -232,8 +228,10 @@ void Game::fetchDeckOption() {
             valid = false; 
         }
         if (valid){
+            deckCard.clearQueue();
             if (input == "0") {
                 // shuffle deck card and ability card
+                deckCard = DeckCard();
                 shuffleDeckCard();        
                 shuffleAbilityCard();
 
@@ -338,6 +336,7 @@ void Game::splashScreen() {
 }
 
 void Game::startGame() {
+    // reset permainan 
     fetchDeckOption();
     distributeDeckCard();
     setConditionAbilityCardPlayer(false);
@@ -345,13 +344,13 @@ void Game::startGame() {
     // belum set semua player ability = false ketika mulai game baru
     cout << "\n=========================Permainan ke-" << countPermainan+1 << "=========================" << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
-        if (countRonde == 1) {
+        if (countRonde == 2) {
             cout << "\nKartu ability telah dibagikan!\n";
             distributeAbilityCard();
         }
         
         for (int j = 0; j < MAX_PLAYER; j++) {
-            cout << "\n===========================Ronde ke-"  << countRonde+1 << "===========================\n";
+            cout << "\n===========================Ronde ke-"  << countRonde << "===========================\n";
 
             cout << "Kartu di meja: \n";
             if (tableCard.getLength() == 0) {
@@ -375,7 +374,7 @@ void Game::startGame() {
             // cout << "2. ";
             // playerPointer.first->getNormalCard(1).printCard();
 
-            if (countRonde >= 1) {
+            if (countRonde >= 2) {
                 cout << "Ability : " << playerPointer.first->getAbilityCard()->getType() << " - " ;
                 if (playerPointer.first->isAbilityUsed()){
                     cout << "tidak bisa digunakan\n";
@@ -390,7 +389,18 @@ void Game::startGame() {
             std::system("clear");
         }
         tableCard + deckCard.getTopCard();
-
         deckCard - 1;
+    }
+
+
+
+    printLeaderboard();
+    int idxWinner = isHaveWinner(); 
+    if ( idxWinner == -1) {
+        cout << "Belum ada pemenang, game akan diulangi lagi\n";
+        startGame();
+    } else {
+        Player *winner = playerQueue[idxWinner].first;
+        cout << "Selamat pemenangnya adalah " << winner->getName() << " dengan skor sebanyak " << winner->getPoint() << endl;   
     }
 }
