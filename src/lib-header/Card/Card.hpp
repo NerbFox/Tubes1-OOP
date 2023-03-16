@@ -33,6 +33,8 @@ public:
     // Prints the card's number and color to the console.
     void printCard() const;
 
+    void printCard(Card) const;
+
     // Returns true if the card has no number or color assigned. 
     bool isEmpty() const; 
 

@@ -2,6 +2,7 @@
 // #include "BaseCard.cpp"
 using namespace std;
 #include "colors.hpp"
+#include <iomanip>
 
 // Constructor
 Card::Card(int number, string color) : BaseCard{}, number(number), color(color) { computeValue(); }
@@ -38,6 +39,13 @@ void Card::printCard() const
 {
     // print the card
     cout << "Kartu " << number << " " << color << endl;
+    // print the card number with color
+    // cout << "-------" << endl;
+    // cout << "|     |" << endl;
+    // cout << "|  " << number << "  |" << endl;
+    // cout << "|     |" << endl;
+    // cout << "-------" << endl;
+
     if (color == "merah")
     {
         cout << RED;
@@ -54,23 +62,74 @@ void Card::printCard() const
     {
         cout << BLUE;
     }
+    
+    cout << ".---------." << endl;
+    cout << "|" << setw(9) << left << number << "|" << endl;
+    for (int i=0; i<4; i++) {
+        cout << "|         |" << endl;
+    }
+    cout << "|" << setw(9) << right << number << "|" << endl;
+    cout << "'---------'" << endl;
+
+    cout << RESET;
+}
+
+void Card::printCard(Card card2) const
+{
+    // print the card
+    cout << "1. Kartu " << number << " " << color << endl;
+    cout << "2. Kartu " << card2.number << " " << card2.color << endl;
+    string c1, c2;
+    
+    if (color == "merah")
+    {
+        c1 = RED;
+    }
+    else if (color == "hijau")
+    {
+        c1 = GREEN;
+    }
+    else if (color == "kuning")
+    {
+        c1 = YELLOW;
+    }
+    else if (color == "biru")
+    {
+        c1 = BLUE;
+    }
+
+    if (card2.color == "merah")
+    {
+        c2 = RED;
+    }
+    else if (card2.color == "hijau")
+    {
+        c2 = GREEN;
+    }
+    else if (card2.color == "kuning")
+    {
+        c2 = YELLOW;
+    }
+    else if (card2.color == "biru")
+    {
+        c2 = BLUE;
+    }
     // print the card number with color
-    if (number >= 10){
-        cout << "--------" << endl;
-        cout << "|      |" << endl;
-        cout << "|  " << number << "  |" << endl;
-        cout << "|      |" << endl;
-        cout << "--------" << endl;
-        cout << RESET;
+    // cout << "-------" << endl;
+    // cout << "|     |" << endl;
+    // cout << "|  " << number << "  |" << endl;
+    // cout << "|     |" << endl;
+    // cout << "-------" << endl;
+
+    cout << c1 << ".---------." << "\t" << c2 << ".---------." << endl;
+    cout << c1 << "|" << setw(9) << left << number << "|" << "\t" << c2 << "|" << setw(9) << left << card2.number << "|" << endl;
+    for (int i=0; i<4; i++) {
+        cout << c1 << "|         |" << "\t" << c2 << "|         |" << endl;
     }
-    else{
-        cout << "--------" << endl;
-        cout << "|      |" << endl;
-        cout << "|  " << "0" << number << "  |" << endl;
-        cout << "|      |" << endl;
-        cout << "--------" << endl;
-        cout << RESET;
-    }
+    cout << c1 << "|" << setw(9) << right << number << "|" << "\t" << c2 << "|" << setw(9) << right << card2.number << "|" << endl;
+    cout << c1 << "'---------'" << "\t" << c2 << "'---------'" << endl;
+
+    cout << RESET;
 }
 
 bool Card::isEmpty() const

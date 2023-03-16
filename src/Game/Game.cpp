@@ -365,10 +365,11 @@ void Game::startGame() {
 
 
             cout << "Kamu memiliki kartu berikut:\n";
-            cout << "1. ";
-            playerPointer.first->getNormalCard(0).printCard();
-            cout << "2. ";
-            playerPointer.first->getNormalCard(1).printCard();
+            // cout << "1. ";
+            // playerPointer.first->getNormalCard(0).printCard();
+            playerPointer.first->getNormalCard(0).printCard(playerPointer.first->getNormalCard(1));
+            // cout << "2. ";
+            // playerPointer.first->getNormalCard(1).printCard();
 
             if (countRonde >= 1) {
                 cout << "Ability : " << playerPointer.first->getAbilityCard()->getType() << " - " ;

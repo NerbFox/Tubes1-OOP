@@ -27,9 +27,10 @@ void ReRoll::action(Game& game) {
 
     // print the result
     cout << "Kamu berhasil mendapatkan : " << endl; 
-    cout << "1. ";
-    game.playerPointer.first->getNormalCard(0).printCard();
-    cout << "2. ";
-    game.playerPointer.first->getNormalCard(1).printCard();
+    // cout << "1. ";
+    // game.playerPointer.first->getNormalCard(0).printCard();
+    game.playerPointer.first->getNormalCard(0).printCard(game.playerPointer.first->getNormalCard(1));
+    // cout << "2. ";
+    // game.playerPointer.first->getNormalCard(1).printCard();
     cout << endl;
 }
