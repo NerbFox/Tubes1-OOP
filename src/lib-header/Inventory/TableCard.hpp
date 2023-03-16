@@ -19,6 +19,12 @@ class TableCard : public InventoryHolder<vector<Card>> {
 
     // returns the container of card 
     Card getContainerAt(int index);
+
+    // print the cards
+    void printCards() const;
+
+    // get color of the card
+    string getCardColor(string color) const;
 };  
 
 

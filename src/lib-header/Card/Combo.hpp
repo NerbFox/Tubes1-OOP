@@ -2,38 +2,10 @@
 #define COMBO_HPP
 #include "../Inventory/TableCard.hpp"
 #include "../Inventory/InventoryHolder.hpp"
-#include "BaseCard.hpp"
+#include "IndividualCombo.hpp"
 #include <map>
-#include <tuple>
 
 class Player;
-
-class IndividualCombo : public BaseCard {
-    private:
-        int comboId;
-        vector<Card> cardCombo;
-    public:
-        IndividualCombo();
-
-        IndividualCombo(int);
-
-        int getComboId();
-
-        vector<Card> getCardCombo();
-
-        void insertCardCombo(const vector<Card>);
-
-        bool operator<(const IndividualCombo&);
-
-        bool operator>(const IndividualCombo&);
-
-        bool operator==(const IndividualCombo&);
-
-        bool operator!=(const IndividualCombo&);
-
-        void computeValue();
-
-};
 
 class Combo {
     private:
@@ -60,13 +32,11 @@ class Combo {
 
         map<int, int> getComboFreq();
 
-        void setFinalSetCard(vector<Card> playerCard, vector<Card> tableCard);
+        void setFinalSetCard(Player player, TableCard tableCard);
 
         void clearFinalSetCard();
 
         void clearAllCombo();
-
-        void resetValueMax();
 
         void resetState();
 
@@ -88,7 +58,7 @@ class Combo {
 
         void generateHighCard();
 
-        void computeValueMax();
+        void computeComboMax();
 };  
 
 

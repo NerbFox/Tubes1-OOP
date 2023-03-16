@@ -39,15 +39,15 @@ void Game::nextPlayer() {
 }
 
 void Game::nextRound(){
+    for (int i = 1; i < MAX_PLAYER; i++){
+        playerQueue[i].second = false;
+    }
     if (countRonde < MAX_ROUND){
         pair<Player*,bool> temp;
         temp = playerQueue.front();
         playerQueue.pop_front();
         playerQueue.push_back(temp);
 
-        for (int i = 1; i < MAX_PLAYER; i++){
-            playerQueue[i].second = false;
-        }
 
         playerPointer.first = playerQueue[0].first;
         playerPointer.second = 0;
@@ -60,6 +60,8 @@ void Game::nextRound(){
     } else {
         countRonde = 1;
         countPermainan++;
+        setConditionAbilityCardPlayer(false);
+        tableCard - 5;
     }
 }
 
@@ -136,6 +138,12 @@ void Game::setAbilityUsedPlayer(int idx, bool condition){
     }
     if (idx==indexPemain) {
         throw IndexNotValidException(idx) ;
+    }
+}
+
+void Game::resetAllComboPlayer() {
+    for (int i = 0; i < MAX_PLAYER; i++) {
+        playerQueue[i].first->clearCombo();
     }
 }
 
@@ -313,6 +321,47 @@ int Game::getRound() {
     return countRonde;
 }
 
+void Game::resolveWinner() {  
+    for (int i = 0; i < MAX_PLAYER; i++) {
+        Combo playerComboTemp;
+        playerComboTemp.setFinalSetCard(*playerQueue[i].first, tableCard);
+        playerComboTemp.checkPair();
+        playerComboTemp.checkThreeOfAKind();
+        playerComboTemp.checkFourOfAKind();
+        playerComboTemp.checkStraightAndFlush();
+        playerComboTemp.checkTwoPair();
+        playerComboTemp.checkFullHouse();
+        playerComboTemp.generateHighCard();
+        playerComboTemp.computeComboMax();
+        playerQueue[i].first->setCombinations(playerComboTemp);
+
+        cout << playerQueue[i].first->getName() << "RESULT" << endl;
+        vector<IndividualCombo> comboVec = (*playerQueue[i].first).getCombinations().getAllCombo();
+        //Print top 4 combinations
+        for (int j = 0; j < 5; j++) {
+            cout << "Combo ID : " << comboVec[j].getComboId();
+            cout << "Value : " << comboVec[j].getValue();
+            vector<Card> cardVec = comboVec[j].getCardCombo();
+            for (int k = 0; k < cardVec.size(); k++) {
+                cardVec[k].printCard();
+            }
+            cout << endl;
+        }
+    }
+    
+    Player* player = playerQueue[0].first; 
+    for (int i = 1; i < MAX_PLAYER; i++) {
+        if (*player < *playerQueue[i].first) {
+            player = playerQueue[i].first;
+        }
+    }
+    
+    cout << "Selamat " << player->getName() << ", kamu memiliki kombinasi paling besar dengan kombinasi berikut:" << endl;
+
+    cout << "Poin hadiah sebanyak " << reward << " diberikan ke " << player->getName();
+    player->addPoint(reward);
+}
+
 void Game::splashScreen() {
     system("clear");
     cout << MAGENTA;
@@ -321,15 +370,18 @@ void Game::splashScreen() {
     cout << " /\" _  \"\\       /\"\"\\     (\\\"   \\|\"  \\  |\"      \"\\  |\"  \\/\"  |     |/\"| /  \")  |\" \\    (\\\"   \\|\"  \\   /\" _   \"|  |\"      \"\\     /    \" \\   |\"  \\    /\"  |\n";
     cout << "(: ( \\___)     /    \\    |.\\\\   \\    | (.  ___  :)  \\   \\  /      (: |/   /   ||  |   |.\\\\   \\    | (: ( \\___)  (.  ___  :)   // ____  \\   \\   \\  //   |\n";
     cout << " \\/ \\         /' /\\  \\   |: \\.   \\\\  | |: \\   ) ||   \\\\  \\/       |    __/    |:  |   |: \\.   \\\\  |  \\/ \\       |: \\   ) ||  /  /    ) :)  /\\\\  \\/.    |\n";
+    cout << CYAN;
     cout << " //  \\ _     //  __'  \\  |.  \\    \\. | (| (___\\ ||   /   /        (// _  \\    |.  |   |.  \\    \\. |  //  \\ ___  (| (___\\ || (: (____/ //  |: \\.        |\n";
     cout << "(:   _) \\   /   /  \\\\  \\ |    \\    \\ | |:       :)  /   /         |: | \\  \\   /\\  |\\  |    \\    \\ | (:   _(  _| |:       :)  \\        /   |.  \\    /:  |\n";
     cout << " \\_______) (___/    \\___) \\___|\\____\\) (________/  |___/          (__|  \\__) (__\\_|_)  \\___|\\____\\)  \\_______)  (________/    \\\"_____/    |___|\\__/|___|\n";
     cout << "                                                                                                                                                        \n";
+    cout << BLUE;
     cout << "          ______         __        _______    ________         _______         __       ___      ___   _______                                          \n";
     cout << "         /\" _  \"\\       /\"\"\\      /\"      \\  |\"      \"\\       /\" _   \"|       /\"\"\\     |\"  \\    /\"  | /\"     \"|                                         \n";
     cout << "        (: ( \\___)     /    \\    |:        | (.  ___  :)     (: ( \\___)      /    \\     \\   \\  //   |(: ______)                                         \n";
     cout << "         \\/ \\         /' /\\  \\   |_____/   ) |: \\   ) ||      \\/ \\          /' /\\  \\    /\\\\  \\/.    | \\/    |                                           \n";
     cout << "         //  \\ _     //  __'  \\   //      /  (| (___\\ ||      //  \\ ___    //  __'  \\  |: \\.        | // ___)_                                          \n";
+    cout << MAGENTA;
     cout << "        (:   _) \\   /   /  \\\\  \\ |:  __   \\  |:       :)     (:   _(  _|  /   /  \\\\  \\ |.  \\    /:  |(:      \"|                                         \n";
     cout << "         \\_______) (___/    \\___)|__|  \\___) (________/       \\_______)  (___/    \\___)|___|\\__/|___| \\_______)                                         \n\n\n";
     cout << RESET;
@@ -344,22 +396,27 @@ void Game::startGame() {
     // belum set semua player ability = false ketika mulai game baru
     cout << MAGENTA << "\n=========================Permainan ke-" << countPermainan+1 << "=========================" << endl;
     for (int i = 0; i < MAX_ROUND; i++) {
+
         if (countRonde == 2) {
             cout << CYAN << "\nKartu ability telah dibagikan!\n";
             distributeAbilityCard();
         }
         
         for (int j = 0; j < MAX_PLAYER; j++) {
+            cout << "table card :" << tableCard.getLength() << endl;
+            cout << "deck card :" << deckCard.getLength() << endl;
             cout << "\n===========================Ronde ke-"  << countRonde << "===========================\n";
 
             cout << "Kartu di meja: \n";
             if (tableCard.getLength() == 0) {
                 cout << "Table card kosong\n";
             } else {
-                for (int k = 0; k < tableCard.getLength(); k++) {
-                    cout << k+1 <<". ";
-                    tableCard.getContainerAt(k).printCard();
-                }
+                // cout << endl ;
+                tableCard.printCards();
+                // for (int k = 0; k < tableCard.getLength(); k++) {
+                //     cout << k+1 <<". ";
+                //     tableCard.getContainerAt(k).printCard();
+                // }
             }
 
             cout << "Poin Hadiah : " << reward << "\n\n";            
@@ -383,16 +440,18 @@ void Game::startGame() {
                 }
             }
 
-
             playerPointer.first->getCommand(*this);
             nextPlayer();
             std::system("clear");
         }
-        tableCard + deckCard.getTopCard();
-        deckCard - 1;
+        if (countRonde < 7 && countRonde != 1) {
+            tableCard + deckCard.getTopCard();
+            deckCard - 1;
+        }
     }
 
 
+    // resolveWinner();
 
     printLeaderboard();
     int idxWinner = isHaveWinner(); 
