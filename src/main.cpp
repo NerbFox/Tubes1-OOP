@@ -9,7 +9,7 @@ T getMax(vector<T> Container)
   for (it = Container.begin(); it != Container.end(); it++)
   {
     if (*it > max)
-    {
+    { 
       max = *it;
     }
   }

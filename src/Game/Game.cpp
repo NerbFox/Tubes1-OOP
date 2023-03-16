@@ -316,6 +316,7 @@ int Game::getRound() {
 }
 
 void Game::splashScreen() {
+    system("clear");
     cout << MAGENTA;
     cout << "\n\n\n\n";
     cout << "  ______         __       _____  ___    ________    ___  ___       __   ___    __      _____  ___     _______    ________       ______     ___      ___ \n";

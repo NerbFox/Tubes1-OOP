@@ -12,7 +12,7 @@ const string BLUE = "\033[1;34m";
 const string MAGENTA = "\033[1;35m";
 const string CYAN = "\033[1;36m";
 const string WHITE = "\033[1;37m";
-// const string PINK = "\033[1;30m";
+const string PINK = "\033[1;37;41m";
 const string RESET = "\033[0m";
 
 #endif
